@@ -1,31 +1,32 @@
-import { StyleSheet } from 'react-native';
+import { ScrollView, View } from "react-native";
+import { useState } from "react";
+import Header from "../../components/Header";
+import SearchBar from "../../components/SearchBar";
+import PlaceCard from "../../components/PlaceCard";
 
-import EditScreenInfo from '@/components/EditScreenInfo';
-import { Text, View } from '@/components/Themed';
 
-export default function TabOneScreen() {
+export default function ExploreScreen() {
+  const [query, setQuery] = useState("");
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
-    </View>
+    <ScrollView style={{ flex: 1, backgroundColor: "#fff" }}>
+      <Header title="Explorar" subtitle="Descubre lugares de La Paz" />
+      <SearchBar value={query} onChangeText={setQuery} />
+
+      <View style={{ paddingHorizontal: 16, paddingBottom: 24 }}>
+        <PlaceCard
+          title="Mirador Killi Killi"
+          subtitle="Vista panorámica de La Paz"
+          imageUri="https://picsum.photos/800/600"
+          onPress={() => console.log("Ir al detalle")}
+        />
+        <PlaceCard
+          title="El Montículo"
+          subtitle="Mirador en Sopocachi"
+          imageUri="https://picsum.photos/801/600"
+          onPress={() => console.log("Ir al detalle")}
+        />
+      </View>
+    </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-});
