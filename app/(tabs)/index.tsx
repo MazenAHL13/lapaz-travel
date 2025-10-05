@@ -1,15 +1,17 @@
-import { ScrollView, View } from "react-native";
 import { useState } from "react";
+import { ScrollView, View } from "react-native";
 import Header from "../../components/Header";
-import SearchBar from "../../components/SearchBar";
 import PlaceCard from "../../components/PlaceCard";
+import SearchBar from "../../components/SearchBar";
 
+import { useThemeColors } from "../hooks/useThemeColors";
 
 export default function ExploreScreen() {
+  const { colors } = useThemeColors();
   const [query, setQuery] = useState("");
 
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: "#fff" }}>
+    <ScrollView style={{ flex: 1, backgroundColor: colors.background }}>
       <Header title="Explorar" subtitle="Descubre lugares de La Paz" />
       <SearchBar value={query} onChangeText={setQuery} />
 

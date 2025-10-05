@@ -1,13 +1,35 @@
-import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
+import { Tabs } from "expo-router";
 
-export default function TabsLayout() {
+import { StyleSheet } from "react-native";
+import { useThemeColors } from "../hooks/useThemeColors";
+import { ThemeColors } from "../theme/colors";
+
+const createStyles = (colors: ThemeColors) =>
+  StyleSheet.create({
+    tabBarStyle: {
+      backgroundColor: colors.surface,
+      borderTopColor: colors.border,
+    },
+  });
+
+const TabsLayout = () => {
+  const { colors } = useThemeColors();
+  const styles = createStyles(colors);
+
   return (
     <Tabs
+      key={colors.background}
       screenOptions={({ route }) => ({
         headerShown: true,
-        tabBarActiveTintColor: "#0EA5E9",
-        tabBarInactiveTintColor: "#94A3B8",
+        headerStyle: { backgroundColor: colors.surface },
+        headerTitleStyle: { color: colors.text },
+        headerTintColor: colors.surface,
+        tabBarActiveBackgroundColor: colors.surface,
+        tabBarInactiveBackgroundColor: colors.background,
+        tabBarActiveTintColor: colors.primary,
+        tabBarInactiveTintColor: colors.muted,
+        tabBarStyle: styles.tabBarStyle,
         tabBarIcon: ({ color, size }) => {
           let iconName: keyof typeof Ionicons.glyphMap = "home";
 
@@ -17,11 +39,12 @@ export default function TabsLayout() {
 
           return <Ionicons name={iconName} size={size} color={color} />;
         },
-      })}
-    >
+      })}>
       <Tabs.Screen name="index" options={{ title: "Explorar" }} />
       <Tabs.Screen name="favorites" options={{ title: "Favoritos" }} />
       <Tabs.Screen name="settings" options={{ title: "Ajustes" }} />
     </Tabs>
   );
-}
+};
+
+export default TabsLayout;
