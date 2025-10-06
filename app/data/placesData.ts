@@ -5,8 +5,7 @@ export const places = [
     subtitle: "Vista panorámica de La Paz",
     description:
       "El Mirador Killi Killi ofrece una de las vistas más impresionantes del centro de La Paz. Ideal para fotografías, especialmente al atardecer.",
-    imageUri: "https://picsum.photos/800/600",
-    schedule: "Abierto todos los días de 6:00 a 20:00",
+    imageUri: "https://bushop.com/wp-content/uploads/sites/6/rsz_killi222.jpg",
     tips: [
       "Lleva una chaqueta: puede hacer frío.",
       "Ideal visitar al atardecer.",
@@ -21,7 +20,7 @@ export const places = [
     subtitle: "Mirador en Sopocachi",
     description:
       "Ubicado en el barrio de Sopocachi, El Montículo es un parque histórico con una hermosa vista y arquitectura colonial.",
-    imageUri: "https://picsum.photos/801/600",
+    imageUri: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Arco_del_Montículo.jpg/960px-Arco_del_Montículo.jpg",
     schedule: "Lunes a domingo de 8:00 a 21:00",
     tips: [
       "Visita la capilla en la cima.",
@@ -37,7 +36,7 @@ export const places = [
     subtitle: "Formaciones geológicas únicas",
     description:
       "Un paisaje casi lunar formado por la erosión, ideal para caminatas y fotografía. Es uno de los atractivos naturales más famosos cerca de La Paz.",
-    imageUri: "https://picsum.photos/802/600",
+    imageUri: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Valle_de_La_Luna_La_Paz_Bolivia_NAC.jpg/960px-Valle_de_La_Luna_La_Paz_Bolivia_NAC.jpg",
     schedule: "Todos los días de 9:00 a 17:00",
     tips: [
       "Lleva protector solar y agua.",
@@ -53,7 +52,7 @@ export const places = [
     subtitle: "Transporte y vistas panorámicas",
     description:
       "El teleférico conecta La Paz con El Alto y ofrece vistas espectaculares de la ciudad durante el trayecto.",
-    imageUri: "https://picsum.photos/803/600",
+    imageUri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7X5BV3w372QNRbbB8Nu9YTZNRu6rQ9yoYxA&s",
     schedule: "Lunes a sábado 6:00 a 23:00, domingo 7:00 a 21:00",
     tips: [
       "Lleva cámara para fotos desde las cabinas.",
@@ -69,7 +68,7 @@ export const places = [
     subtitle: "Calle colonial y museos",
     description:
       "Una de las calles mejor conservadas de la época colonial, famosa por sus museos y casas coloridas.",
-    imageUri: "https://picsum.photos/804/600",
+    imageUri: "https://lp-cms-production.imgix.net/2020-11/b2d578bd09916bf36a729124bc44c4b3-calle-jaen-museums.jpg",
     schedule: "Museos abiertos de martes a domingo de 9:00 a 17:00",
     tips: [
       "Visita los museos de la calle.",
@@ -85,7 +84,7 @@ export const places = [
     subtitle: "Mercado tradicional y místico",
     description:
       "Mercado típico donde se venden hierbas, amuletos y productos para rituales andinos. Un lugar único para conocer la cultura local.",
-    imageUri: "https://picsum.photos/805/600",
+    imageUri: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Mercado_de_Hechiceria_003%2C_La_Paz%2C_Bolivia.JPG/500px-Mercado_de_Hechiceria_003%2C_La_Paz%2C_Bolivia.JPG",
     schedule: "Todos los días de 9:00 a 19:00",
     tips: [
       "Pregunta antes de tomar fotos.",
@@ -101,7 +100,7 @@ export const places = [
     subtitle: "Corazón político e histórico",
     description:
       "La plaza principal de La Paz, rodeada por la Catedral, el Palacio de Gobierno y el Palacio Legislativo.",
-    imageUri: "https://picsum.photos/806/600",
+    imageUri: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Plaza_Murillo_en_La_Paz_-_Bolivia.jpg/960px-Plaza_Murillo_en_La_Paz_-_Bolivia.jpg",
     schedule: "Acceso libre todo el día",
     tips: [
       "Ideal para descansar y observar la vida paceña.",
@@ -117,7 +116,7 @@ export const places = [
     subtitle: "Iglesia y plaza histórica",
     description:
       "Imponente iglesia barroca construida en el siglo XVI, punto de encuentro y manifestaciones culturales.",
-    imageUri: "https://picsum.photos/807/600",
+    imageUri: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/La_Basílica_de_San_Francisco_en_La_Paz.jpg/960px-La_Basílica_de_San_Francisco_en_La_Paz.jpg",
     schedule: "Templo abierto de 8:00 a 18:00, museo de 9:00 a 17:00",
     tips: [
       "Sube al mirador del campanario.",
@@ -133,7 +132,7 @@ export const places = [
     subtitle: "Vista panorámica desde El Alto",
     description:
       "Ofrece una vista impresionante de la ciudad de La Paz con el Illimani de fondo, especialmente al amanecer.",
-    imageUri: "https://picsum.photos/808/600",
+    imageUri: "https://www.ibolivia.org/wp-content/uploads/2019/07/mirador-jacha-kollo.jpg",
     schedule: "Acceso libre todo el día",
     tips: [
       "Ideal para fotógrafos.",
@@ -149,7 +148,7 @@ export const places = [
     subtitle: "Cultura y tradición boliviana",
     description:
       "Museo dedicado a la diversidad cultural y folklórica de Bolivia, con exposiciones permanentes y temporales.",
-    imageUri: "https://picsum.photos/809/600",
+    imageUri: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Musef3.JPG/960px-Musef3.JPG",
     schedule: "Martes a viernes 9:00 a 19:00, sábado y domingo 9:00 a 17:00",
     tips: [
       "Aprovecha las visitas guiadas.",
@@ -165,7 +164,7 @@ export const places = [
     subtitle: "Espacio verde y recreativo",
     description:
       "Parque urbano con áreas de juegos, senderos y vegetación nativa. Un pulmón verde en la ciudad.",
-    imageUri: "https://picsum.photos/810/600",
+    imageUri: "https://lapaz.bo/wp-content/uploads/2023/06/cebras.jpg",
     schedule: "Todos los días de 7:00 a 20:00",
     tips: [
       "Ideal para picnic y deportes.",
@@ -181,7 +180,7 @@ export const places = [
     subtitle: "Formación rocosa icónica",
     description:
       "Roca gigante que asemeja una muela, ideal para senderismo y escalada. Uno de los paisajes más reconocidos de La Paz.",
-    imageUri: "https://picsum.photos/811/600",
+    imageUri: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Muela_del_diablo_2024.jpg/500px-Muela_del_diablo_2024.jpg",
     schedule: "Acceso libre, mejor durante el día",
     tips: [
       "Lleva agua y protector solar.",
@@ -197,7 +196,7 @@ export const places = [
     subtitle: "Recreación en el centro",
     description:
       "Gran parque en el centro de la ciudad con áreas deportivas, ciclovías y zonas de descanso.",
-    imageUri: "https://picsum.photos/812/600",
+    imageUri: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Vista_desde_el_Parque_Urbano_Central.jpg/960px-Vista_desde_el_Parque_Urbano_Central.jpg",
     schedule: "Todos los días de 6:00 a 22:00",
     tips: [
       "Ideal para correr o andar en bicicleta.",
@@ -213,7 +212,7 @@ export const places = [
     subtitle: "Vista y parque familiar",
     description:
       "Mirador con parque infantil y senderos, excelente para ver la ciudad y disfrutar en familia.",
-    imageUri: "https://picsum.photos/813/600",
+    imageUri: "https://upload.wikimedia.org/wikipedia/commons/9/96/LaPazBolivia.JPG",
     schedule: "Martes a domingo 9:00 a 17:00",
     tips: [
       "Ideal para ir con niños.",
@@ -229,7 +228,7 @@ export const places = [
     subtitle: "Templo histórico en Plaza Murillo",
     description:
       "Impresionante catedral neoclásica ubicada frente a la Plaza Murillo, centro espiritual y arquitectónico.",
-    imageUri: "https://picsum.photos/814/600",
+    imageUri: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Catedral_Metropolitana_de_La_Paz.JPG/960px-Catedral_Metropolitana_de_La_Paz.JPG",
     schedule: "Todos los días de 7:00 a 19:00",
     tips: [
       "Respeta los horarios de misa.",
@@ -245,7 +244,7 @@ export const places = [
     subtitle: "Historia y cultura de la hoja de coca",
     description:
       "Pequeño museo dedicado a la importancia cultural, social y medicinal de la hoja de coca en Bolivia.",
-    imageUri: "https://picsum.photos/815/600",
+    imageUri: "https://www.correodelalba.org/wp-content/uploads/2021/09/MuseoCoca1.jpg",
     schedule: "Lunes a sábado 10:00 a 18:00",
     tips: [
       "Ideal para conocer la historia local.",
@@ -261,7 +260,7 @@ export const places = [
     subtitle: "Vista panorámica sobre La Paz",
     description:
       "Desde El Alto se obtiene una de las mejores vistas de La Paz y el Illimani, especialmente al atardecer.",
-    imageUri: "https://picsum.photos/816/600",
+    imageUri: "https://1.bp.blogspot.com/-QZVbKMMNZmM/XL0O9Bz5EzI/AAAAAAAAAFU/ah7ArtfQqjku2fGG-iMIM-S4mv-KXnS4QCEwYBhgL/s1600/20190415_124014.jpg",
     schedule: "Acceso libre todo el día",
     tips: [
       "Lleva ropa abrigada.",
@@ -277,7 +276,7 @@ export const places = [
     subtitle: "Arqueología precolombina",
     description:
       "Museo que alberga piezas de la cultura Tiwanaku y otras civilizaciones precolombinas de Bolivia.",
-    imageUri: "https://picsum.photos/817/600",
+    imageUri: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Lapaz37.jpg/960px-Lapaz37.jpg",
     schedule: "Martes a viernes 9:00 a 16:30, sábado y domingo 9:00 a 17:00",
     tips: [
       "No te pierdas la colección de monolitos.",
@@ -293,7 +292,7 @@ export const places = [
     subtitle: "Arquitectura y vistas urbanas",
     description:
       "Puente emblemático de La Paz que conecta Sopocachi con Miraflores, famoso por su arquitectura.",
-    imageUri: "https://picsum.photos/818/600",
+    imageUri: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjxoI8ptCtDTNjucKNh03rhIItaO4uOW5PUFzhyphenhyphenYp3z47BqHf4YZoDeJH4jw0ycmpOQ5zgsx4TtVzq1dZevMi6lPXWW8Ry2H43MGnxXg_ZXODjHwsbE1TiCZC-89OlynwtewJqcjYAwIiw/s1600/americas.jpg",
     schedule: "Acceso libre todo el día",
     tips: [
       "Ideal para fotos urbanas.",
@@ -309,7 +308,7 @@ export const places = [
     subtitle: "Bosque urbano y senderos",
     description:
       "Extensa área verde con senderos para caminar, correr y hacer picnic. Refugio natural dentro de la ciudad.",
-    imageUri: "https://picsum.photos/819/600",
+    imageUri: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Bosquecillo_de_Pura_Pura_-_Bolivia.png/500px-Bosquecillo_de_Pura_Pura_-_Bolivia.png",
     schedule: "Todos los días de 7:00 a 18:00",
     tips: [
       "Lleva comida y agua.",
@@ -325,7 +324,7 @@ export const places = [
     subtitle: "Plaza tradicional y mercado",
     description:
       "Plaza famosa por su iglesia y mercado, punto de encuentro para locales y turistas.",
-    imageUri: "https://picsum.photos/820/600",
+    imageUri: "https://boliviaesturismo.com/wp-content/uploads/2015/06/Plaza_de_San_Pedro_vista_de_la_carcel.jpg",
     schedule: "Acceso libre todo el día",
     tips: [
       "Prueba los jugos naturales del mercado.",
@@ -341,7 +340,7 @@ export const places = [
     subtitle: "Vista panorámica y naturaleza",
     description:
       "Mirador menos conocido con una vista diferente de la ciudad y senderos naturales.",
-    imageUri: "https://picsum.photos/821/600",
+    imageUri: "https://www.pub.eldiario.net/noticias/2016/2016_11/nt161104/f_2016-11-04_34.jpg",
     schedule: "Acceso libre durante el día",
     tips: [
       "Ideal para caminatas.",
@@ -357,7 +356,7 @@ export const places = [
     subtitle: "Historia y costumbres paceñas",
     description:
       "Museo que recrea escenas de la vida paceña tradicional, con trajes, maquetas y objetos antiguos.",
-    imageUri: "https://picsum.photos/822/600",
+    imageUri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkr21LiBBoPOtI2xt2QryOXYP10ZqF8UpybQ&s",
     schedule: "Martes a viernes 9:00 a 12:30 y 15:00 a 19:00, sábado y domingo 9:00 a 13:00",
     tips: [
       "Ideal para conocer la historia local.",
@@ -373,7 +372,7 @@ export const places = [
     subtitle: "Conexión a la Zona Sur",
     description:
       "Teleférico moderno que conecta el centro con la Zona Sur, ofreciendo vistas de diferentes barrios paceños.",
-    imageUri: "https://picsum.photos/823/600",
+    imageUri: "https://visorbolivia.wordpress.com/wp-content/uploads/2014/12/verde.jpg",
     schedule: "Lunes a sábado 6:00 a 23:00, domingo 7:00 a 21:00",
     tips: [
       "Ideal para llegar rápido a la Zona Sur.",
@@ -389,7 +388,7 @@ export const places = [
     subtitle: "Plantas nativas y biodiversidad",
     description:
       "Espacio dedicado a la conservación de plantas nativas y educación ambiental, ideal para familias.",
-    imageUri: "https://picsum.photos/824/600",
+    imageUri: "https://lapaz.bolivialocal.net/imagen/e/2017/1/i109/el-jardin-botanico-ciudad-paz-3-mx.jpg",
     schedule: "Martes a domingo 9:00 a 17:00",
     tips: [
       "Lleva cámara para fotografiar flores.",
@@ -405,7 +404,7 @@ export const places = [
     subtitle: "Plaza y monumento histórico",
     description:
       "Plaza emblemática del barrio Sopocachi, con monumento a Eduardo Abaroa y ambiente bohemio.",
-    imageUri: "https://picsum.photos/825/600",
+    imageUri: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Eduardo_Abaroa_Hidalgo_2.jpg/960px-Eduardo_Abaroa_Hidalgo_2.jpg",
     schedule: "Acceso libre todo el día",
     tips: [
       "Disfruta de los cafés y bares cercanos.",
@@ -421,7 +420,7 @@ export const places = [
     subtitle: "Mercado tradicional de abastos",
     description:
       "Uno de los mercados más antiguos y tradicionales, famoso por su variedad de frutas, verduras y productos locales.",
-    imageUri: "https://picsum.photos/826/600",
+    imageUri: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Mercado_Rodriguez_-_La_Paz%2C_Bolivia4.jpg/960px-Mercado_Rodriguez_-_La_Paz%2C_Bolivia4.jpg",
     schedule: "Todos los días de 6:00 a 19:00",
     tips: [
       "Prueba las frutas frescas.",
