@@ -1,6 +1,6 @@
 import React from "react";
-import { Image, ScrollView, Text, View, SafeAreaView } from "react-native";
-import { Stack, useLocalSearchParams } from "expo-router";
+import { Image, ScrollView, Text, View, SafeAreaView, Pressable } from "react-native";
+import { router, Stack, useLocalSearchParams } from "expo-router";
 import FavoriteButton from "../../components/FavoriteButton";
 import { places } from "../data/placesData";
 import { useThemeColors } from "../hooks/useThemeColors";
@@ -24,6 +24,19 @@ export default function PlaceDetail() {
           contentContainerStyle={{ padding: 16, paddingBottom: 24 }}
           contentInsetAdjustmentBehavior="automatic"
         >
+          <Pressable
+            onPress={() => router.back()}
+            style={{
+              alignSelf: "flex-start",
+              marginBottom: 12,
+              paddingHorizontal: 8,
+              paddingVertical: 4,
+              borderRadius: 8,
+              backgroundColor: colors.surface,
+            }}
+          >
+            <Text style={{ fontSize: 16, color: colors.text }}>← Volver</Text>
+          </Pressable>
           <Image
             source={{ uri: place.imageUri }}
             style={{ height: 220, borderRadius: 12 }}
