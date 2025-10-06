@@ -5,11 +5,13 @@ import PlaceCard from "../../components/PlaceCard";
 import SearchBar from "../../components/SearchBar";
 import { places } from "../data/placesData";
 
+import { useRouter } from "expo-router";
 import { useThemeColors } from "../hooks/useThemeColors";
 
 export default function ExploreScreen() {
   const { colors } = useThemeColors();
   const [query, setQuery] = useState("");
+  const router = useRouter();
 
   const filtered = places.filter((p) =>
     p.title.toLowerCase().includes(query.toLowerCase())
@@ -27,7 +29,7 @@ export default function ExploreScreen() {
             title={place.title}
             subtitle={place.subtitle}
             imageUri={place.imageUri}
-            onPress={() => console.log("Ir al detalle", place.id)}
+            onPress={() => router.push(`/places/${place.id}`)}
           />
         ))}
       </View>
