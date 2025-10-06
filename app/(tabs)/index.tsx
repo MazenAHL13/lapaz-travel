@@ -18,7 +18,7 @@ export default function ExploreScreen() {
 
   return (
     
-    <ScrollView style={{ flex: 1, backgroundColor: "#fff", paddingTop: 12}}>
+    <ScrollView style={{ flex: 1, backgroundColor: colors.background, paddingTop: 12}}>
 
       <SearchBar value={query} onChangeText={setQuery} />
 
@@ -29,7 +29,9 @@ export default function ExploreScreen() {
             title={place.title}
             subtitle={place.subtitle}
             imageUri={place.imageUri}
-            onPress={() => router.push(`place/${place.id}`)}
+            onPress={() =>
+              router.push({ pathname: "/places/[id]", params: { id: place.id } })
+            }
           />
         ))}
       </View>
