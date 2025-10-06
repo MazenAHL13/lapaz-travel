@@ -17,8 +17,15 @@ export default function PlaceCard({
 }: PlaceCardProps) {
   const { colors } = useThemeColors();
   const styles = createStyles(colors);
+
   return (
-    <Pressable onPress={onPress} style={styles.card}>
+    <Pressable
+      onPress={onPress}
+      style={({ pressed }) => [
+        styles.card,
+        pressed && { opacity: 0.9, transform: [{ scale: 0.98 }] },
+      ]}
+    >
       <Image source={{ uri: imageUri }} style={styles.image} />
       <View style={styles.content}>
         <Text style={styles.title}>{title}</Text>
@@ -28,6 +35,7 @@ export default function PlaceCard({
   );
 }
 
+
 const createStyles = (colors: ThemeColors) =>
   StyleSheet.create({
     card: {
@@ -36,6 +44,10 @@ const createStyles = (colors: ThemeColors) =>
       overflow: "hidden",
       marginBottom: 16,
       elevation: 2,
+      shadowColor: "#000",
+      shadowOpacity: 0.1,
+      shadowRadius: 4,
+      shadowOffset: { width: 0, height: 2 },
     },
     image: {
       width: "100%",
@@ -52,5 +64,6 @@ const createStyles = (colors: ThemeColors) =>
     subtitle: {
       fontSize: 14,
       color: colors.textSecondary,
+      marginTop: 2,
     },
   });

@@ -3,6 +3,7 @@ import { ScrollView, View } from "react-native";
 import Header from "../../components/Header";
 import PlaceCard from "../../components/PlaceCard";
 import SearchBar from "../../components/SearchBar";
+import { places } from "../data/placesData";
 
 import { useThemeColors } from "../hooks/useThemeColors";
 
@@ -10,24 +11,25 @@ export default function ExploreScreen() {
   const { colors } = useThemeColors();
   const [query, setQuery] = useState("");
 
+  const filtered = places.filter((p) =>
+    p.title.toLowerCase().includes(query.toLowerCase())
+  );
+
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: colors.background }}>
+    <ScrollView style={{ flex: 1, backgroundColor: "#fff" }}>
       <Header title="Explorar" subtitle="Descubre lugares de La Paz" />
       <SearchBar value={query} onChangeText={setQuery} />
 
       <View style={{ paddingHorizontal: 16, paddingBottom: 24 }}>
-        <PlaceCard
-          title="Mirador Killi Killi"
-          subtitle="Vista panorámica de La Paz"
-          imageUri="https://picsum.photos/800/600"
-          onPress={() => console.log("Ir al detalle")}
-        />
-        <PlaceCard
-          title="El Montículo"
-          subtitle="Mirador en Sopocachi"
-          imageUri="https://picsum.photos/801/600"
-          onPress={() => console.log("Ir al detalle")}
-        />
+        {filtered.map((place) => (
+          <PlaceCard
+            key={place.id}
+            title={place.title}
+            subtitle={place.subtitle}
+            imageUri={place.imageUri}
+            onPress={() => console.log("Ir al detalle", place.id)}
+          />
+        ))}
       </View>
     </ScrollView>
   );
