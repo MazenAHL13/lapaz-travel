@@ -1,22 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { Text, TouchableOpacity } from "react-native";
+import { useFavoritesStore } from "../app/store/favorites";
 
 export default function FavoriteButton({ placeId }: { placeId: string }) {
-  const [favorites, setFavorites] = useState<string[]>([]);
+  const { favorites, toggleFavorite, isFavorite } = useFavoritesStore();
 
-  const isFav = favorites.includes(placeId);
-
-  const toggleFavorite = () => {
-    setFavorites((prev) =>
-      prev.includes(placeId)
-        ? prev.filter((id) => id !== placeId)
-        : [...prev, placeId]
-    );
-  };
+  const isFav = isFavorite(placeId);
 
   return (
     <TouchableOpacity
-      onPress={toggleFavorite}
+      onPress={() => toggleFavorite(placeId)}
       style={{
         paddingHorizontal: 12,
         paddingVertical: 6,

@@ -1,22 +1,50 @@
-import { Text, View } from "react-native";
+import { Text, View, ScrollView, SafeAreaView } from "react-native";
 import { useThemeColors } from "../hooks/useThemeColors";
+import { useFavoritesStore } from "../store/favorites";
+import { places } from "../data/placesData";
+import PlaceCard from "../../components/PlaceCard";
+import { useRouter } from "expo-router";
 
 export default function FavoritesScreen() {
   const { colors } = useThemeColors();
+  const { favorites } = useFavoritesStore();
+  const router = useRouter();
+
+  const favoritePlaces = places.filter((p) => favorites.includes(p.id));
+
   return (
-    <View
-      style={{
-        backgroundColor: colors.background,
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}>
-      <Text style={{ fontSize: 20, fontWeight: "700", color: colors.text }}>
-        ⭐ Favoritos
-      </Text>
-      <Text style={{ color: colors.textSecondary }}>
-        Pronto podrás ver tus lugares guardados.
-      </Text>
-    </View>
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
+      <ScrollView
+        contentContainerStyle={{
+          padding: 16,
+          alignItems: favoritePlaces.length === 0 ? "center" : "stretch",
+          justifyContent: favoritePlaces.length === 0 ? "center" : "flex-start",
+          flexGrow: 1,
+        }}
+      >
+        {favoritePlaces.length === 0 ? (
+          <View style={{ alignItems: "center" }}>
+            <Text style={{ fontSize: 20, fontWeight: "700", color: colors.text }}>
+              Favoritos
+            </Text>
+            <Text style={{ color: colors.textSecondary, marginTop: 8 }}>
+              Aún no tienes lugares guardados.
+            </Text>
+          </View>
+        ) : (
+          favoritePlaces.map((place) => (
+            <PlaceCard
+              key={place.id}
+              title={place.title}
+              subtitle={place.subtitle}
+              imageUri={place.imageUri}
+              onPress={() =>
+                router.push({ pathname: "/places/[id]", params: { id: place.id } })
+              }
+            />
+          ))
+        )}
+      </ScrollView>
+    </SafeAreaView>
   );
 }
