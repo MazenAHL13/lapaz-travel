@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { ScrollView, View } from "react-native";
-import Header from "../../components/Header";
 import PlaceCard from "../../components/PlaceCard";
 import SearchBar from "../../components/SearchBar";
 import { places } from "../data/placesData";
@@ -18,8 +17,9 @@ export default function ExploreScreen() {
   );
 
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: "#fff" }}>
-      <Header title="Explorar" subtitle="Descubre lugares de La Paz" />
+    
+    <ScrollView style={{ flex: 1, backgroundColor: "#fff", paddingTop: 12}}>
+
       <SearchBar value={query} onChangeText={setQuery} />
 
       <View style={{ paddingHorizontal: 16, paddingBottom: 24 }}>
@@ -29,7 +29,7 @@ export default function ExploreScreen() {
             title={place.title}
             subtitle={place.subtitle}
             imageUri={place.imageUri}
-            onPress={() => router.push(`/place/${place.id}`)}
+            onPress={() => router.push(`place/${place.id}`)}
           />
         ))}
       </View>
