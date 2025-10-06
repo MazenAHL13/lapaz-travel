@@ -1,46 +1,95 @@
-import { useLocalSearchParams, useRouter } from "expo-router";
 import React from "react";
-import { Image, Pressable, ScrollView, Text, View } from "react-native";
+import { Image, ScrollView, Text, View, SafeAreaView } from "react-native";
+import { Stack, useLocalSearchParams } from "expo-router";
 import FavoriteButton from "../../components/FavoriteButton";
 import { places } from "../data/placesData";
+import { useThemeColors } from "../hooks/useThemeColors";
 
 export default function PlaceDetail() {
   const { id } = useLocalSearchParams();
-  const router = useRouter();
-  const place = places.find((p) => p.id === id);
+  const { colors } = useThemeColors();
 
-  if (!place) return <Text>Lugar no encontrado</Text>;
+  const placeId = Array.isArray(id) ? id[0] : id; // ✅ robusto
+  const place = places.find((p) => p.id === placeId);
+
+  if (!place) return <Text style={{ color: colors.text }}>Lugar no encontrado</Text>;
 
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: "#fff", padding: 16, marginTop: 50 }}>
-      <Pressable onPress={() => router.back()} style={{ marginBottom: 12 }}>
-        <Text style={{ fontSize: 18 }}>←</Text>
-      </Pressable>
-      <Image source={{ uri: place.imageUri }} style={{ height: 220, borderRadius: 12 }} />
-      <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", marginTop: 12 }}>
-        <Text style={{ fontSize: 22, fontWeight: "bold", flex: 1 }} numberOfLines={2} ellipsizeMode="tail">{place.title}</Text>
-        <FavoriteButton placeId={place.id} />
-      </View>
-      <Text style={{ marginVertical: 8, color: "gray" }}>{place.subtitle}</Text>
-      {(place.zona || place.categoria) && (
-        <View style={{ marginBottom: 8 }}>
-          {place.categoria && <Text style={{ color: "gray" }}>Zona: {place.zona}</Text>}
-          {place.categoria && <Text style={{ color: "gray" }}>Categoría: {place.categoria}</Text>}
-        </View>
-      )}
-      <Text style={{ fontSize: 16 }}>{place.description}</Text>
+    <>
+      {/* Usa el header nativo con back automático */}
+      <Stack.Screen options={{ title: place.title }} />
 
-      <View style={{ marginTop: 16 }}>
-        <Text style={{ fontWeight: "bold", fontSize: 18 }}>🕐 Horario</Text>
-        <Text>{place.schedule}</Text>
-      </View>
+      <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
+        <ScrollView
+          style={{ flex: 1 }}
+          contentContainerStyle={{ padding: 16, paddingBottom: 24 }}
+          contentInsetAdjustmentBehavior="automatic"
+        >
+          <Image
+            source={{ uri: place.imageUri }}
+            style={{ height: 220, borderRadius: 12 }}
+          />
 
-      <View style={{ marginTop: 16 }}>
-        <Text style={{ fontWeight: "bold", fontSize: 18 }}>💡 Tips</Text>
-        {place.tips.map((tip, i) => (
-          <Text key={i}>• {tip}</Text>
-        ))}
-      </View>
-    </ScrollView>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+              flexWrap: "wrap",
+              marginTop: 12,
+              gap: 8,
+            }}
+          >
+            <Text
+              style={{ fontSize: 22, fontWeight: "bold", flex: 1, color: colors.text }}
+              numberOfLines={2}
+              ellipsizeMode="tail"
+            >
+              {place.title}
+            </Text>
+            <FavoriteButton placeId={place.id} />
+          </View>
+
+          <Text style={{ marginVertical: 8, color: colors.textSecondary }}>
+            {place.subtitle}
+          </Text>
+
+          {(place.zona || place.categoria) && (
+            <View style={{ marginBottom: 8 }}>
+              {place.zona && (
+                <Text style={{ color: colors.textSecondary }}>Zona: {place.zona}</Text>
+              )}
+              {place.categoria && (
+                <Text style={{ color: colors.textSecondary }}>
+                  Categoría: {place.categoria}
+                </Text>
+              )}
+            </View>
+          )}
+
+          <Text style={{ fontSize: 16, color: colors.text }}>
+            {place.description}
+          </Text>
+
+          <View style={{ marginTop: 16 }}>
+            <Text style={{ fontWeight: "bold", fontSize: 18, color: colors.text }}>
+              🕐 Horario
+            </Text>
+            <Text style={{ color: colors.textSecondary }}>{place.schedule}</Text>
+          </View>
+
+          <View style={{ marginTop: 16 }}>
+            <Text style={{ fontWeight: "bold", fontSize: 18, color: colors.text }}>
+              💡 Tips
+            </Text>
+            {place.tips.map((tip, i) => (
+              <Text key={i} style={{ color: colors.textSecondary }}>
+                • {tip}
+              </Text>
+            ))}
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    </>
   );
 }
