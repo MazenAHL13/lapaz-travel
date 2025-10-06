@@ -29,7 +29,7 @@ export default function ExploreScreen() {
             title={place.title}
             subtitle={place.subtitle}
             imageUri={place.imageUri}
-            onPress={() => router.push(`/places/${place.id}`)}
+            onPress={() => router.push(`/place/${place.id}`)}
           />
         ))}
       </View>

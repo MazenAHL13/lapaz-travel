@@ -5,11 +5,13 @@ import { ThemeColors } from "../app/theme/colors";
 type HeaderProps = {
   title: string;
   subtitle?: string;
+  useSurfaceBackground?: boolean; // opcional para elegir fondo
 };
 
-export default function Header({ title, subtitle }: HeaderProps) {
+export default function Header({ title, subtitle, useSurfaceBackground = false }: HeaderProps) {
   const { colors } = useThemeColors();
-  const styles = createStyles(colors);
+  const styles = createStyles(colors, useSurfaceBackground);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{title}</Text>
@@ -18,11 +20,14 @@ export default function Header({ title, subtitle }: HeaderProps) {
   );
 }
 
-const createStyles = (colors: ThemeColors) =>
+const createStyles = (colors: ThemeColors, useSurfaceBackground: boolean) =>
   StyleSheet.create({
     container: {
       paddingHorizontal: 16,
       paddingVertical: 12,
+      backgroundColor: useSurfaceBackground ? colors.surface : colors.background, // ✅ fondo dinámico
+      borderBottomWidth: StyleSheet.hairlineWidth,
+      borderBottomColor: colors.border, // da un pequeño contraste
     },
     title: {
       fontSize: 22,
