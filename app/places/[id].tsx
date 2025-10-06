@@ -16,7 +16,6 @@ export default function PlaceDetail() {
 
   return (
     <>
-      {/* Usa el header nativo con back automático */}
       <Stack.Screen options={{ title: place.title }} />
 
       <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
