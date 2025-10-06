@@ -9,7 +9,7 @@ export default function PlaceDetail() {
   const { id } = useLocalSearchParams();
   const { colors } = useThemeColors();
 
-  const placeId = Array.isArray(id) ? id[0] : id; // ✅ robusto
+  const placeId = Array.isArray(id) ? id[0] : id; 
   const place = places.find((p) => p.id === placeId);
 
   if (!place) return <Text style={{ color: colors.text }}>Lugar no encontrado</Text>;
