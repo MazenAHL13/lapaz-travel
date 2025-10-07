@@ -1,346 +1,301 @@
 {
-    "places": [
-      {
-        "id": "killi-killi",
-        "title": "Mirador Killi Killi",
-        "subtitle": "Vista panorámica de La Paz",
-        "description": "El Mirador Killi Killi ofrece una de las vistas más impresionantes del centro de La Paz. Ideal para fotografías, especialmente al atardecer.",
-        "imageUri": "https://bushop.com/wp-content/uploads/sites/6/rsz_killi222.jpg",
-        "tips": [
-          "Lleva una chaqueta: puede hacer frío.",
-          "Ideal visitar al atardecer.",
-          "Hay puestos de comida cerca."
-        ],
-        "zona": "Villa Pabón",
-        "categoria": "Mirador"
-      },
-      {
-        "id": "monticulo",
-        "title": "El Montículo",
-        "subtitle": "Mirador en Sopocachi",
-        "description": "Ubicado en el barrio de Sopocachi, El Montículo es un parque histórico con una hermosa vista y arquitectura colonial.",
-        "imageUri": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Arco_del_Montículo.jpg/960px-Arco_del_Montículo.jpg",
-        "schedule": "Lunes a domingo de 8:00 a 21:00",
-        "tips": [
-          "Visita la capilla en la cima.",
-          "Lugar tranquilo para leer o descansar.",
-          "Perfecto para fotos panorámicas."
-        ],
-        "zona": "Sopocachi",
-        "categoria": "Mirador"
-      },
-      {
-        "id": "valle-luna",
-        "title": "Valle de la Luna",
-        "subtitle": "Formaciones geológicas únicas",
-        "description": "Un paisaje casi lunar formado por la erosión, ideal para caminatas y fotografía. Es uno de los atractivos naturales más famosos cerca de La Paz.",
-        "imageUri": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Valle_de_La_Luna_La_Paz_Bolivia_NAC.jpg/960px-Valle_de_La_Luna_La_Paz_Bolivia_NAC.jpg",
-        "schedule": "Todos los días de 9:00 a 17:00",
-        "tips": [
-          "Lleva protector solar y agua.",
-          "Usa zapatos cómodos para caminar.",
-          "No te salgas de los senderos marcados."
-        ],
-        "zona": "Mallasa",
-        "categoria": "Atractivo Natural"
-      },
-      {
-        "id": "teleferico-rojo",
-        "title": "Teleférico Línea Roja",
-        "subtitle": "Transporte y vistas panorámicas",
-        "description": "El teleférico conecta La Paz con El Alto y ofrece vistas espectaculares de la ciudad durante el trayecto.",
-        "imageUri": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7X5BV3w372QNRbbB8Nu9YTZNRu6rQ9yoYxA&s",
-        "schedule": "Lunes a sábado 6:00 a 23:00, domingo 7:00 a 21:00",
-        "tips": [
-          "Lleva cámara para fotos desde las cabinas.",
-          "Ideal para ver la ciudad desde las alturas.",
-          "Evita las horas pico."
-        ],
-        "zona": "Centro, El Alto",
-        "categoria": "Transporte Turístico"
-      },
-      {
-        "id": "calle-jaen",
-        "title": "Calle Jaén",
-        "subtitle": "Calle colonial y museos",
-        "description": "Una de las calles mejor conservadas de la época colonial, famosa por sus museos y casas coloridas.",
-        "imageUri": "https://lp-cms-production.imgix.net/2020-11/b2d578bd09916bf36a729124bc44c4b3-calle-jaen-museums.jpg",
-        "schedule": "Museos abiertos de martes a domingo de 9:00 a 17:00",
-        "tips": [
-          "Visita los museos de la calle.",
-          "Ideal para caminar y tomar fotos.",
-          "Disfruta de los cafés y tiendas de artesanías."
-        ],
-        "zona": "Centro",
-        "categoria": "Calle Histórica"
-      },
-      {
-        "id": "mercado-brujas",
-        "title": "Mercado de las Brujas",
-        "subtitle": "Mercado tradicional y místico",
-        "description": "Mercado típico donde se venden hierbas, amuletos y productos para rituales andinos. Un lugar único para conocer la cultura local.",
-        "imageUri": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Mercado_de_Hechiceria_003%2C_La_Paz%2C_Bolivia.JPG/500px-Mercado_de_Hechiceria_003%2C_La_Paz%2C_Bolivia.JPG",
-        "schedule": "Todos los días de 9:00 a 19:00",
-        "tips": [
-          "Pregunta antes de tomar fotos.",
-          "Ideal para comprar souvenirs únicos.",
-          "Respeta las creencias y costumbres locales."
-        ],
-        "zona": "Centro",
-        "categoria": "Mercado"
-      },
-      {
-        "id": "plaza-murillo",
-        "title": "Plaza Murillo",
-        "subtitle": "Corazón político e histórico",
-        "description": "La plaza principal de La Paz, rodeada por la Catedral, el Palacio de Gobierno y el Palacio Legislativo.",
-        "imageUri": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Plaza_Murillo_en_La_Paz_-_Bolivia.jpg/960px-Plaza_Murillo_en_La_Paz_-_Bolivia.jpg",
-        "schedule": "Acceso libre todo el día",
-        "tips": [
-          "Ideal para descansar y observar la vida paceña.",
-          "Alimenta a las palomas.",
-          "Visita los edificios históricos a su alrededor."
-        ],
-        "zona": "Centro",
-        "categoria": "Plaza"
-      },
-      {
-        "id": "san-francisco",
-        "title": "Basílica de San Francisco",
-        "subtitle": "Iglesia y plaza histórica",
-        "description": "Imponente iglesia barroca construida en el siglo XVI, punto de encuentro y manifestaciones culturales.",
-        "imageUri": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/La_Basílica_de_San_Francisco_en_La_Paz.jpg/960px-La_Basílica_de_San_Francisco_en_La_Paz.jpg",
-        "schedule": "Templo abierto de 8:00 a 18:00, museo de 9:00 a 17:00",
-        "tips": [
-          "Sube al mirador del campanario.",
-          "Visita el museo conventual.",
-          "Admira la arquitectura y los detalles en piedra."
-        ],
-        "zona": "Centro",
-        "categoria": "Iglesia"
-      },
-      {
-        "id": "mirador-jach-a-kollo",
-        "title": "Mirador Jach'a Kollo",
-        "subtitle": "Vista panorámica desde El Alto",
-        "description": "Ofrece una vista impresionante de la ciudad de La Paz con el Illimani de fondo, especialmente al amanecer.",
-        "imageUri": "https://www.ibolivia.org/wp-content/uploads/2019/07/mirador-jacha-kollo.jpg",
-        "schedule": "Acceso libre todo el día",
-        "tips": [
-          "Ideal para fotógrafos.",
-          "Lleva ropa abrigada.",
-          "Recomendable ir en grupo."
-        ],
-        "zona": "El Alto",
-        "categoria": "Mirador"
-      },
-      {
-        "id": "museo-etnografico",
-        "title": "Museo Nacional de Etnografía y Folklore",
-        "subtitle": "Cultura y tradición boliviana",
-        "description": "Museo dedicado a la diversidad cultural y folklórica de Bolivia, con exposiciones permanentes y temporales.",
-        "imageUri": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Musef3.JPG/960px-Musef3.JPG",
-        "schedule": "Martes a viernes 9:00 a 19:00, sábado y domingo 9:00 a 17:00",
-        "tips": [
-          "Aprovecha las visitas guiadas.",
-          "Ideal para familias y estudiantes.",
-          "No se permite tomar fotos en algunas salas."
-        ],
-        "zona": "Centro",
-        "categoria": "Museo"
-      }
-          ,
+"places": [
+    {
+    "id": "killi-killi",
+    "title": "Mirador Killi Killi",
+    "subtitle": "Vista panorámica de La Paz",
+    "description": "El Mirador Killi Killi ofrece una de las vistas más impresionantes del centro de La Paz. Ideal para fotografías, especialmente al atardecer.",
+    "schedule": "Acceso libre todo el día",
+    "imageUri": "https://bushop.com/wp-content/uploads/sites/6/rsz_killi222.jpg",
+    "tips": [
+        "🧥 Lleva una chaqueta: puede hacer frío.",
+        "🌇 Ideal visitar al atardecer.",
+        "🍢 Hay puestos de comida cerca."
+    ],
+    "zona": "Villa Pabón",
+    "categoria": "Mirador"
+    },
+    {
+    "id": "monticulo",
+    "title": "El Montículo",
+    "subtitle": "Mirador en Sopocachi",
+    "description": "Ubicado en el barrio de Sopocachi, El Montículo es un parque histórico con una hermosa vista y arquitectura colonial.",
+    "imageUri": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Arco_del_Montículo.jpg/960px-Arco_del_Montículo.jpg",
+    "schedule": "Lunes a domingo de 8:00 a 21:00",
+    "tips": [
+        "⛪ Visita la capilla en la cima.",
+        "📖 Lugar tranquilo para leer o descansar.",
+        "📸 Perfecto para fotos panorámicas."
+    ],
+    "zona": "Sopocachi",
+    "categoria": "Mirador"
+    },
+    {
+    "id": "valle-luna",
+    "title": "Valle de la Luna",
+    "subtitle": "Formaciones geológicas únicas",
+    "description": "Un paisaje casi lunar formado por la erosión, ideal para caminatas y fotografía. Es uno de los atractivos naturales más famosos cerca de La Paz.",
+    "imageUri": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Valle_de_La_Luna_La_Paz_Bolivia_NAC.jpg/960px-Valle_de_La_Luna_La_Paz_Bolivia_NAC.jpg",
+    "schedule": "Todos los días de 9:00 a 17:00",
+    "tips": [
+        "☀️ Lleva protector solar y agua.",
+        "👟 Usa zapatos cómodos para caminar.",
+        "⚠️ No te salgas de los senderos marcados."
+    ],
+    "zona": "Mallasa",
+    "categoria": "Atractivo Natural"
+    },
+    {
+    "id": "teleferico-rojo",
+    "title": "Teleférico Línea Roja",
+    "subtitle": "Transporte y vistas panorámicas",
+    "description": "El teleférico conecta La Paz con El Alto y ofrece vistas espectaculares de la ciudad durante el trayecto.",
+    "imageUri": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7X5BV3w372QNRbbB8Nu9YTZNRu6rQ9yoYxA&s",
+    "schedule": "Lunes a sábado 6:00 a 23:00, domingo 7:00 a 21:00",
+    "tips": [
+        "📸 Lleva cámara para fotos desde las cabinas.",
+        "🏙️ Ideal para ver la ciudad desde las alturas.",
+        "🚫 Evita las horas pico."
+    ],
+    "zona": "Centro, El Alto",
+    "categoria": "Transporte Turístico"
+    },
+    {
+    "id": "calle-jaen",
+    "title": "Calle Jaén",
+    "subtitle": "Calle colonial y museos",
+    "description": "Una de las calles mejor conservadas de la época colonial, famosa por sus museos y casas coloridas.",
+    "imageUri": "https://lp-cms-production.imgix.net/2020-11/b2d578bd09916bf36a729124bc44c4b3-calle-jaen-museums.jpg",
+    "schedule": "Museos abiertos de martes a domingo de 9:00 a 17:00",
+    "tips": [
+        "🏛️ Visita los museos de la calle.",
+        "🚶 Ideal para caminar y tomar fotos.",
+        "☕ Disfruta de los cafés y tiendas de artesanías."
+    ],
+    "zona": "Centro",
+    "categoria": "Calle Histórica"
+    },
+    {
+    "id": "mercado-brujas",
+    "title": "Mercado de las Brujas",
+    "subtitle": "Mercado tradicional y místico",
+    "description": "Mercado típico donde se venden hierbas, amuletos y productos para rituales andinos. Un lugar único para conocer la cultura local.",
+    "imageUri": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Mercado_de_Hechiceria_003%2C_La_Paz%2C_Bolivia.JPG/500px-Mercado_de_Hechiceria_003%2C_La_Paz%2C_Bolivia.JPG",
+    "schedule": "Todos los días de 9:00 a 19:00",
+    "tips": [
+        "📷 Pregunta antes de tomar fotos.",
+        "🧿 Ideal para comprar souvenirs únicos.",
+        "🙏 Respeta las creencias y costumbres locales."
+    ],
+    "zona": "Centro",
+    "categoria": "Mercado"
+    },
+    {
+    "id": "plaza-murillo",
+    "title": "Plaza Murillo",
+    "subtitle": "Corazón político e histórico",
+    "description": "La plaza principal de La Paz, rodeada por la Catedral, el Palacio de Gobierno y el Palacio Legislativo.",
+    "imageUri": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Plaza_Murillo_en_La_Paz_-_Bolivia.jpg/960px-Plaza_Murillo_en_La_Paz_-_Bolivia.jpg",
+    "schedule": "Acceso libre todo el día",
+    "tips": [
+        "🪑 Ideal para descansar y observar la vida paceña.",
+        "🕊️ Alimenta a las palomas.",
+        "🏛️ Visita los edificios históricos a su alrededor."
+    ],
+    "zona": "Centro",
+    "categoria": "Plaza"
+    },
+    {
+    "id": "san-francisco",
+    "title": "Basílica de San Francisco",
+    "subtitle": "Iglesia y plaza histórica",
+    "description": "Imponente iglesia barroca construida en el siglo XVI, punto de encuentro y manifestaciones culturales.",
+    "imageUri": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/La_Basílica_de_San_Francisco_en_La_Paz.jpg/960px-La_Basílica_de_San_Francisco_en_La_Paz.jpg",
+    "schedule": "Templo abierto de 8:00 a 18:00, museo de 9:00 a 17:00",
+    "tips": [
+        "🔔 Sube al mirador del campanario.",
+        "🏛️ Visita el museo conventual.",
+        "🪨 Admira la arquitectura y los detalles en piedra."
+    ],
+    "zona": "Centro",
+    "categoria": "Iglesia"
+    },
+    {
+    "id": "mirador-jach-a-kollo",
+    "title": "Mirador Jach'a Kollo",
+    "subtitle": "Vista panorámica desde El Alto",
+    "description": "Ofrece una vista impresionante de la ciudad de La Paz con el Illimani de fondo, especialmente al amanecer.",
+    "imageUri": "https://www.ibolivia.org/wp-content/uploads/2019/07/mirador-jacha-kollo.jpg",
+    "schedule": "Acceso libre todo el día",
+    "tips": [
+        "📸 Ideal para fotógrafos.",
+        "🧥 Lleva ropa abrigada.",
+        "👥 Recomendable ir en grupo."
+    ],
+    "zona": "El Alto",
+    "categoria": "Mirador"
+    },
+    {
+    "id": "museo-etnografico",
+    "title": "Museo Nacional de Etnografía y Folklore",
+    "subtitle": "Cultura y tradición boliviana",
+    "description": "Museo dedicado a la diversidad cultural y folklórica de Bolivia, con exposiciones permanentes y temporales.",
+    "imageUri": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Musef3.JPG/960px-Musef3.JPG",
+    "schedule": "Martes a viernes 9:00 a 19:00, sábado y domingo 9:00 a 17:00",
+    "tips": [
+        "💬 Aprovecha las visitas guiadas.",
+        "👨‍👩‍👧 Ideal para familias y estudiantes.",
+        "🚫 No se permite tomar fotos en algunas salas."
+    ],
+    "zona": "Centro",
+    "categoria": "Museo"
+    },
     {
       "id": "parque-cotahuma",
-      "title": "Parque de Cotahuma",
-      "subtitle": "Espacio verde y recreativo",
-      "description": "Parque urbano con áreas de juegos, senderos y vegetación nativa. Un pulmón verde en la ciudad.",
-      "imageUri": "https://lapaz.bo/wp-content/uploads/2023/06/cebras.jpg",
-      "schedule": "Todos los días de 7:00 a 20:00",
+      "title": "Parque Cotahuma",
+      "subtitle": "Área verde con vista al Illimani",
+      "description": "Un parque tranquilo con zonas verdes y una excelente vista del Illimani, ideal para pasar el fin de semana en familia.",
+      "imageUri": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Parque_Cotahuma_La_Paz.jpg",
+      "schedule": "Todos los días de 8:00 a 18:00",
       "tips": [
-        "Ideal para picnic y deportes.",
-        "Lleva repelente de insectos.",
-        "No dejes basura."
+        "🌳 Ideal para picnic o paseos familiares.",
+        "📸 Excelente lugar para tomar fotos del Illimani.",
+        "🚶 Lleva calzado cómodo para caminar."
       ],
       "zona": "Cotahuma",
       "categoria": "Parque"
     },
     {
-      "id": "muela-diablo",
-      "title": "Muela del Diablo",
-      "subtitle": "Formación rocosa icónica",
-      "description": "Roca gigante que asemeja una muela, ideal para senderismo y escalada. Uno de los paisajes más reconocidos de La Paz.",
-      "imageUri": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Muela_del_diablo_2024.jpg/500px-Muela_del_diablo_2024.jpg",
-      "schedule": "Acceso libre, mejor durante el día",
+      "id": "muela-del-diablo",
+      "title": "La Muela del Diablo",
+      "subtitle": "Aventura y senderismo",
+      "description": "Formación rocosa icónica ideal para los amantes del senderismo y la naturaleza, con una vista espectacular de la ciudad y los valles circundantes.",
+      "imageUri": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Muela_del_Diablo.jpg/960px-Muela_del_Diablo.jpg",
+      "schedule": "Acceso libre, preferible ir de día",
       "tips": [
-        "Lleva agua y protector solar.",
-        "Usa zapatos para trekking.",
-        "No vayas solo."
+        "👟 Usa zapatos de trekking.",
+        "💧 Lleva agua y protector solar.",
+        "🚗 Acceso en vehículo hasta un punto, luego caminata."
       ],
       "zona": "Mallasa",
       "categoria": "Atractivo Natural"
     },
     {
-      "id": "parque-urbano-central",
-      "title": "Parque Urbano Central",
-      "subtitle": "Recreación en el centro",
-      "description": "Gran parque en el centro de la ciudad con áreas deportivas, ciclovías y zonas de descanso.",
-      "imageUri": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Vista_desde_el_Parque_Urbano_Central.jpg/960px-Vista_desde_el_Parque_Urbano_Central.jpg",
-      "schedule": "Todos los días de 6:00 a 22:00",
-      "tips": [
-        "Ideal para correr o andar en bicicleta.",
-        "Hay ferias y eventos los fines de semana.",
-        "Cuidado con tus pertenencias."
-      ],
-      "zona": "Centro",
-      "categoria": "Parque"
-    },
-    {
-      "id": "mirador-laikakota",
-      "title": "Mirador Laikakota",
-      "subtitle": "Vista y parque familiar",
-      "description": "Mirador con parque infantil y senderos, excelente para ver la ciudad y disfrutar en familia.",
-      "imageUri": "https://upload.wikimedia.org/wikipedia/commons/9/96/LaPazBolivia.JPG",
-      "schedule": "Martes a domingo 9:00 a 17:00",
-      "tips": [
-        "Ideal para ir con niños.",
-        "Hay snacks y bebidas a la venta.",
-        "Visita el puente colgante cercano."
-      ],
-      "zona": "Centro",
-      "categoria": "Mirador"
-    },
-    {
-      "id": "catedral-metropolitana",
-      "title": "Catedral Metropolitana",
-      "subtitle": "Templo histórico en Plaza Murillo",
-      "description": "Impresionante catedral neoclásica ubicada frente a la Plaza Murillo, centro espiritual y arquitectónico.",
-      "imageUri": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Catedral_Metropolitana_de_La_Paz.JPG/960px-Catedral_Metropolitana_de_La_Paz.JPG",
-      "schedule": "Todos los días de 7:00 a 19:00",
-      "tips": [
-        "Respeta los horarios de misa.",
-        "Admira las pinturas y vitrales.",
-        "No se permite tomar fotos durante las ceremonias."
-      ],
-      "zona": "Centro",
-      "categoria": "Iglesia"
-    },
-    {
-      "id": "museo-coca",
-      "title": "Museo de la Coca",
-      "subtitle": "Historia y cultura de la hoja de coca",
-      "description": "Pequeño museo dedicado a la importancia cultural, social y medicinal de la hoja de coca en Bolivia.",
-      "imageUri": "https://www.correodelalba.org/wp-content/uploads/2021/09/MuseoCoca1.jpg",
-      "schedule": "Lunes a sábado 10:00 a 18:00",
-      "tips": [
-        "Ideal para conocer la historia local.",
-        "Compra productos derivados de la coca.",
-        "No se permite tomar fotos en algunas áreas."
-      ],
-      "zona": "Centro",
-      "categoria": "Museo"
-    },
-    {
-      "id": "mirador-el-alto",
-      "title": "Mirador de El Alto",
-      "subtitle": "Vista panorámica sobre La Paz",
-      "description": "Desde El Alto se obtiene una de las mejores vistas de La Paz y el Illimani, especialmente al atardecer.",
-      "imageUri": "https://1.bp.blogspot.com/-QZVbKMMNZmM/XL0O9Bz5EzI/AAAAAAAAAFU/ah7ArtfQqjku2fGG-iMIM-S4mv-KXnS4QCEwYBhgL/s1600/20190415_124014.jpg",
+      "id": "plaza-del-estudiante",
+      "title": "Plaza del Estudiante",
+      "subtitle": "Punto de encuentro juvenil",
+      "description": "Una de las plazas más activas y modernas, rodeada de universidades, cafés y librerías.",
+      "imageUri": "https://upload.wikimedia.org/wikipedia/commons/f/fb/Plaza_del_estudiante_La_Paz_Bolivia.jpg",
       "schedule": "Acceso libre todo el día",
       "tips": [
-        "Lleva ropa abrigada.",
-        "Ideal para fotógrafos.",
-        "Evita horarios nocturnos."
+        "☕ Disfruta de un café en los alrededores.",
+        "📚 Ideal para estudiar o relajarse al aire libre.",
+        "🚦 Cruza con precaución: tráfico constante."
       ],
-      "zona": "El Alto",
-      "categoria": "Mirador"
+      "zona": "Centro",
+      "categoria": "Plaza"
     },
     {
       "id": "museo-tiwanaku",
       "title": "Museo Nacional de Arqueología (Tiwanaku)",
-      "subtitle": "Arqueología precolombina",
-      "description": "Museo que alberga piezas de la cultura Tiwanaku y otras civilizaciones precolombinas de Bolivia.",
-      "imageUri": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Lapaz37.jpg/960px-Lapaz37.jpg",
-      "schedule": "Martes a viernes 9:00 a 16:30, sábado y domingo 9:00 a 17:00",
+      "subtitle": "Historia precolombina de Bolivia",
+      "description": "Museo que alberga una de las colecciones más importantes de la cultura Tiwanaku, además de artefactos de otras civilizaciones prehispánicas.",
+      "imageUri": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Museo_Nacional_de_Arqueologia_La_Paz_Bolivia.jpg/960px-Museo_Nacional_de_Arqueologia_La_Paz_Bolivia.jpg",
+      "schedule": "Martes a domingo de 9:00 a 17:00",
       "tips": [
-        "No te pierdas la colección de monolitos.",
-        "Ideal para amantes de la historia.",
-        "Hay tienda de souvenirs."
+        "🏺 No te pierdas las piezas de la cultura Tiwanaku.",
+        "💡 Tómate tiempo para leer las descripciones.",
+        "🚫 No se permite tomar fotos con flash."
       ],
       "zona": "Centro",
       "categoria": "Museo"
     },
     {
-      "id": "puente-villazon",
-      "title": "Puente de Las Américas (Puente Villazón)",
-      "subtitle": "Arquitectura y vistas urbanas",
-      "description": "Puente emblemático de La Paz que conecta Sopocachi con Miraflores, famoso por su arquitectura.",
-      "imageUri": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjxoI8ptCtDTNjucKNh03rhIItaO4uOW5PUFzhyphenhyphenYp3z47BqHf4YZoDeJH4jw0ycmpOQ5zgsx4TtVzq1dZevMi6lPXWW8Ry2H43MGnxXg_ZXODjHwsbE1TiCZC-89OlynwtewJqcjYAwIiw/s1600/americas.jpg",
-      "schedule": "Acceso libre todo el día",
+      "id": "parque-las-cholas",
+      "title": "Parque Las Cholas",
+      "subtitle": "Diversión al aire libre",
+      "description": "Parque con amplias áreas recreativas, juegos infantiles y zonas para picnic, ideal para un paseo familiar.",
+      "imageUri": "https://upload.wikimedia.org/wikipedia/commons/5/5f/Parque_Las_Cholas_La_Paz.jpg",
+      "schedule": "Martes a domingo de 9:00 a 18:00",
       "tips": [
-        "Ideal para fotos urbanas.",
-        "Transítalo a pie con precaución.",
-        "Hermoso al atardecer."
+        "👨‍👩‍👧 Ideal para visitar con niños.",
+        "🌳 Lleva algo para picnic.",
+        "🚴 Hay ciclovía cerca del parque."
       ],
-      "zona": "Sopocachi",
-      "categoria": "Atractivo Urbano"
-    },
-    {
-      "id": "parque-bosquecillo",
-      "title": "Bosquecillo de Pura Pura",
-      "subtitle": "Bosque urbano y senderos",
-      "description": "Extensa área verde con senderos para caminar, correr y hacer picnic. Refugio natural dentro de la ciudad.",
-      "imageUri": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Bosquecillo_de_Pura_Pura_-_Bolivia.png/500px-Bosquecillo_de_Pura_Pura_-_Bolivia.png",
-      "schedule": "Todos los días de 7:00 a 18:00",
-      "tips": [
-        "Lleva comida y agua.",
-        "Ideal para observar aves.",
-        "No dejes basura."
-      ],
-      "zona": "Pura Pura",
+      "zona": "Calacoto",
       "categoria": "Parque"
     },
     {
-      "id": "plaza-san-pedro",
-      "title": "Plaza San Pedro",
-      "subtitle": "Plaza tradicional y mercado",
-      "description": "Plaza famosa por su iglesia y mercado, punto de encuentro para locales y turistas.",
-      "imageUri": "https://boliviaesturismo.com/wp-content/uploads/2015/06/Plaza_de_San_Pedro_vista_de_la_carcel.jpg",
+      "id": "mirador-blanco",
+      "title": "Mirador Blanco",
+      "subtitle": "Vistas y fotografía",
+      "description": "Mirador poco conocido con una hermosa vista panorámica de la ciudad, especialmente recomendable al amanecer.",
+      "imageUri": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/18/36/ea/7f/mirador-blanco.jpg",
       "schedule": "Acceso libre todo el día",
       "tips": [
-        "Prueba los jugos naturales del mercado.",
-        "Visita la iglesia de San Pedro.",
-        "Cuidado con tus pertenencias."
+        "📸 Ideal para tomar fotos al amanecer.",
+        "🧥 Lleva abrigo por el frío matutino.",
+        "👥 Ve acompañado si vas temprano."
       ],
-      "zona": "San Pedro",
-      "categoria": "Plaza"
-    },
-    {
-      "id": "mirador-pampahasi",
-      "title": "Mirador de Pampahasi",
-      "subtitle": "Vista panorámica y naturaleza",
-      "description": "Mirador menos conocido con una vista diferente de la ciudad y senderos naturales.",
-      "imageUri": "https://www.pub.eldiario.net/noticias/2016/2016_11/nt161104/f_2016-11-04_34.jpg",
-      "schedule": "Acceso libre durante el día",
-      "tips": [
-        "Ideal para caminatas.",
-        "Lleva agua y protección solar.",
-        "No vayas solo."
-      ],
-      "zona": "Pampahasi",
+      "zona": "Achumani",
       "categoria": "Mirador"
     },
     {
-      "id": "museo-costumbrista",
-      "title": "Museo Costumbrista Juan de Vargas",
-      "subtitle": "Historia y costumbres paceñas",
-      "description": "Museo que recrea escenas de la vida paceña tradicional, con trajes, maquetas y objetos antiguos.",
-      "imageUri": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkr21LiBBoPOtI2xt2QryOXYP10ZqF8UpybQ&s",
-      "schedule": "Martes a viernes 9:00 a 12:30 y 15:00 a 19:00, sábado y domingo 9:00 a 13:00",
+      "id": "casa-de-la-cultura",
+      "title": "Casa de la Cultura Franz Tamayo",
+      "subtitle": "Centro cultural de la ciudad",
+      "description": "Importante espacio artístico y cultural donde se realizan exposiciones, conciertos y ferias de libros durante todo el año.",
+      "imageUri": "https://upload.wikimedia.org/wikipedia/commons/d/df/Casa_de_la_Cultura_Franz_Tamayo_-_La_Paz.jpg",
+      "schedule": "Lunes a viernes de 9:00 a 19:00, sábado 9:00 a 14:00",
       "tips": [
-        "Ideal para conocer la historia local.",
-        "Visita la sala de maquetas.",
-        "No se permite tomar fotos en algunas áreas."
+        "🎨 Revisa la agenda cultural antes de ir.",
+        "📷 Pregunta si puedes tomar fotos dentro.",
+        "📚 Visita la librería del recinto."
+      ],
+      "zona": "Centro",
+      "categoria": "Centro Cultural"
+    },
+    {
+      "id": "plaza-villaroel",
+      "title": "Plaza Villarroel",
+      "subtitle": "Plaza y monumento histórico",
+      "description": "Plaza icónica del barrio de Miraflores, dedicada al héroe Gualberto Villarroel, con gran valor histórico y social.",
+      "imageUri": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Plaza_Villarroel_La_Paz_Bolivia.jpg",
+      "schedule": "Acceso libre todo el día",
+      "tips": [
+        "🏛️ Observa el monumento central.",
+        "📸 Ideal para fotos al atardecer.",
+        "🚶 Da un paseo por los alrededores."
+      ],
+      "zona": "Miraflores",
+      "categoria": "Plaza"
+    },
+    {
+      "id": "cafe-del-mundo",
+      "title": "Café del Mundo",
+      "subtitle": "Café temático internacional",
+      "description": "Uno de los cafés más populares de Sopocachi, con un ambiente multicultural y menú inspirado en platos del mundo.",
+      "imageUri": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/f0/30/0d/cafe-del-mundo.jpg",
+      "schedule": "Lunes a domingo de 8:00 a 23:00",
+      "tips": [
+        "🍰 Prueba sus postres internacionales.",
+        "☕ Ideal para ir con amigos o trabajar.",
+        "📶 Tiene Wi-Fi gratuito."
+      ],
+      "zona": "Sopocachi",
+      "categoria": "Gastronomía"
+    },
+    {
+      "id": "museo-de-la-coca",
+      "title": "Museo de la Coca",
+      "subtitle": "Historia y cultura de la hoja sagrada",
+      "description": "Museo pequeño pero muy informativo que explica la historia, usos y significado cultural de la hoja de coca en Bolivia.",
+      "imageUri": "https://upload.wikimedia.org/wikipedia/commons/4/49/Museo_de_la_Coca_La_Paz_Bolivia.jpg",
+      "schedule": "Lunes a sábado de 10:00 a 18:00",
+      "tips": [
+        "🌿 Aprende sobre los usos tradicionales de la coca.",
+        "🎧 Disponible audioguía en varios idiomas.",
+        "📸 Fotos permitidas sin flash."
       ],
       "zona": "Centro",
       "categoria": "Museo"
@@ -353,9 +308,9 @@
       "imageUri": "https://visorbolivia.wordpress.com/wp-content/uploads/2014/12/verde.jpg",
       "schedule": "Lunes a sábado 6:00 a 23:00, domingo 7:00 a 21:00",
       "tips": [
-        "Ideal para llegar rápido a la Zona Sur.",
-        "Disfruta el paisaje urbano desde las alturas.",
-        "Evita horas pico."
+        "🚡 Ideal para llegar rápido a la Zona Sur.",
+        "🏙️ Disfruta el paisaje urbano desde las alturas.",
+        "⏰ Evita horas pico."
       ],
       "zona": "Centro, Zona Sur",
       "categoria": "Transporte Turístico"
@@ -368,9 +323,9 @@
       "imageUri": "https://lapaz.bolivialocal.net/imagen/e/2017/1/i109/el-jardin-botanico-ciudad-paz-3-mx.jpg",
       "schedule": "Martes a domingo 9:00 a 17:00",
       "tips": [
-        "Lleva cámara para fotografiar flores.",
-        "No arranques plantas.",
-        "Ideal para ir con niños."
+        "📸 Lleva cámara para fotografiar flores.",
+        "🚫 No arranques plantas.",
+        "👨‍👩‍👧 Ideal para ir con niños."
       ],
       "zona": "Miraflores",
       "categoria": "Parque"
@@ -383,9 +338,9 @@
       "imageUri": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Eduardo_Abaroa_Hidalgo_2.jpg/960px-Eduardo_Abaroa_Hidalgo_2.jpg",
       "schedule": "Acceso libre todo el día",
       "tips": [
-        "Disfruta de los cafés y bares cercanos.",
-        "Ideal para descansar y leer.",
-        "Hay ferias los fines de semana."
+        "☕ Disfruta de los cafés y bares cercanos.",
+        "📖 Ideal para descansar y leer.",
+        "🎪 Hay ferias los fines de semana."
       ],
       "zona": "Sopocachi",
       "categoria": "Plaza"
@@ -398,12 +353,27 @@
       "imageUri": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Mercado_Rodriguez_-_La_Paz%2C_Bolivia4.jpg/960px-Mercado_Rodriguez_-_La_Paz%2C_Bolivia4.jpg",
       "schedule": "Todos los días de 6:00 a 19:00",
       "tips": [
-        "Prueba las frutas frescas.",
-        "Regatea con los vendedores.",
-        "Cuidado con tus pertenencias."
+        "🍎 Prueba las frutas frescas.",
+        "💬 Regatea con los vendedores.",
+        "🎒 Cuidado con tus pertenencias."
       ],
       "zona": "Sopocachi",
       "categoria": "Mercado"
+    },
+    {
+      "id": "museo-de-la-revolucion",
+      "title": "Museo de la Revolución Nacional",
+      "subtitle": "Historia política de Bolivia",
+      "description": "Museo que narra la historia de la Revolución Nacional de 1952 y otros eventos políticos importantes en Bolivia.",
+      "imageUri": "https://perspectivatemporal.org/sites/default/files/2023-11-media-image/IMG_20230720_124432.jpg",
+      "schedule": "Martes a domingo de 9:00 a 17:00",
+      "tips": [
+        "📚 Lee las descripciones para entender el contexto histórico.",
+        "🎧 Audioguías disponibles en varios idiomas.",
+        "🚫 No se permite tomar fotos con flash."
+      ],
+      "zona": "Centro",
+      "categoria": "Museo"
     }
   ]
 }

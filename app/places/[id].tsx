@@ -1,104 +1,102 @@
+import { Ionicons } from "@expo/vector-icons";
 import { router, Stack, useLocalSearchParams } from "expo-router";
 import React from "react";
-import { Image, Pressable, SafeAreaView, ScrollView, Text, View } from "react-native";
+import {
+  Image,
+  Pressable,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import FavoriteButton from "../../components/FavoriteButton";
 import data from "../data/placesData.json";
 import { useThemeColors } from "../hooks/useThemeColors";
+import { ThemeColors } from "../theme/colors";
+
 const places = data.places;
 
 export default function PlaceDetail() {
   const { id } = useLocalSearchParams();
   const { colors } = useThemeColors();
 
-  const placeId = Array.isArray(id) ? id[0] : id; 
+  const styles = getStyles(colors);
+
+  const placeId = Array.isArray(id) ? id[0] : id;
   const place = places.find((p) => p.id === placeId);
 
-  if (!place) return <Text style={{ color: colors.text }}>Lugar no encontrado</Text>;
+  if (!place) {
+    return (
+      <View style={styles.centered}>
+        <Text style={{ color: colors.text }}>Lugar no encontrado</Text>
+      </View>
+    );
+  }
 
   return (
     <>
-      <Stack.Screen options={{ title: place.title }} />
+      <Stack.Screen options={{ title: place.title, headerTitleAlign: "center" }} />
 
-      <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
+      <SafeAreaView style={styles.safeArea}>
         <ScrollView
-          style={{ flex: 1 }}
-          contentContainerStyle={{ padding: 16, paddingBottom: 24 }}
-          contentInsetAdjustmentBehavior="automatic"
+          style={styles.scrollView}
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={false}
         >
-          <Pressable
-            onPress={() => router.back()}
-            style={{
-              alignSelf: "flex-start",
-              marginBottom: 12,
-              paddingHorizontal: 8,
-              paddingVertical: 4,
-              borderRadius: 8,
-              backgroundColor: colors.surface,
-            }}
-          >
-            <Text style={{ fontSize: 16, color: colors.text }}>← Volver</Text>
+          <Pressable onPress={() => router.back()} style={styles.backButton}>
+            <Ionicons name="arrow-back" size={20} color={colors.primary} />
+            <Text style={styles.backButtonText}>Volver</Text>
           </Pressable>
-          <Image
-            source={{ uri: place.imageUri }}
-            style={{ height: 220, borderRadius: 12 }}
-          />
 
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-              flexWrap: "wrap",
-              marginTop: 12,
-              gap: 8,
-            }}
-          >
-            <Text
-              style={{ fontSize: 22, fontWeight: "bold", flex: 1, color: colors.text }}
-              numberOfLines={2}
-              ellipsizeMode="tail"
-            >
-              {place.title}
-            </Text>
+          <View style={styles.imageContainer}>
+            <Image source={{ uri: place.imageUri }} style={styles.image} />
+          </View>
+
+          <View style={styles.headerContainer}>
+            <Text style={styles.title}>{place.title}</Text>
             <FavoriteButton placeId={place.id} />
           </View>
 
-          <Text style={{ marginVertical: 8, color: colors.textSecondary }}>
-            {place.subtitle}
-          </Text>
+          <Text style={styles.subtitle}>{place.subtitle}</Text>
 
           {(place.zona || place.categoria) && (
-            <View style={{ marginBottom: 8 }}>
+            <View style={styles.tagsContainer}>
               {place.zona && (
-                <Text style={{ color: colors.textSecondary }}>Zona: {place.zona}</Text>
+                <View style={styles.tag}>
+                  <Ionicons name="location-outline" size={14} color={colors.primary} />
+                  <Text style={styles.tagText}>{place.zona}</Text>
+                </View>
               )}
               {place.categoria && (
-                <Text style={{ color: colors.textSecondary }}>
-                  Categoría: {place.categoria}
-                </Text>
+                <View style={styles.tag}>
+                  <Ionicons name="pricetag-outline" size={14} color={colors.primary} />
+                  <Text style={styles.tagText}>{place.categoria}</Text>
+                </View>
               )}
             </View>
           )}
 
-          <Text style={{ fontSize: 16, color: colors.text }}>
-            {place.description}
-          </Text>
+          <Text style={styles.description}>{place.description}</Text>
 
-          <View style={{ marginTop: 16 }}>
-            <Text style={{ fontWeight: "bold", fontSize: 18, color: colors.text }}>
-              🕐 Horario
-            </Text>
-            <Text style={{ color: colors.textSecondary }}>{place.schedule}</Text>
+          <View style={styles.infoCard}>
+            <View style={styles.cardHeader}>
+              <Ionicons name="time-outline" size={22} color={colors.text} />
+              <Text style={styles.cardTitle}>Horario</Text>
+            </View>
+            <Text style={styles.cardContent}>{place.schedule}</Text>
           </View>
 
-          <View style={{ marginTop: 16 }}>
-            <Text style={{ fontWeight: "bold", fontSize: 18, color: colors.text }}>
-              💡 Tips
-            </Text>
+          <View style={styles.infoCard}>
+            <View style={styles.cardHeader}>
+              <Ionicons name="bulb-outline" size={22} color={colors.text} />
+              <Text style={styles.cardTitle}>Tips</Text>
+            </View>
             {place.tips.map((tip, i) => (
-              <Text key={i} style={{ color: colors.textSecondary }}>
-                • {tip}
-              </Text>
+              <View key={i} style={styles.tipItem}>
+                <Text style={styles.bulletPoint}>•</Text>
+                <Text style={styles.cardContent}>{tip}</Text>
+              </View>
             ))}
           </View>
         </ScrollView>
@@ -106,3 +104,132 @@ export default function PlaceDetail() {
     </>
   );
 }
+
+const getStyles = (colors: ThemeColors) =>
+  StyleSheet.create({
+    safeArea: {
+      flex: 1,
+      backgroundColor: colors.background,
+    },
+    scrollView: {
+      flex: 1,
+    },
+    scrollContent: {
+      padding: 20,
+      paddingTop: 24,
+      paddingBottom: 40,
+    },
+    centered: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: colors.background,
+    },
+    backButton: {
+      flexDirection: "row",
+      alignItems: "center",
+      alignSelf: "flex-start",
+      paddingHorizontal: 12,
+      paddingVertical: 6,
+      borderRadius: 20,
+      backgroundColor: colors.surface,
+      marginBottom: 16,
+    },
+    backButtonText: {
+      fontSize: 16,
+      color: colors.primary,
+      marginLeft: 6,
+      fontWeight: "500",
+    },
+    imageContainer: {
+      shadowColor: "#000",
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.1,
+      shadowRadius: 8,
+      elevation: 5,
+    },
+    image: {
+      height: 250,
+      width: "100%",
+      borderRadius: 16,
+    },
+    headerContainer: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "flex-start",
+      marginTop: 20,
+      gap: 12,
+    },
+    title: {
+      fontSize: 28,
+      fontWeight: "bold",
+      color: colors.text,
+      flex: 1,
+    },
+    subtitle: {
+      fontSize: 16,
+      color: colors.textSecondary,
+      marginTop: 4,
+      marginBottom: 16,
+    },
+    tagsContainer: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+      gap: 8,
+      marginBottom: 16,
+    },
+    tag: {
+      flexDirection: "row",
+      alignItems: "center",
+      backgroundColor: colors.surface,
+      paddingHorizontal: 10,
+      paddingVertical: 5,
+      borderRadius: 15,
+    },
+    tagText: {
+      color: colors.primary,
+      marginLeft: 5,
+      fontSize: 13,
+      fontWeight: "500",
+    },
+    description: {
+      fontSize: 16,
+      lineHeight: 24,
+      color: colors.text,
+      marginBottom: 24,
+    },
+    infoCard: {
+      backgroundColor: colors.surface,
+      borderRadius: 12,
+      padding: 16,
+      marginBottom: 16,
+    },
+    cardHeader: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginBottom: 8,
+    },
+    cardTitle: {
+      fontSize: 20,
+      fontWeight: "bold",
+      color: colors.text,
+      marginLeft: 8,
+    },
+    cardContent: {
+      fontSize: 15,
+      color: colors.textSecondary,
+      lineHeight: 22,
+      flex: 1,
+    },
+    tipItem: {
+      flexDirection: "row",
+      alignItems: "flex-start",
+      marginVertical: 6,
+    },
+    bulletPoint: {
+      fontSize: 15,
+      color: colors.textSecondary,
+      marginRight: 8,
+      lineHeight: 22,
+    },
+  });
