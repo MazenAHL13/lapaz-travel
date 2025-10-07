@@ -1,9 +1,9 @@
-import { Text, View, ScrollView, SafeAreaView } from "react-native";
-import { useThemeColors } from "../hooks/useThemeColors";
-import { useFavoritesStore } from "../store/favorites";
-import { places } from "../data/placesData";
-import PlaceCard from "../../components/PlaceCard";
 import { useRouter } from "expo-router";
+import { SafeAreaView, ScrollView, Text, View } from "react-native";
+import PlaceCard from "../../components/PlaceCard";
+import { places } from "../data/placesData";
+import { useThemeColors } from "../hooks/useThemeColors";
+import { useFavoritesStore } from "../store/useFavoritesStore";
 
 export default function FavoritesScreen() {
   const { colors } = useThemeColors();
@@ -20,11 +20,11 @@ export default function FavoritesScreen() {
           alignItems: favoritePlaces.length === 0 ? "center" : "stretch",
           justifyContent: favoritePlaces.length === 0 ? "center" : "flex-start",
           flexGrow: 1,
-        }}
-      >
+        }}>
         {favoritePlaces.length === 0 ? (
           <View style={{ alignItems: "center" }}>
-            <Text style={{ fontSize: 20, fontWeight: "700", color: colors.text }}>
+            <Text
+              style={{ fontSize: 20, fontWeight: "700", color: colors.text }}>
               Favoritos
             </Text>
             <Text style={{ color: colors.textSecondary, marginTop: 8 }}>
@@ -39,7 +39,10 @@ export default function FavoritesScreen() {
               subtitle={place.subtitle}
               imageUri={place.imageUri}
               onPress={() =>
-                router.push({ pathname: "/places/[id]", params: { id: place.id } })
+                router.push({
+                  pathname: "/places/[id]",
+                  params: { id: place.id },
+                })
               }
             />
           ))

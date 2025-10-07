@@ -51,6 +51,7 @@ const createStyles = (colors: ThemeColors) =>
       marginRight: 6,
     },
     input: {
+      color: colors.textSecondary,
       flex: 1,
       fontSize: 16,
     },
