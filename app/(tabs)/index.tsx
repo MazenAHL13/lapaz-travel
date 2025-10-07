@@ -3,7 +3,8 @@ import { ScrollView, View } from "react-native";
 import FilterSearch from "../../components/FilterSearch";
 import PlaceCard from "../../components/PlaceCard";
 import SearchBar from "../../components/SearchBar";
-import { places } from "../data/placesData";
+import data from "../data/placesData.json";
+const places = data.places;
 
 import { useRouter } from "expo-router";
 import { useThemeColors } from "../hooks/useThemeColors";

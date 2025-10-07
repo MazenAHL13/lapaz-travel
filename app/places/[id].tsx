@@ -1,9 +1,10 @@
-import React from "react";
-import { Image, ScrollView, Text, View, SafeAreaView, Pressable } from "react-native";
 import { router, Stack, useLocalSearchParams } from "expo-router";
+import React from "react";
+import { Image, Pressable, SafeAreaView, ScrollView, Text, View } from "react-native";
 import FavoriteButton from "../../components/FavoriteButton";
-import { places } from "../data/placesData";
+import data from "../data/placesData.json";
 import { useThemeColors } from "../hooks/useThemeColors";
+const places = data.places;
 
 export default function PlaceDetail() {
   const { id } = useLocalSearchParams();
