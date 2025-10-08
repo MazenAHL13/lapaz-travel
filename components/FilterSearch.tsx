@@ -103,7 +103,7 @@ const createStyles = (colors: ThemeColors) =>
       flexDirection: "row",
     },
     title: {
-      color: colors.textSecondary,
+      color: "000",
       fontSize: 16,
       alignSelf: "center",
     },
