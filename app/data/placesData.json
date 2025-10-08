@@ -155,7 +155,7 @@
       "title": "Parque Cotahuma",
       "subtitle": "Área verde con vista al Illimani",
       "description": "Un parque tranquilo con zonas verdes y una excelente vista del Illimani, ideal para pasar el fin de semana en familia.",
-      "imageUri": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Parque_Cotahuma_La_Paz.jpg",
+      "imageUri": "https://lapaz.bo/wp-content/uploads/2023/06/cebras.jpg",
       "schedule": "Todos los días de 8:00 a 18:00",
       "tips": [
         "🌳 Ideal para picnic o paseos familiares.",
@@ -170,7 +170,7 @@
       "title": "La Muela del Diablo",
       "subtitle": "Aventura y senderismo",
       "description": "Formación rocosa icónica ideal para los amantes del senderismo y la naturaleza, con una vista espectacular de la ciudad y los valles circundantes.",
-      "imageUri": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Muela_del_Diablo.jpg/960px-Muela_del_Diablo.jpg",
+      "imageUri": "https://lh3.googleusercontent.com/gps-cs-s/AC9h4noLxkfwyJASXRwe0ZjNiLaI6ajq_TESPx_1DkveJOIm57p-1Ebm49YK5IqK5bFLn5ATJaHMjdKW8WzF-22xUJYDqw84ROBnOaUyQJor1QgwoaxRAFd_oCIhXKwlwWBRd1MBUSiF=w1080-h624-n-k-no",
       "schedule": "Acceso libre, preferible ir de día",
       "tips": [
         "👟 Usa zapatos de trekking.",
@@ -185,7 +185,7 @@
       "title": "Plaza del Estudiante",
       "subtitle": "Punto de encuentro juvenil",
       "description": "Una de las plazas más activas y modernas, rodeada de universidades, cafés y librerías.",
-      "imageUri": "https://upload.wikimedia.org/wikipedia/commons/f/fb/Plaza_del_estudiante_La_Paz_Bolivia.jpg",
+      "imageUri": "https://scontent.flpb1-2.fna.fbcdn.net/v/t39.30808-6/556793534_1486418570160708_4943944244878762577_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=127cfc&_nc_ohc=zxHiRA1Kk9cQ7kNvwGE7Nj6&_nc_oc=AdkikbKWbV5_ljsylhhIN9A1qWllzPszaId0lCYXnzXgSRKhV4swUBuxEtPccCKX1l0&_nc_zt=23&_nc_ht=scontent.flpb1-2.fna&_nc_gid=BFTzZ8iaN_dc4___ubHx0g&oh=00_Afe-SjR4pxSpIOz6Uw8xAkqsKv8ESfR0_SDcL1B1euFuVg&oe=68EC2EAB",
       "schedule": "Acceso libre todo el día",
       "tips": [
         "☕ Disfruta de un café en los alrededores.",
@@ -200,7 +200,7 @@
       "title": "Museo Nacional de Arqueología (Tiwanaku)",
       "subtitle": "Historia precolombina de Bolivia",
       "description": "Museo que alberga una de las colecciones más importantes de la cultura Tiwanaku, además de artefactos de otras civilizaciones prehispánicas.",
-      "imageUri": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Museo_Nacional_de_Arqueologia_La_Paz_Bolivia.jpg/960px-Museo_Nacional_de_Arqueologia_La_Paz_Bolivia.jpg",
+      "imageUri": "https://lh3.googleusercontent.com/gps-cs-s/AC9h4nr1SKHKcA3uM2Vgw6_uBONQm_DoqiQfuuCbEw7yEzav4XbJOjfZM191tWrcVfriw2UxyI_8zcTsBB0X1oqUl3p1VQaUJOXcuuP4pakqjqyFV3bvljQ3sNuEVoy838zyJiR2Sbs=s1360-w1360-h1020",
       "schedule": "Martes a domingo de 9:00 a 17:00",
       "tips": [
         "🏺 No te pierdas las piezas de la cultura Tiwanaku.",
@@ -215,7 +215,7 @@
       "title": "Parque Las Cholas",
       "subtitle": "Diversión al aire libre",
       "description": "Parque con amplias áreas recreativas, juegos infantiles y zonas para picnic, ideal para un paseo familiar.",
-      "imageUri": "https://upload.wikimedia.org/wikipedia/commons/5/5f/Parque_Las_Cholas_La_Paz.jpg",
+      "imageUri": "https://estaticos-noticias.unitel.bo/binrepository/1000x750/0c-274/1024d1024/none/125450566/NNAJ/florida2_101-2851741_20220820191954.jpg",
       "schedule": "Martes a domingo de 9:00 a 18:00",
       "tips": [
         "👨‍👩‍👧 Ideal para visitar con niños.",
@@ -226,11 +226,11 @@
       "categoria": "Parque"
     },
     {
-      "id": "mirador-blanco",
-      "title": "Mirador Blanco",
+      "id": "mirador-letras-la-paz",
+      "title": "Mirador Letras La Paz",
       "subtitle": "Vistas y fotografía",
       "description": "Mirador poco conocido con una hermosa vista panorámica de la ciudad, especialmente recomendable al amanecer.",
-      "imageUri": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/18/36/ea/7f/mirador-blanco.jpg",
+      "imageUri": "https://scontent.flpb1-1.fna.fbcdn.net/v/t39.30808-6/491104935_1012446484330714_183931441979591185_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=833d8c&_nc_ohc=ZCOPfSb5bnkQ7kNvwGDyQ0l&_nc_oc=Admxzq5PcU861vRObAQu_5Y6tNsKW8ic29LzdR-Jtvaa5ZCByqCL-Mvi5jG56YYjSq8&_nc_zt=23&_nc_ht=scontent.flpb1-1.fna&_nc_gid=KNvbDKpkAwNo81bRr9Z_lA&oh=00_AffU5DWlYw4426aaaKhuGFYdn_XiBaQVeastyjJjr_ofxQ&oe=68EC3997",
       "schedule": "Acceso libre todo el día",
       "tips": [
         "📸 Ideal para tomar fotos al amanecer.",
@@ -245,7 +245,7 @@
       "title": "Casa de la Cultura Franz Tamayo",
       "subtitle": "Centro cultural de la ciudad",
       "description": "Importante espacio artístico y cultural donde se realizan exposiciones, conciertos y ferias de libros durante todo el año.",
-      "imageUri": "https://upload.wikimedia.org/wikipedia/commons/d/df/Casa_de_la_Cultura_Franz_Tamayo_-_La_Paz.jpg",
+      "imageUri": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Casa_de_la_Cultura_Franz_Tamayo_0.jpg/960px-Casa_de_la_Cultura_Franz_Tamayo_0.jpg",
       "schedule": "Lunes a viernes de 9:00 a 19:00, sábado 9:00 a 14:00",
       "tips": [
         "🎨 Revisa la agenda cultural antes de ir.",
@@ -260,7 +260,7 @@
       "title": "Plaza Villarroel",
       "subtitle": "Plaza y monumento histórico",
       "description": "Plaza icónica del barrio de Miraflores, dedicada al héroe Gualberto Villarroel, con gran valor histórico y social.",
-      "imageUri": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Plaza_Villarroel_La_Paz_Bolivia.jpg",
+      "imageUri": "https://scontent.flpb1-2.fna.fbcdn.net/v/t39.30808-6/492570443_1340317814770785_362178377536894092_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=127cfc&_nc_ohc=K-09ay7-R74Q7kNvwHDgslc&_nc_oc=AdlsJRvkAKUl8kX34RN7VTKl5EX_xFTR-p-kOlGvFCV48nUld3A6VfVw6imp1Z8IuDw&_nc_zt=23&_nc_ht=scontent.flpb1-2.fna&_nc_gid=USVAJ2vepakrKmI_c5AR1Q&oh=00_AffpZukjeyvk3Os6lUQu3VjxapTrXFuMNXnuBrbUjyeB-Q&oe=68EC2D32",
       "schedule": "Acceso libre todo el día",
       "tips": [
         "🏛️ Observa el monumento central.",
@@ -275,7 +275,7 @@
       "title": "Café del Mundo",
       "subtitle": "Café temático internacional",
       "description": "Uno de los cafés más populares de Sopocachi, con un ambiente multicultural y menú inspirado en platos del mundo.",
-      "imageUri": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/f0/30/0d/cafe-del-mundo.jpg",
+      "imageUri": "https://media-cdn.tripadvisor.com/media/photo-s/0f/33/2e/bf/cafe-del-mundo.jpg",
       "schedule": "Lunes a domingo de 8:00 a 23:00",
       "tips": [
         "🍰 Prueba sus postres internacionales.",
@@ -290,7 +290,7 @@
       "title": "Museo de la Coca",
       "subtitle": "Historia y cultura de la hoja sagrada",
       "description": "Museo pequeño pero muy informativo que explica la historia, usos y significado cultural de la hoja de coca en Bolivia.",
-      "imageUri": "https://upload.wikimedia.org/wikipedia/commons/4/49/Museo_de_la_Coca_La_Paz_Bolivia.jpg",
+      "imageUri": "https://www.correodelalba.org/wp-content/uploads/2021/09/MuseoCoca1.jpg",
       "schedule": "Lunes a sábado de 10:00 a 18:00",
       "tips": [
         "🌿 Aprende sobre los usos tradicionales de la coca.",
