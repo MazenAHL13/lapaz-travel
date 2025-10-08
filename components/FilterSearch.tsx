@@ -103,7 +103,7 @@ const createStyles = (colors: ThemeColors) =>
       flexDirection: "row",
     },
     title: {
-      color: "000",
+      color: colors.textSecondary,
       fontSize: 16,
       alignSelf: "center",
     },
@@ -119,6 +119,6 @@ const createStyles = (colors: ThemeColors) =>
       padding: 5,
       marginHorizontal: 5,
       marginBottom: 8,
-      backgroundColor: colors.success,
+      backgroundColor: "#3399ff",
     },
   });
