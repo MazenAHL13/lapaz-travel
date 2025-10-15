@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "id": "mazen",
+      "name": "Mazen Abu Hamdan",
+      "email": "mazen@lapaz.travel",
+      "avatar": "https://i.pravatar.cc/150?img=12"
+    },
+    {
+      "id": "diego",
+      "name": "Diego alba",
+      "email": "diego@lapaz.travel",
+      "avatar": "https://i.pravatar.cc/150?img=20"
+    },
+    {
+      "id": "fidel",
+      "name": "Fidel Aguilar",
+      "email": "fidel@lapaz.travel",
+      "avatar": "https://i.pravatar.cc/150?img=32"
+    }
+  ]
+}

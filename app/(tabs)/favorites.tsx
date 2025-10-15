@@ -39,13 +39,10 @@ export default function FavoritesScreen() {
               title={place.title}
               subtitle={place.subtitle}
               imageUri={place.imageUri}
-              onPress={() =>
-                router.push({
-                  pathname: "/places/[id]",
-                  params: { id: place.id },
-                })
-              }
-            />
+              onPress={() => router.push({
+                pathname: "/places/[id]",
+                params: { id: place.id },
+              })} placeId={""}            />
           ))
         )}
       </ScrollView>
