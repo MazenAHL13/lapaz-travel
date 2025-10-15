@@ -1,10 +1,11 @@
-import { SafeAreaView, View, Text, Pressable, Image, Alert } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { SafeAreaView, View, Text, Pressable, Image, Alert, StyleSheet } from "react-native";
 import { useThemeColors } from "../hooks/useThemeColors";
 import { useUserStore } from "../store/useUserStore";
 import { router } from "expo-router";
 import * as ImagePicker from "expo-image-picker";
 import { useState } from "react";
+import Colors from "@/constants/Colors";
 
 export default function ProfileScreen() {
   const { colors } = useThemeColors();
@@ -13,6 +14,7 @@ export default function ProfileScreen() {
   const setAvatar = useUserStore((s) => s.setAvatar);
   const clearAvatar = useUserStore((s) => s.clearAvatar);
   const [isEditing, setIsEditing] = useState(false);
+  const styles = createStyles(colors);
 
 
   const handleLogout = async () => {
@@ -84,26 +86,40 @@ export default function ProfileScreen() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
       <View style={{ padding: 16, gap: 16 }}>
-        {/* Header */}
         <View style={{ alignItems: "center", gap: 8 }}>
           <Pressable onPress={pickImage} disabled={!isEditing}>
             <Avatar />
           </Pressable>
 
           {isEditing && (
-            <>
-              <Text style={{ fontSize: 14, color: colors.textSecondary, marginTop: 4 }}>
-                Toca la imagen para cambiar tu foto
-              </Text>
-              {user?.avatar && (
-                <Pressable onPress={handleRemovePhoto} style={{ marginTop: 4 }}>
-                  <Text style={{ color: colors.textSecondary, fontSize: 13 }}>
-                    Quitar foto
-                  </Text>
-                </Pressable>
-              )}
-            </>
+  <>
+          <Text style={{ fontSize: 16, color: colors.textSecondary, marginTop: 4 }}>
+            Toca la imagen para cambiar tu foto
+          </Text>
+
+          {user?.avatar && (
+            <Pressable
+              onPress={handleRemovePhoto}
+              style={({ pressed }) => [
+                styles.removePhotoButton,
+                {
+                  backgroundColor: pressed
+                    ? colors.error
+                    : colors.background,
+                  borderColor: colors.error,
+                },
+              ]}
+            >
+              <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}>
+                <Ionicons name="trash-outline" size={18} color={colors.error} />
+                <Text style={{ fontSize: 14, fontWeight: "600", color: colors.error }}>
+                  Quitar foto
+                </Text>
+              </View>
+            </Pressable>
           )}
+        </>
+      )}
 
           <Text style={{ fontSize: 20, fontWeight: "700", color: colors.text }}>
             {user?.name ?? "Usuario"}
@@ -156,7 +172,7 @@ export default function ProfileScreen() {
             </Text>
           </Pressable>
 
-          {/* Logout */}
+       
           <Pressable
             style={{
               borderWidth: 1,
@@ -176,3 +192,15 @@ export default function ProfileScreen() {
     </SafeAreaView>
   );
 }
+const createStyles = (colors: typeof Colors.light) =>
+  StyleSheet.create({
+    removePhotoButton: {
+      paddingVertical: 8,
+      paddingHorizontal: 14,
+      borderRadius: 10,
+      borderWidth: 1.5,
+      alignItems: "center",
+      justifyContent: "center",
+      marginTop: 6,
+    },
+  });
