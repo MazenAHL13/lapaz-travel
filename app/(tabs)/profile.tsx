@@ -13,6 +13,7 @@ export default function ProfileScreen() {
   const setAvatar = useUserStore((s) => s.setAvatar);
   const clearAvatar = useUserStore((s) => s.clearAvatar);
   const [isEditing, setIsEditing] = useState(false);
+  const [tempAvatarUri, setTempAvatarUri] = useState<string | null | undefined>(undefined);
   const styles = createStyles(colors);
 
 
@@ -47,7 +48,7 @@ export default function ProfileScreen() {
             });
 
             if (!res.canceled && res.assets.length > 0) {
-              setAvatar(res.assets[0].uri);
+              setTempAvatarUri(res.assets[0].uri);
             }
           },
         },
@@ -58,16 +59,18 @@ export default function ProfileScreen() {
   const handleRemovePhoto = () => {
     Alert.alert("Quitar foto", "¿Estás seguro de eliminar tu foto de perfil?", [
       { text: "Cancelar", style: "cancel" },
-      { text: "Eliminar", style: "destructive", onPress: () => clearAvatar() },
+      { text: "Eliminar", style: "destructive", onPress: () => setTempAvatarUri(null) },
     ]);
   };
 
   // 🧍 Avatar dinámico
   const Avatar = () => {
-    if (user?.avatar) {
+    const sourceUri = isEditing ? tempAvatarUri : user?.avatar;
+
+    if (sourceUri) {
       return (
         <Image
-          source={{ uri: user.avatar }}
+          source={{ uri: sourceUri }}
           style={{
             width: 96,
             height: 96,
@@ -96,7 +99,7 @@ export default function ProfileScreen() {
             Toca la imagen para cambiar tu foto
           </Text>
 
-          {user?.avatar && (
+          {tempAvatarUri && (
             <Pressable
               onPress={handleRemovePhoto}
               style={({ pressed }) => [
@@ -154,9 +157,15 @@ export default function ProfileScreen() {
             }}
             onPress={() => {
               if (isEditing) {
+                if (tempAvatarUri) {
+                  setAvatar(tempAvatarUri);
+                } else if (tempAvatarUri === null) {
+                  clearAvatar();
+                }
                 setIsEditing(false);
                 Alert.alert("Cambios guardados", "Tu perfil ha sido actualizado.");
               } else {
+                setTempAvatarUri(user?.avatar);
                 setIsEditing(true);
               }
             }}
