@@ -13,7 +13,7 @@ export const useFavoritesStore = create<FavState>((set, get) => ({
 
   toggleFavorite: (placeId) => {
     const userId = useUserStore.getState().currentUser?.id;
-    if (!userId) return; // por seguridad, no se puede usar sin login
+    if (!userId) return;
 
     const current = get().favoritesByUser[userId] ?? [];
     const updated = current.includes(placeId)
