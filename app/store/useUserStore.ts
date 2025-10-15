@@ -1,51 +1,47 @@
 import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import usersData from "../data/users.json";
 
 type User = {
-  id: "mazen" | "diego" | "fidel";
+  id: string;
   name: string;
   email: string;
-  avatar?: string; 
+  avatar?: string;
+  password: string;
 };
 
 type UserState = {
   currentUser: User | null;
-  loginAs: (id: User["id"]) => void;
+  login: (email: string, password: string) => boolean;
   logout: () => void;
-  setAvatar: (uri: string) => void; 
 };
 
-export const useUserStore = create<UserState>((set, get) => ({
-  currentUser: null,
+export const useUserStore = create<UserState>()(
+  persist(
+    (set) => ({
+      currentUser: null,
 
-  loginAs: (id) => {
-    const baseUsers: Record<User["id"], User> = {
-      mazen: {
-        id: "mazen",
-        name: "Mazen Abu Hamdan",
-        email: "mazen@lapaz.travel",
-        avatar: "https://i.pravatar.cc/150?img=12",
-      },
-      diego: {
-        id: "diego",
-        name: "Diego Alba",
-        email: "diego@lapaz.travel",
-        avatar: "https://i.pravatar.cc/150?img=20",
-      },
-      fidel: {
-        id: "fidel",
-        name: "Fidel Aguilar",
-        email: "fidel@lapaz.travel",
-        avatar: "https://i.pravatar.cc/150?img=32",
-      },
-    };
-    set({ currentUser: baseUsers[id] ?? null });
-  },
+      login: (email, password) => {
+        const user = usersData.users.find(
+          (u) =>
+            (u.email.toLowerCase() === email.toLowerCase() ||
+              u.name.toLowerCase().includes(email.toLowerCase())) &&
+            u.password === password
+        );
 
-  logout: () => set({ currentUser: null }),
+        if (user) {
+          set({ currentUser: user });
+          return true;
+        }
+        return false;
+      },
 
-  setAvatar: (uri) => {
-    const user = get().currentUser;
-    if (!user) return;
-    set({ currentUser: { ...user, avatar: uri } });
-  },
-}));
+      logout: () => set({ currentUser: null }),
+    }),
+    {
+      name: "user-storage",
+      storage: createJSONStorage(() => AsyncStorage),
+    }
+  )
+);
