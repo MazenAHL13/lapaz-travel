@@ -13,6 +13,7 @@ import {
 import { useThemeColors } from "./hooks/useThemeColors";
 import { ThemeColors } from "./theme/colors";
 import { useUserStore } from "./store/useUserStore";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function LoginScreen() {
   const { colors } = useThemeColors();
@@ -38,6 +39,8 @@ export default function LoginScreen() {
   router.replace("/(tabs)");
 };
 
+const [showPassword, setShowPassword] = useState(false);
+
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.logoContainer}>
@@ -57,15 +60,30 @@ export default function LoginScreen() {
           onChangeText={setEmail}
           autoCapitalize="none"
         />
-        <TextInput
-          style={[styles.input, { color: colors.text, borderColor: colors.border }]}
-          placeholder="Contraseña"
-          placeholderTextColor={colors.textSecondary}
-          secureTextEntry
-          value={password}
-          onChangeText={setPassword}
-        />
-
+        <View style={{ position: "relative" }}>
+          <TextInput
+            style={[styles.input, { color: colors.text, borderColor: colors.border }]}
+            placeholder="Contraseña"
+            placeholderTextColor={colors.textSecondary}
+            secureTextEntry={!showPassword}
+            value={password}
+            onChangeText={setPassword}
+          />
+          <Pressable
+              onPress={() => setShowPassword((v) => !v)}
+              style={{
+                position: "absolute",
+                right: 14,
+                top: 14,
+              }}
+            >
+              <Ionicons
+                name={showPassword ? "eye-off" : "eye"}
+                size={22}
+                color={colors.textSecondary}
+              />
+            </Pressable>
+          </View>
         <Pressable
           onPress={handleLogin}
           style={({ pressed }) => [
