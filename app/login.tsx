@@ -26,8 +26,15 @@ export default function LoginScreen() {
 
   const login = useUserStore((s) => s.login);
 
-  const handleLogin = () => {
-    const success = login(email.trim(), password.trim());
+  const handleLogin = async () => {
+    const trimmedEmail = email.trim();
+    const trimmedPassword = password.trim();
+
+    if (!trimmedEmail || !trimmedPassword) {
+      Alert.alert("Campos requeridos", "Debes llenar ambos campos.");
+      return;
+    }
+    const success = await login(trimmedEmail, trimmedPassword);
 
   if (!success) {
     Alert.alert(
