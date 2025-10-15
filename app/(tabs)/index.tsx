@@ -86,6 +86,7 @@ export default function ExploreScreen() {
         {filtered.map((place) => (
           <PlaceCard
             key={place.id}
+            placeId={place.id} 
             title={place.title}
             subtitle={`${place.zona} • ${place.categoria}`}
             imageUri={place.imageUri}
