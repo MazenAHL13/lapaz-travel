@@ -45,7 +45,7 @@ export default function ExploreScreen() {
 
   return (
     <ScrollView
-      style={{ flex: 1, backgroundColor: colors.background, paddingTop: 12 }}>
+      style={{ flex: 1, backgroundColor: colors.background, padding: 16}}>
       <SearchBar value={query} onChangeText={setQuery} />
 
       <FilterSearch

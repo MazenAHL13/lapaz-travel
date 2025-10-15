@@ -1,6 +1,7 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { useThemeColors } from "../app/hooks/useThemeColors";
 import { ThemeColors } from "../app/theme/colors";
+import { radius, shadow, spacing } from "../constants/tokens";
 
 type PlaceCardProps = {
   title: string;
@@ -22,9 +23,16 @@ export default function PlaceCard({
     <Pressable
       onPress={onPress}
       style={({ pressed }) => [
-        styles.card,
-        pressed && { opacity: 0.9, transform: [{ scale: 0.98 }] },
-      ]}
+  {
+    marginBottom: 16,
+    borderRadius: radius.lg,
+    padding: spacing.lg,
+    backgroundColor: colors.card, 
+    opacity: pressed ? 0.98 : 1,
+  },
+  shadow.ios,
+  shadow.android,
+]}
     >
       <Image source={{ uri: imageUri }} style={styles.image} />
       <View style={styles.content}>
@@ -48,6 +56,7 @@ const createStyles = (colors: ThemeColors) =>
       shadowOpacity: 0.1,
       shadowRadius: 4,
       shadowOffset: { width: 0, height: 2 },
+      padding: 16,
     },
     image: {
       width: "100%",
