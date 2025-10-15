@@ -1,27 +1,35 @@
+import { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
-import { StyleSheet, TextInput, View } from "react-native";
+import { Pressable, StyleSheet, TextInput, View } from "react-native";
 import { useThemeColors } from "../app/hooks/useThemeColors";
 import { ThemeColors } from "../app/theme/colors";
+import { radius, spacing, typography, shadow } from "../constants/tokens";
 
 type SearchBarProps = {
   placeholder?: string;
   value: string;
   onChangeText: (text: string) => void;
+  onPressFilter?: () => void;
+  activeFilterCount?: number;
 };
 
 export default function SearchBar({
   placeholder = "Buscar...",
   value,
   onChangeText,
+  onPressFilter,
+  activeFilterCount = 0,
 }: SearchBarProps) {
   const { colors } = useThemeColors();
-  const styles = createStyles(colors);
+  const [focused, setFocused] = useState(false);
+  const styles = createStyles(colors, focused);
+
   return (
     <View style={styles.container}>
       <Ionicons
         name="search"
-        size={20}
-        color={colors.muted}
+        size={18}
+        color={focused ? colors.primary : colors.muted}
         style={styles.icon}
       />
       <TextInput
@@ -30,29 +38,61 @@ export default function SearchBar({
         placeholderTextColor={colors.textSecondary}
         value={value}
         onChangeText={onChangeText}
+        returnKeyType="search"
+        autoCorrect={false}
+        autoCapitalize="none"
+        clearButtonMode="while-editing"
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
       />
+  
+      {!!onPressFilter && (
+        <Pressable
+          onPress={onPressFilter}
+          hitSlop={10}
+          style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
+          accessibilityRole="button"
+          accessibilityLabel="Mostrar filtros"
+        >
+          <View style={styles.filterButton}>
+            <Ionicons
+              name="funnel"
+              size={18}
+              color={colors.textSecondary}
+            />
+          </View>
+        </Pressable>
+      )}
     </View>
   );
 }
 
-const createStyles = (colors: ThemeColors) =>
+const createStyles = (colors: ThemeColors, focused: boolean) =>
   StyleSheet.create({
     container: {
       flexDirection: "row",
       alignItems: "center",
-      backgroundColor: colors.surface,
-      borderRadius: 12,
-      paddingHorizontal: 10,
-      paddingVertical: 8,
-      marginHorizontal: 16,
-      marginBottom: 8,
+      height: 44,
+      borderRadius: radius.lg,
+      paddingHorizontal: spacing.md,
+      backgroundColor: colors.card, 
+      borderWidth: 1,
+      borderColor: focused ? colors.primary : colors.border,
+      ...(focused ? { ...shadow.ios, ...shadow.android } : null),
     },
     icon: {
-      marginRight: 6,
+      opacity: 0.9,
     },
     input: {
-      color: colors.textSecondary,
       flex: 1,
-      fontSize: 16,
+      paddingVertical: 0,
+      marginLeft: spacing.sm,
+      fontSize: typography.base,
+      color: colors.text,
+    },
+     filterButton: {
+      marginLeft: spacing.sm,
+      alignItems: "center",
+      justifyContent: "center",
     },
   });

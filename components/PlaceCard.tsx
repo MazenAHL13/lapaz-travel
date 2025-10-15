@@ -1,12 +1,16 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import { useThemeColors } from "../app/hooks/useThemeColors";
 import { ThemeColors } from "../app/theme/colors";
+import { useFavoritesStore } from "../app/store/useFavoritesStore";
+import { radius, shadow, spacing } from "../constants/tokens";
 
 type PlaceCardProps = {
   title: string;
   subtitle?: string;
   imageUri: string;
   onPress?: () => void;
+  placeId?: string;
 };
 
 export default function PlaceCard({
@@ -14,8 +18,13 @@ export default function PlaceCard({
   subtitle,
   imageUri,
   onPress,
+  placeId,
 }: PlaceCardProps) {
   const { colors } = useThemeColors();
+  const { isFavorite, toggleFavorite } = useFavoritesStore();
+  const isFav = placeId ? isFavorite(placeId) : false;
+
+
   const styles = createStyles(colors);
 
   return (
@@ -23,10 +32,36 @@ export default function PlaceCard({
       onPress={onPress}
       style={({ pressed }) => [
         styles.card,
-        pressed && { opacity: 0.9, transform: [{ scale: 0.98 }] },
+        { opacity: pressed ? 0.96 : 1 },
+        shadow.ios,
+        shadow.android,
       ]}
     >
-      <Image source={{ uri: imageUri }} style={styles.image} />
+      <View style={styles.imageWrapper}>
+        <Image source={{ uri: imageUri }} style={styles.image} />
+        {placeId && (
+          <Pressable
+            onPress={() => toggleFavorite(placeId)}
+            hitSlop={10}
+            style={({ pressed }) => [
+              styles.favoriteIcon,
+              {
+                backgroundColor: isFav
+                  ? `${colors.primary}20`
+                  : `${colors.card}CC`,
+                transform: [{ scale: pressed ? 0.9 : 1 }],
+              },
+            ]}
+          >
+            <Ionicons
+              name={isFav ? "heart" : "heart-outline"}
+              size={20}
+              color={isFav ? colors.primary : colors.textSecondary}
+            />
+          </Pressable>
+        )}
+      </View>
+
       <View style={styles.content}>
         <Text style={styles.title}>{title}</Text>
         {subtitle && <Text style={styles.subtitle}>{subtitle}</Text>}
@@ -35,26 +70,42 @@ export default function PlaceCard({
   );
 }
 
-
 const createStyles = (colors: ThemeColors) =>
   StyleSheet.create({
     card: {
-      backgroundColor: colors.surface,
-      borderRadius: 12,
+      marginBottom: spacing.lg,
+      borderRadius: radius.lg,
+      backgroundColor: colors.card,
+      borderWidth: 1,
+      borderColor: colors.border,
       overflow: "hidden",
-      marginBottom: 16,
-      elevation: 2,
-      shadowColor: "#000",
-      shadowOpacity: 0.1,
-      shadowRadius: 4,
-      shadowOffset: { width: 0, height: 2 },
+      shadowColor: colors.shadow,
+      shadowOpacity: 0.15,
+      shadowRadius: 8,
+      shadowOffset: { width: 0, height: 4 },
+      elevation: 4,
+    },
+    imageWrapper: {
+      position: "relative",
     },
     image: {
       width: "100%",
-      height: 150,
+      height: 160,
+    },
+    favoriteIcon: {
+      position: "absolute",
+      top: spacing.sm,
+      right: spacing.sm,
+      height: 32,
+      width: 32,
+      borderRadius: 16,
+      alignItems: "center",
+      justifyContent: "center",
+      borderWidth: 1,
+      borderColor: colors.border,
     },
     content: {
-      padding: 12,
+      padding: spacing.md,
     },
     title: {
       fontSize: 16,
