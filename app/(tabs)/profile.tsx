@@ -5,7 +5,6 @@ import { useUserStore } from "../store/useUserStore";
 import { router } from "expo-router";
 import * as ImagePicker from "expo-image-picker";
 import { useState } from "react";
-import Colors from "@/constants/Colors";
 
 export default function ProfileScreen() {
   const { colors } = useThemeColors();
@@ -192,7 +191,7 @@ export default function ProfileScreen() {
     </SafeAreaView>
   );
 }
-const createStyles = (colors: typeof Colors.light) =>
+const createStyles = (colors: any) =>
   StyleSheet.create({
     removePhotoButton: {
       paddingVertical: 8,
