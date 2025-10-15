@@ -1,22 +1,23 @@
-import { useState } from "react";
+import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
+import { useState } from "react";
 import {
-  Image,
-  SafeAreaView,
-  TextInput,
-  Pressable,
-  Text,
-  View,
-  StyleSheet,
   Alert,
+  Image,
+  Pressable,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
 } from "react-native";
 import { useThemeColors } from "./hooks/useThemeColors";
-import { ThemeColors } from "./theme/colors";
 import { useUserStore } from "./store/useUserStore";
-import { Ionicons } from "@expo/vector-icons";
+import { ThemeColors } from "./theme/colors";
+
 
 export default function LoginScreen() {
-  const { colors } = useThemeColors();
+  const { theme, colors } = useThemeColors();
   const router = useRouter();
   const styles = createStyles(colors);
 
@@ -41,11 +42,16 @@ export default function LoginScreen() {
 
 const [showPassword, setShowPassword] = useState(false);
 
+const logoSource =
+  theme === "dark"
+    ? require("../assets/images/logoDark.png")
+    : require("../assets/images/logo.png");
+
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.logoContainer}>
         <Image
-          source={require("../assets/images/logo.png")}
+          source={logoSource}
           style={styles.logo}
           resizeMode="contain"
         />
