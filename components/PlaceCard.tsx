@@ -23,16 +23,11 @@ export default function PlaceCard({
     <Pressable
       onPress={onPress}
       style={({ pressed }) => [
-  {
-    marginBottom: 16,
-    borderRadius: radius.lg,
-    padding: spacing.lg,
-    backgroundColor: colors.card, 
-    opacity: pressed ? 0.98 : 1,
-  },
-  shadow.ios,
-  shadow.android,
-]}
+        styles.card,
+        { opacity: pressed ? 0.96 : 1 },
+        shadow.ios,
+        shadow.android,
+      ]}
     >
       <Image source={{ uri: imageUri }} style={styles.image} />
       <View style={styles.content}>
@@ -43,27 +38,28 @@ export default function PlaceCard({
   );
 }
 
-
 const createStyles = (colors: ThemeColors) =>
   StyleSheet.create({
     card: {
-      backgroundColor: colors.surface,
-      borderRadius: 12,
+      marginBottom: spacing.lg,
+      borderRadius: radius.lg,
+      backgroundColor: colors.card,
+      borderWidth: 1,
+      borderColor: colors.border,
       overflow: "hidden",
-      marginBottom: 16,
-      elevation: 2,
-      shadowColor: "#000",
-      shadowOpacity: 0.1,
-      shadowRadius: 4,
-      shadowOffset: { width: 0, height: 2 },
-      padding: 16,
+
+      shadowColor: colors.shadow,
+      shadowOpacity: 0.15,
+      shadowRadius: 8,
+      shadowOffset: { width: 0, height: 4 },
+      elevation: 4, // Android
     },
     image: {
       width: "100%",
-      height: 150,
+      height: 160,
     },
     content: {
-      padding: 12,
+      padding: spacing.md,
     },
     title: {
       fontSize: 16,
