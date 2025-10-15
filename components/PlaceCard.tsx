@@ -10,7 +10,7 @@ type PlaceCardProps = {
   subtitle?: string;
   imageUri: string;
   onPress?: () => void;
-  placeId?: string;
+  placeId: string;
 };
 
 export default function PlaceCard({
