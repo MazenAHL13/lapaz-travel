@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
-import { StyleSheet, TextInput, View } from "react-native";
+import { Pressable, StyleSheet, TextInput, View } from "react-native";
 import { useThemeColors } from "../app/hooks/useThemeColors";
 import { ThemeColors } from "../app/theme/colors";
 import { radius, spacing, typography, shadow } from "../constants/tokens";
@@ -9,12 +9,16 @@ type SearchBarProps = {
   placeholder?: string;
   value: string;
   onChangeText: (text: string) => void;
+  onPressFilter?: () => void;
+  activeFilterCount?: number;
 };
 
 export default function SearchBar({
   placeholder = "Buscar...",
   value,
   onChangeText,
+  onPressFilter,
+  activeFilterCount = 0,
 }: SearchBarProps) {
   const { colors } = useThemeColors();
   const [focused, setFocused] = useState(false);
@@ -41,6 +45,24 @@ export default function SearchBar({
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
       />
+  
+      {!!onPressFilter && (
+        <Pressable
+          onPress={onPressFilter}
+          hitSlop={10}
+          style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
+          accessibilityRole="button"
+          accessibilityLabel="Mostrar filtros"
+        >
+          <View style={styles.filterButton}>
+            <Ionicons
+              name="funnel"
+              size={18}
+              color={colors.textSecondary}
+            />
+          </View>
+        </Pressable>
+      )}
     </View>
   );
 }
@@ -67,5 +89,10 @@ const createStyles = (colors: ThemeColors, focused: boolean) =>
       marginLeft: spacing.sm,
       fontSize: typography.base,
       color: colors.text,
+    },
+     filterButton: {
+      marginLeft: spacing.sm,
+      alignItems: "center",
+      justifyContent: "center",
     },
   });
