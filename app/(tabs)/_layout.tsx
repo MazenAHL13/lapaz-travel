@@ -36,6 +36,7 @@ const TabsLayout = () => {
           if (route.name === "index") iconName = "search";
           else if (route.name === "favorites") iconName = "star";
           else if (route.name === "settings") iconName = "settings";
+          else if (route.name === "profile") iconName = "person";
 
           return <Ionicons name={iconName} size={size} color={color} />;
         },
@@ -43,6 +44,7 @@ const TabsLayout = () => {
       <Tabs.Screen name="index" options={{ title: "Explorar" }} />
       <Tabs.Screen name="favorites" options={{ title: "Favoritos" }} />
       <Tabs.Screen name="settings" options={{ title: "Ajustes" }} />
+      <Tabs.Screen name="profile" options={{ title: "Perfil" }} />
     </Tabs>
   );
 };

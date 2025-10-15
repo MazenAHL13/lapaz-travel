@@ -4,7 +4,7 @@ import { create } from "zustand";
 import type { Theme } from "../theme/colors";
 
 const initialTheme: Theme =
-  Appearance.getColorScheme() !== "dark" ? "dark" : "light";
+  Appearance.getColorScheme() === "dark" ? "dark" : "light";
 
 type ThemeStore = {
   theme: Theme;
