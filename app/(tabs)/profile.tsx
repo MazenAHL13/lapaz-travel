@@ -49,8 +49,6 @@ export default function ProfileScreen() {
           <Text style={{ color: colors.textSecondary }}>⚑ Favoritos: próximamente</Text>
           <Text style={{ color: colors.textSecondary }}>✈ Viajes guardados: próximamente</Text>
         </View>
-
-        {/* Acciones */}
         <View style={{ gap: 12 }}>
           <Pressable
             style={{
@@ -63,7 +61,7 @@ export default function ProfileScreen() {
             accessibilityLabel="Editar perfil (próximamente)"
             onPress={() => {}}
           >
-            <Text style={{ fontWeight: "700", color: colors.primary }}>
+            <Text style={{ fontWeight: "700", color: colors.surface }}>
               Editar perfil
             </Text>
           </Pressable>

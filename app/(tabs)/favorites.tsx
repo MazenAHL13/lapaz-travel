@@ -1,17 +1,16 @@
-import { useRouter } from "expo-router";
 import { SafeAreaView, ScrollView, Text, View } from "react-native";
 import PlaceCard from "../../components/PlaceCard";
 import data from "../data/placesData.json";
 import { useThemeColors } from "../hooks/useThemeColors";
 import { useFavoritesStore } from "../store/useFavoritesStore";
+import { router } from "expo-router";
 const places = data.places;
 
 export default function FavoritesScreen() {
   const { colors } = useThemeColors();
-  const { favorites } = useFavoritesStore();
-  const router = useRouter();
-
-  const favoritePlaces = places.filter((p) => favorites.includes(p.id));
+  const { getFavorites } = useFavoritesStore();
+  const favoriteIds = getFavorites();
+  const favoritePlaces = places.filter((p) => favoriteIds.includes(p.id));
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
