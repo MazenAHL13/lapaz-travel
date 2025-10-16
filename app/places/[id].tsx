@@ -15,6 +15,7 @@ import data from "../data/placesData.json";
 import { useThemeColors } from "../hooks/useThemeColors";
 import { ThemeColors } from "../theme/colors";
 import RelatedPlacesRow from "../../components/RelatedPlacesRow";
+import BackButton from "@/components/Backbutton";
 
 const places = data.places;
 
@@ -45,10 +46,7 @@ export default function PlaceDetail() {
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
         >
-          <Pressable onPress={() => router.back()} style={styles.backButton}>
-            <Ionicons name="arrow-back" size={20} color={colors.primary} />
-            <Text style={styles.backButtonText}>Volver</Text>
-          </Pressable>
+          <BackButton />
 
           <View style={styles.imageContainer}>
             <Image source={{ uri: place.imageUri }} style={styles.image} />
