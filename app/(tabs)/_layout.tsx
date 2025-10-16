@@ -37,12 +37,14 @@ const TabsLayout = () => {
           else if (route.name === "favorites") iconName = "star";
           else if (route.name === "settings") iconName = "settings";
           else if (route.name === "profile") iconName = "person";
+          else if (route.name === "plan") iconName = "trail-sign";
 
           return <Ionicons name={iconName} size={size} color={color} />;
         },
       })}>
       <Tabs.Screen name="index" options={{ title: "Explorar" }} />
       <Tabs.Screen name="favorites" options={{ title: "Favoritos" }} />
+      <Tabs.Screen name="plan" options={{ title: "Plan" }} />
       <Tabs.Screen name="settings" options={{ title: "Ajustes" }} />
       <Tabs.Screen name="profile" options={{ title: "Perfil" }} />
     </Tabs>
