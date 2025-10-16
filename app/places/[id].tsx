@@ -14,6 +14,7 @@ import FavoriteButton from "../../components/FavoriteButton";
 import data from "../data/placesData.json";
 import { useThemeColors } from "../hooks/useThemeColors";
 import { ThemeColors } from "../theme/colors";
+import RelatedPlacesRow from "../../components/RelatedPlacesRow";
 
 const places = data.places;
 
@@ -99,6 +100,8 @@ export default function PlaceDetail() {
               </View>
             ))}
           </View>
+          <RelatedPlacesRow current={place} all={places} /> 
+
         </ScrollView>
       </SafeAreaView>
     </>
