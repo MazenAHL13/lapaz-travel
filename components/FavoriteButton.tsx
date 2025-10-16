@@ -1,4 +1,4 @@
-import { Pressable, View, Text } from "react-native";
+import { Pressable, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useFavoritesStore } from "../app/store/useFavoritesStore";
 import { useThemeColors } from "../app/hooks/useThemeColors";
@@ -13,7 +13,6 @@ export default function FavoriteButton({ placeId }: { placeId: string }) {
   return (
     <Pressable
       onPress={() => toggleFavorite(placeId)}
-      hitSlop={8}
       style={({ pressed }) => [
         {
           flexDirection: "row",
