@@ -33,7 +33,7 @@ export const useUserStore = create<UserState>()(
         const baseUser = usersData.users.find(
           (u) =>
             (u.email.toLowerCase() === email.toLowerCase() ||
-              u.name.toLowerCase().includes(email.toLowerCase())) &&
+            u.name.toLowerCase() === email.toLowerCase()) &&
             u.password === password
         );
 
