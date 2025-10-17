@@ -1,154 +1,184 @@
 {
-"places": [
+  "places": [
     {
-    "id": "killi-killi",
-    "title": "Mirador Killi Killi",
-    "subtitle": "Vista panorámica de La Paz",
-    "description": "El Mirador Killi Killi ofrece una de las vistas más impresionantes del centro de La Paz. Ideal para fotografías, especialmente al atardecer.",
-    "schedule": "Acceso libre todo el día",
-    "imageUri": "https://bushop.com/wp-content/uploads/sites/6/rsz_killi222.jpg",
-    "tips": [
+      "id": "killi-killi",
+      "title": "Mirador Killi Killi",
+      "subtitle": "Vista panorámica de La Paz",
+      "description": "El Mirador Killi Killi ofrece una de las vistas más impresionantes del centro de La Paz. Ideal para fotografías, especialmente al atardecer.",
+      "schedule": "Acceso libre todo el día",
+      "imageUri": "https://bushop.com/wp-content/uploads/sites/6/rsz_killi222.jpg",
+      "tips": [
         "🧥 Lleva una chaqueta: puede hacer frío.",
         "🌇 Ideal visitar al atardecer.",
         "🍢 Hay puestos de comida cerca."
-    ],
-    "zona": "Villa Pabón",
-    "categoria": "Mirador"
+      ],
+      "zona": "Villa Pabón",
+      "categoria": "Mirador",
+      "latitude": -16.4951377,
+      "longitude": -68.1275289,
+      "_geocoded_from": "Mirador Killi Killi, Villa Pabón, Periférica, La Paz, Pedro Domingo Murillo, La Paz, Bolivia"
     },
     {
-    "id": "monticulo",
-    "title": "El Montículo",
-    "subtitle": "Mirador en Sopocachi",
-    "description": "Ubicado en el barrio de Sopocachi, El Montículo es un parque histórico con una hermosa vista y arquitectura colonial.",
-    "imageUri": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Arco_del_Montículo.jpg/960px-Arco_del_Montículo.jpg",
-    "schedule": "Lunes a domingo de 8:00 a 21:00",
-    "tips": [
+      "id": "monticulo",
+      "title": "El Montículo",
+      "subtitle": "Mirador en Sopocachi",
+      "description": "Ubicado en el barrio de Sopocachi, El Montículo es un parque histórico con una hermosa vista y arquitectura colonial.",
+      "imageUri": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Arco_del_Montículo.jpg/960px-Arco_del_Montículo.jpg",
+      "schedule": "Lunes a domingo de 8:00 a 21:00",
+      "tips": [
         "⛪ Visita la capilla en la cima.",
         "📖 Lugar tranquilo para leer o descansar.",
         "📸 Perfecto para fotos panorámicas."
-    ],
-    "zona": "Sopocachi",
-    "categoria": "Mirador"
+      ],
+      "zona": "Sopocachi",
+      "categoria": "Mirador",
+      "latitude": -16.5131758,
+      "longitude": -68.1273107,
+      "_geocoded_from": "Parque Mirador El Montículo, Kantutani, Cotahuma, La Paz, Pedro Domingo Murillo, La Paz, Bolivia"
     },
     {
-    "id": "valle-luna",
-    "title": "Valle de la Luna",
-    "subtitle": "Formaciones geológicas únicas",
-    "description": "Un paisaje casi lunar formado por la erosión, ideal para caminatas y fotografía. Es uno de los atractivos naturales más famosos cerca de La Paz.",
-    "imageUri": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Valle_de_La_Luna_La_Paz_Bolivia_NAC.jpg/960px-Valle_de_La_Luna_La_Paz_Bolivia_NAC.jpg",
-    "schedule": "Todos los días de 9:00 a 17:00",
-    "tips": [
+      "id": "valle-luna",
+      "title": "Valle de la Luna",
+      "subtitle": "Formaciones geológicas únicas",
+      "description": "Un paisaje casi lunar formado por la erosión, ideal para caminatas y fotografía. Es uno de los atractivos naturales más famosos cerca de La Paz.",
+      "imageUri": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Valle_de_La_Luna_La_Paz_Bolivia_NAC.jpg/960px-Valle_de_La_Luna_La_Paz_Bolivia_NAC.jpg",
+      "schedule": "Todos los días de 9:00 a 17:00",
+      "tips": [
         "☀️ Lleva protector solar y agua.",
         "👟 Usa zapatos cómodos para caminar.",
         "⚠️ No te salgas de los senderos marcados."
-    ],
-    "zona": "Mallasa",
-    "categoria": "Atractivo Natural"
+      ],
+      "zona": "Mallasa",
+      "categoria": "Atractivo Natural",
+      "latitude": -16.5676183,
+      "longitude": -68.0937882,
+      "_geocoded_from": "Valle de la Luna, Mallasa, La Paz, Pedro Domingo Murillo, La Paz, Bolivia"
     },
     {
-    "id": "teleferico-rojo",
-    "title": "Teleférico Línea Roja",
-    "subtitle": "Transporte y vistas panorámicas",
-    "description": "El teleférico conecta La Paz con El Alto y ofrece vistas espectaculares de la ciudad durante el trayecto.",
-    "imageUri": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7X5BV3w372QNRbbB8Nu9YTZNRu6rQ9yoYxA&s",
-    "schedule": "Lunes a sábado 6:00 a 23:00, domingo 7:00 a 21:00",
-    "tips": [
+      "id": "teleferico-rojo",
+      "title": "Teleférico Línea Roja",
+      "subtitle": "Transporte y vistas panorámicas",
+      "description": "El teleférico conecta La Paz con El Alto y ofrece vistas espectaculares de la ciudad durante el trayecto.",
+      "imageUri": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7X5BV3w372QNRbbB8Nu9YTZNRu6rQ9yoYxA&s",
+      "schedule": "Lunes a sábado 6:00 a 23:00, domingo 7:00 a 21:00",
+      "tips": [
         "📸 Lleva cámara para fotos desde las cabinas.",
         "🏙️ Ideal para ver la ciudad desde las alturas.",
         "🚫 Evita las horas pico."
-    ],
-    "zona": "Centro, El Alto",
-    "categoria": "Transporte Turístico"
+      ],
+      "zona": "Centro, El Alto",
+      "categoria": "Transporte Turístico",
+      "latitude": -16.49598,
+      "longitude": -68.13314,
+      "_geocoded_from": "manual override"
     },
     {
-    "id": "calle-jaen",
-    "title": "Calle Jaén",
-    "subtitle": "Calle colonial y museos",
-    "description": "Una de las calles mejor conservadas de la época colonial, famosa por sus museos y casas coloridas.",
-    "imageUri": "https://lp-cms-production.imgix.net/2020-11/b2d578bd09916bf36a729124bc44c4b3-calle-jaen-museums.jpg",
-    "schedule": "Museos abiertos de martes a domingo de 9:00 a 17:00",
-    "tips": [
+      "id": "calle-jaen",
+      "title": "Calle Jaén",
+      "subtitle": "Calle colonial y museos",
+      "description": "Una de las calles mejor conservadas de la época colonial, famosa por sus museos y casas coloridas.",
+      "imageUri": "https://lp-cms-production.imgix.net/2020-11/b2d578bd09916bf36a729124bc44c4b3-calle-jaen-museums.jpg",
+      "schedule": "Museos abiertos de martes a domingo de 9:00 a 17:00",
+      "tips": [
         "🏛️ Visita los museos de la calle.",
         "🚶 Ideal para caminar y tomar fotos.",
         "☕ Disfruta de los cafés y tiendas de artesanías."
-    ],
-    "zona": "Centro",
-    "categoria": "Calle Histórica"
+      ],
+      "zona": "Centro",
+      "categoria": "Calle Histórica",
+      "latitude": -16.492233,
+      "longitude": -68.1358659,
+      "_geocoded_from": "Calle Apolinar Jaen, San Sebastián, Centro, La Paz, Pedro Domingo Murillo, La Paz, Bolivia"
     },
     {
-    "id": "mercado-brujas",
-    "title": "Mercado de las Brujas",
-    "subtitle": "Mercado tradicional y místico",
-    "description": "Mercado típico donde se venden hierbas, amuletos y productos para rituales andinos. Un lugar único para conocer la cultura local.",
-    "imageUri": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Mercado_de_Hechiceria_003%2C_La_Paz%2C_Bolivia.JPG/500px-Mercado_de_Hechiceria_003%2C_La_Paz%2C_Bolivia.JPG",
-    "schedule": "Todos los días de 9:00 a 19:00",
-    "tips": [
+      "id": "mercado-brujas",
+      "title": "Mercado de las Brujas",
+      "subtitle": "Mercado tradicional y místico",
+      "description": "Mercado típico donde se venden hierbas, amuletos y productos para rituales andinos. Un lugar único para conocer la cultura local.",
+      "imageUri": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Mercado_de_Hechiceria_003%2C_La_Paz%2C_Bolivia.JPG/500px-Mercado_de_Hechiceria_003%2C_La_Paz%2C_Bolivia.JPG",
+      "schedule": "Todos los días de 9:00 a 19:00",
+      "tips": [
         "📷 Pregunta antes de tomar fotos.",
         "🧿 Ideal para comprar souvenirs únicos.",
         "🙏 Respeta las creencias y costumbres locales."
-    ],
-    "zona": "Centro",
-    "categoria": "Mercado"
+      ],
+      "zona": "Centro",
+      "categoria": "Mercado",
+      "latitude": -16.4962388,
+      "longitude": -68.1391523,
+      "_geocoded_from": "Mercado de las Brujas, Calle Melchor Jiménez, El Rosario, Centro, La Paz, Pedro Domingo Murillo, La Paz, Bolivia"
     },
     {
-    "id": "plaza-murillo",
-    "title": "Plaza Murillo",
-    "subtitle": "Corazón político e histórico",
-    "description": "La plaza principal de La Paz, rodeada por la Catedral, el Palacio de Gobierno y el Palacio Legislativo.",
-    "imageUri": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Plaza_Murillo_en_La_Paz_-_Bolivia.jpg/960px-Plaza_Murillo_en_La_Paz_-_Bolivia.jpg",
-    "schedule": "Acceso libre todo el día",
-    "tips": [
+      "id": "plaza-murillo",
+      "title": "Plaza Murillo",
+      "subtitle": "Corazón político e histórico",
+      "description": "La plaza principal de La Paz, rodeada por la Catedral, el Palacio de Gobierno y el Palacio Legislativo.",
+      "imageUri": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Plaza_Murillo_en_La_Paz_-_Bolivia.jpg/960px-Plaza_Murillo_en_La_Paz_-_Bolivia.jpg",
+      "schedule": "Acceso libre todo el día",
+      "tips": [
         "🪑 Ideal para descansar y observar la vida paceña.",
         "🕊️ Alimenta a las palomas.",
         "🏛️ Visita los edificios históricos a su alrededor."
-    ],
-    "zona": "Centro",
-    "categoria": "Plaza"
+      ],
+      "zona": "Centro",
+      "categoria": "Plaza",
+      "latitude": -16.4957117,
+      "longitude": -68.1335593,
+      "_geocoded_from": "Plaza Murillo, Central, Centro, La Paz, Pedro Domingo Murillo, La Paz, Bolivia"
     },
     {
-    "id": "san-francisco",
-    "title": "Basílica de San Francisco",
-    "subtitle": "Iglesia y plaza histórica",
-    "description": "Imponente iglesia barroca construida en el siglo XVI, punto de encuentro y manifestaciones culturales.",
-    "imageUri": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/La_Basílica_de_San_Francisco_en_La_Paz.jpg/960px-La_Basílica_de_San_Francisco_en_La_Paz.jpg",
-    "schedule": "Templo abierto de 8:00 a 18:00, museo de 9:00 a 17:00",
-    "tips": [
+      "id": "san-francisco",
+      "title": "Basílica de San Francisco",
+      "subtitle": "Iglesia y plaza histórica",
+      "description": "Imponente iglesia barroca construida en el siglo XVI, punto de encuentro y manifestaciones culturales.",
+      "imageUri": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/La_Basílica_de_San_Francisco_en_La_Paz.jpg/960px-La_Basílica_de_San_Francisco_en_La_Paz.jpg",
+      "schedule": "Templo abierto de 8:00 a 18:00, museo de 9:00 a 17:00",
+      "tips": [
         "🔔 Sube al mirador del campanario.",
         "🏛️ Visita el museo conventual.",
         "🪨 Admira la arquitectura y los detalles en piedra."
-    ],
-    "zona": "Centro",
-    "categoria": "Iglesia"
+      ],
+      "zona": "Centro",
+      "categoria": "Iglesia",
+      "latitude": -16.4964827,
+      "longitude": -68.1373578,
+      "_geocoded_from": "Basílica de San Francisco, Calle Sagárnaga, El Rosario, Centro, La Paz, Pedro Domingo Murillo, La Paz, Bolivia"
     },
     {
-    "id": "mirador-jach-a-kollo",
-    "title": "Mirador Jach'a Kollo",
-    "subtitle": "Vista panorámica desde El Alto",
-    "description": "Ofrece una vista impresionante de la ciudad de La Paz con el Illimani de fondo, especialmente al amanecer.",
-    "imageUri": "https://www.ibolivia.org/wp-content/uploads/2019/07/mirador-jacha-kollo.jpg",
-    "schedule": "Acceso libre todo el día",
-    "tips": [
+      "id": "mirador-jach-a-kollo",
+      "title": "Mirador Jach'a Kollo",
+      "subtitle": "Vista panorámica desde El Alto",
+      "description": "Ofrece una vista impresionante de la ciudad de La Paz con el Illimani de fondo, especialmente al amanecer.",
+      "imageUri": "https://www.ibolivia.org/wp-content/uploads/2019/07/mirador-jacha-kollo.jpg",
+      "schedule": "Acceso libre todo el día",
+      "tips": [
         "📸 Ideal para fotógrafos.",
         "🧥 Lleva ropa abrigada.",
         "👥 Recomendable ir en grupo."
-    ],
-    "zona": "El Alto",
-    "categoria": "Mirador"
+      ],
+      "zona": "El Alto",
+      "categoria": "Mirador",
+      "latitude": -16.50915,
+      "longitude": -68.1487487,
+      "_geocoded_from": "Mirador Jacha Kollo, Calle 12 de Abril, Las Nieves (Cotahuma), Cotahuma, La Paz, Pedro Domingo Murillo, La Paz, Bolivia"
     },
     {
-    "id": "museo-etnografico",
-    "title": "Museo Nacional de Etnografía y Folklore",
-    "subtitle": "Cultura y tradición boliviana",
-    "description": "Museo dedicado a la diversidad cultural y folklórica de Bolivia, con exposiciones permanentes y temporales.",
-    "imageUri": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Musef3.JPG/960px-Musef3.JPG",
-    "schedule": "Martes a viernes 9:00 a 19:00, sábado y domingo 9:00 a 17:00",
-    "tips": [
+      "id": "museo-etnografico",
+      "title": "Museo Nacional de Etnografía y Folklore",
+      "subtitle": "Cultura y tradición boliviana",
+      "description": "Museo dedicado a la diversidad cultural y folklórica de Bolivia, con exposiciones permanentes y temporales.",
+      "imageUri": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Musef3.JPG/960px-Musef3.JPG",
+      "schedule": "Martes a viernes 9:00 a 19:00, sábado y domingo 9:00 a 17:00",
+      "tips": [
         "💬 Aprovecha las visitas guiadas.",
         "👨‍👩‍👧 Ideal para familias y estudiantes.",
         "🚫 No se permite tomar fotos en algunas salas."
-    ],
-    "zona": "Centro",
-    "categoria": "Museo"
+      ],
+      "zona": "Centro",
+      "categoria": "Museo",
+      "latitude": -16.4944656,
+      "longitude": -68.1352019,
+      "_geocoded_from": "Museo Nacional de Etnografía y Folklore, Calle Ingavi, Central, Centro, La Paz, Pedro Domingo Murillo, La Paz, Bolivia"
     },
     {
       "id": "parque-cotahuma",
@@ -163,7 +193,10 @@
         "🚶 Lleva calzado cómodo para caminar."
       ],
       "zona": "Cotahuma",
-      "categoria": "Parque"
+      "categoria": "Parque",
+      "latitude": -16.5338692,
+      "longitude": -68.1246853,
+      "_geocoded_from": "Parque Cementerio Los Andes, Bajo Llojeta, Cotahuma, La Paz, Pedro Domingo Murillo, La Paz, Bolivia"
     },
     {
       "id": "muela-del-diablo",
@@ -178,7 +211,10 @@
         "🚗 Acceso en vehículo hasta un punto, luego caminata."
       ],
       "zona": "Mallasa",
-      "categoria": "Atractivo Natural"
+      "categoria": "Atractivo Natural",
+      "latitude": -16.5626041,
+      "longitude": -68.0572136,
+      "_geocoded_from": "Cerro Muela del Diablo, Avenida Colinas, Alto Pedregal, Sur, Mecapaca, Pedro Domingo Murillo, La Paz, Bolivia"
     },
     {
       "id": "plaza-del-estudiante",
@@ -193,7 +229,10 @@
         "🚦 Cruza con precaución: tráfico constante."
       ],
       "zona": "Centro",
-      "categoria": "Plaza"
+      "categoria": "Plaza",
+      "latitude": -16.5042019,
+      "longitude": -68.1311466,
+      "_geocoded_from": "Plaza Franz Tamayo, Casco Viejo, Centro, La Paz, Pedro Domingo Murillo, La Paz, Bolivia"
     },
     {
       "id": "museo-tiwanaku",
@@ -208,7 +247,10 @@
         "🚫 No se permite tomar fotos con flash."
       ],
       "zona": "Centro",
-      "categoria": "Museo"
+      "categoria": "Museo",
+      "latitude": -16.50302,
+      "longitude": -68.12987,
+      "_geocoded_from": "manual override"
     },
     {
       "id": "parque-las-cholas",
@@ -223,7 +265,10 @@
         "🚴 Hay ciclovía cerca del parque."
       ],
       "zona": "Calacoto",
-      "categoria": "Parque"
+      "categoria": "Parque",
+      "latitude": -16.5434563,
+      "longitude": -68.0924611,
+      "_geocoded_from": "Parque La Florida, Bajo Seguencoma, Calacoto, Sur, La Paz, Pedro Domingo Murillo, La Paz, Bolivia"
     },
     {
       "id": "mirador-letras-la-paz",
@@ -238,7 +283,10 @@
         "👥 Ve acompañado si vas temprano."
       ],
       "zona": "Achumani",
-      "categoria": "Mirador"
+      "categoria": "Mirador",
+      "latitude": -16.519229, 
+      "longitude": -68.144801,
+      "_geocoded_from": "manual override"
     },
     {
       "id": "casa-de-la-cultura",
@@ -253,7 +301,10 @@
         "📚 Visita la librería del recinto."
       ],
       "zona": "Centro",
-      "categoria": "Centro Cultural"
+      "categoria": "Centro Cultural",
+      "latitude": -16.4952663,
+      "longitude": -68.1364877,
+      "_geocoded_from": "Casa de la Cultura Franz Tamayo, Plaza de Las Culturas, Central, Centro, La Paz, Pedro Domingo Murillo, La Paz, Bolivia"
     },
     {
       "id": "plaza-villaroel",
@@ -268,7 +319,10 @@
         "🚶 Da un paseo por los alrededores."
       ],
       "zona": "Miraflores",
-      "categoria": "Plaza"
+      "categoria": "Plaza",
+      "latitude": -16.4832349,
+      "longitude": -68.1216284,
+      "_geocoded_from": "Plaza Villarroel, Miraflores Alto, Periférica, La Paz, Pedro Domingo Murillo, La Paz, Bolivia"
     },
     {
       "id": "cafe-del-mundo",
@@ -283,7 +337,10 @@
         "📶 Tiene Wi-Fi gratuito."
       ],
       "zona": "Sopocachi",
-      "categoria": "Gastronomía"
+      "categoria": "Gastronomía",
+      "latitude": -16.4974812,
+      "longitude": -68.138602,
+      "_geocoded_from": "Café del Mundo, 324, Calle Sagárnaga, El Rosario, Centro, La Paz, Pedro Domingo Murillo, La Paz, Bolivia"
     },
     {
       "id": "museo-de-la-coca",
@@ -298,7 +355,10 @@
         "📸 Fotos permitidas sin flash."
       ],
       "zona": "Centro",
-      "categoria": "Museo"
+      "categoria": "Museo",
+      "latitude": -16.4977352,
+      "longitude": -68.1383122,
+      "_geocoded_from": "Museo de la Coca, 906, Calle José María Linares, Cotahuma, La Paz, Pedro Domingo Murillo, La Paz, Bolivia"
     },
     {
       "id": "teleferico-verde",
@@ -313,7 +373,10 @@
         "⏰ Evita horas pico."
       ],
       "zona": "Centro, Zona Sur",
-      "categoria": "Transporte Turístico"
+      "categoria": "Transporte Turístico",
+      "latitude": -16.5380702,
+      "longitude": -68.0877546,
+      "_geocoded_from": "PumaKatari-Teleférico Verde (Irpavi II Sur-IDA), Avenida Teniente Coronel Rafael Pabón Cuevas, Irpavi, Calacoto, Sur, La Paz, Pedro Domingo Murillo, La Paz, Bolivia"
     },
     {
       "id": "parque-jardin-botanico",
@@ -328,7 +391,10 @@
         "👨‍👩‍👧 Ideal para ir con niños."
       ],
       "zona": "Miraflores",
-      "categoria": "Parque"
+      "categoria": "Parque",
+      "latitude": -16.52236,
+      "longitude": -68.11009,
+      "_geocoded_from": "manual override"
     },
     {
       "id": "plaza-aben-amar",
@@ -343,7 +409,10 @@
         "🎪 Hay ferias los fines de semana."
       ],
       "zona": "Sopocachi",
-      "categoria": "Plaza"
+      "categoria": "Plaza",
+      "latitude": -16.5102884,
+      "longitude": -68.1267308,
+      "_geocoded_from": "Plaza Abaroa, Sopocachi, Cotahuma, La Paz, Pedro Domingo Murillo, La Paz, Bolivia"
     },
     {
       "id": "mercado-rodriguez",
@@ -358,7 +427,10 @@
         "🎒 Cuidado con tus pertenencias."
       ],
       "zona": "Sopocachi",
-      "categoria": "Mercado"
+      "categoria": "Mercado",
+      "latitude": -16.5001315,
+      "longitude": -68.1389083,
+      "_geocoded_from": "Mercado Rodriguez, Avenida Illampu, Alto San Pedro, Cotahuma, La Paz, Pedro Domingo Murillo, La Paz, Bolivia"
     },
     {
       "id": "museo-de-la-revolucion",
@@ -373,7 +445,10 @@
         "🚫 No se permite tomar fotos con flash."
       ],
       "zona": "Centro",
-      "categoria": "Museo"
+      "categoria": "Museo",
+      "latitude": -16.4978,
+      "longitude": -68.13499,
+      "_geocoded_from": "manual override"
     }
   ]
 }
