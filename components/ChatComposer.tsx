@@ -25,7 +25,7 @@ export function ChatComposer({
         multiline
       />
       <Pressable onPress={onSend} style={[styles.send, { backgroundColor: colors.primary }]}>
-        {isThinking ? <ActivityIndicator color="#fff" /> : <Ionicons name="send-outline" size={18} color="#fff" />}
+        {isThinking ? <ActivityIndicator color="#fff" /> : <Ionicons name="paper-plane" size={16} color="#fff" />}
       </Pressable>
     </View>
   );

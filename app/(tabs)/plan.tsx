@@ -3,6 +3,7 @@ import { router } from "expo-router";
 import { useThemeColors } from "../hooks/useThemeColors";
 import { ThemeColors } from "../theme/colors";
 import { Ionicons } from "@expo/vector-icons";
+import NearPlacesMap from "@/components/NearPlacesMap";
 
 export default function PlanScreen() {
   const { colors } = useThemeColors();
@@ -15,6 +16,9 @@ export default function PlanScreen() {
         <Text style={styles.subtitle}>
           Plantilla inicial del plan. Aquí agregaremos mapa, resumen y chips.
         </Text>
+        <View style={{ height: 300, marginTop: 12 }}>
+          <NearPlacesMap />
+        </View>
 
         <Pressable
           onPress={() => router.push({ pathname: "/(modals)/chat" })}
@@ -31,9 +35,20 @@ export default function PlanScreen() {
 const getStyles = (colors: ThemeColors) =>
   StyleSheet.create({
     safe: { flex: 1, backgroundColor: colors.background },
-    container: { flex: 1, padding: 16, gap: 12 },
-    title: { fontSize: 24, fontWeight: "700", color: colors.text },
-    subtitle: { fontSize: 14, color: colors.textSecondary },
+    container: { 
+      flex: 1, 
+      padding: 16, 
+      gap: 12 
+    },
+    title: { 
+      fontSize: 24, 
+      fontWeight: "700", 
+      color: colors.text 
+    },
+    subtitle: { 
+      fontSize: 14, 
+      color: colors.textSecondary 
+    },
     chatButton: {
       alignSelf: "flex-start",
       flexDirection: "row",

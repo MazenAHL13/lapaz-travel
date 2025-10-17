@@ -83,7 +83,6 @@ export default function ChatModal() {
           value={input}
           onChangeText={setInput}
           onSend={send}
-          // onPickImage={() => { /* integrar expo-image-picker cuando quieras */ }}
           isThinking={false}
           paddingBottom={16}
         />
