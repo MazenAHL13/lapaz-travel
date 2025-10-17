@@ -3,7 +3,7 @@ import { persist, createJSONStorage } from "zustand/middleware";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import usersData from "../data/users.json";
 
-type User = {
+export type User = {
   id: string;
   name: string;
   email: string;
@@ -13,78 +13,63 @@ type User = {
 
 type UserState = {
   currentUser: User | null;
-  login: (email: string, password: string) => Promise<boolean>;
+  savedAvatars: Record<string, string | undefined>; 
+  login: (emailOrName: string, password: string) => Promise<boolean>;
   logout: () => void;
-  setAvatar: (uri: string) => Promise<void>;
-  clearAvatar: () => Promise<void>;
-};
-
-type PersistedMods = {
-  [userId: string]: Partial<User>; 
+  setAvatar: (uri: string) => void;
+  clearAvatar: () => void;
+  clearAll: () => void;
 };
 
 export const useUserStore = create<UserState>()(
   persist(
     (set, get) => ({
       currentUser: null,
+      savedAvatars: {},
 
-      
-      login: async (email, password) => {
-        const baseUser = usersData.users.find(
+      login: async (emailOrName, password) => {
+        const found = usersData.users.find(
           (u) =>
-            (u.email.toLowerCase() === email.toLowerCase() ||
-            u.name.toLowerCase() === email.toLowerCase()) &&
+            (u.email.toLowerCase() === emailOrName.toLowerCase() ||
+              u.name.toLowerCase() === emailOrName.toLowerCase()) &&
             u.password === password
         );
+        if (!found) return false;
 
-        if (!baseUser) return false;
-
-        
-        const raw = (await AsyncStorage.getItem("user-mods")) || "{}";
-        const mods: PersistedMods = JSON.parse(raw);
-
-        
-        const mergedUser = { ...baseUser, ...(mods[baseUser.id] ?? {}) };
-        set({ currentUser: mergedUser });
-
+        const avatar = get().savedAvatars[found.id];
+        set({ currentUser: { ...found, avatar } });
         return true;
       },
 
-     
       logout: () => set({ currentUser: null }),
 
-        setAvatar: async (uri) => {
+      setAvatar: (uri) => {
         const u = get().currentUser;
         if (!u) return;
-
-        const updated = { ...u, avatar: uri };
-        set({ currentUser: updated });
-
-        const raw = (await AsyncStorage.getItem("user-mods")) || "{}";
-        const mods: PersistedMods = JSON.parse(raw);
-        mods[u.id] = { ...(mods[u.id] ?? {}), avatar: uri };
-        await AsyncStorage.setItem("user-mods", JSON.stringify(mods));
+        const next = { ...get().savedAvatars, [u.id]: uri };
+        set({
+          currentUser: { ...u, avatar: uri },
+          savedAvatars: next,
+        });
       },
 
-      clearAvatar: async () => {
+      clearAvatar: () => {
         const u = get().currentUser;
         if (!u) return;
-
-        const updated = { ...u, avatar: undefined };
-        set({ currentUser: updated });
-
-        const raw = (await AsyncStorage.getItem("user-mods")) || "{}";
-        const mods: PersistedMods = JSON.parse(raw);
-        if (mods[u.id]) {
-          delete mods[u.id].avatar;
-          if (Object.keys(mods[u.id]).length === 0) delete mods[u.id];
-        }
-        await AsyncStorage.setItem("user-mods", JSON.stringify(mods));
+        const next = { ...get().savedAvatars };
+        delete next[u.id];
+        set({
+          currentUser: { ...u, avatar: undefined },
+          savedAvatars: next,
+        });
       },
+
+      clearAll: () => set({ currentUser: null, savedAvatars: {} }),
     }),
     {
-      name: "user-storage", 
+      name: "user-store",
       storage: createJSONStorage(() => AsyncStorage),
+      version: 1,
     }
   )
 );
