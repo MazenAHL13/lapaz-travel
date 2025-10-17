@@ -9,6 +9,8 @@ import data from "../data/placesData.json";
 import { useThemeColors } from "../hooks/useThemeColors";
 import { useUserStore } from "../store/useUserStore";
 
+
+
 const places = data.places;
 
 export default function ExploreScreen() {
@@ -17,16 +19,13 @@ export default function ExploreScreen() {
   const user = useUserStore((s) => s.currentUser);
 
   const [query, setQuery] = useState("");
+  const [showFilters, setShowFilters] = useState(false);
 
-  const categorias = useMemo(
-    () => [...new Set(places.map((p) => p.categoria))],
-    []
-  );
+  const categorias = useMemo(() => [...new Set(places.map((p) => p.categoria))], []);
   const zonas = useMemo(() => [...new Set(places.map((p) => p.zona))], []);
 
   const [filterCategories, setFilterCategories] = useState<string[]>(categorias);
   const [filterZones, setFilterZones] = useState<string[]>(zonas);
-  const [showFilters, setShowFilters] = useState(false);
 
   const toggleFilterZone = useCallback((zone: string) => {
     setFilterZones((prev) =>
@@ -36,24 +35,16 @@ export default function ExploreScreen() {
 
   const toggleFilterCategory = useCallback((category: string) => {
     setFilterCategories((prev) =>
-      prev.includes(category)
-        ? prev.filter((c) => c !== category)
-        : [...prev, category]
+      prev.includes(category) ? prev.filter((c) => c !== category) : [...prev, category]
     );
   }, []);
 
   const effectiveZones = filterZones.length ? filterZones : zonas;
-  const effectiveCategories = filterCategories.length
-    ? filterCategories
-    : categorias;
+  const effectiveCategories = filterCategories.length ? filterCategories : categorias;
 
   const activeFilterCount =
-    (filterZones.length > 0 && filterZones.length < zonas.length
-      ? filterZones.length
-      : 0) +
-    (filterCategories.length > 0 && filterCategories.length < categorias.length
-      ? filterCategories.length
-      : 0);
+    (filterZones.length > 0 && filterZones.length < zonas.length ? filterZones.length : 0) +
+    (filterCategories.length > 0 && filterCategories.length < categorias.length ? filterCategories.length : 0);
 
   const filtered = useMemo(() => {
     return places.filter(
@@ -68,8 +59,10 @@ export default function ExploreScreen() {
     <ScrollView
       style={{ flex: 1, backgroundColor: colors.background }}
       contentContainerStyle={{ padding: 16, rowGap: 16, paddingBottom: 24 }}
+      keyboardShouldPersistTaps="handled"
+      keyboardDismissMode="on-drag"
     >
-      {/* Header del usuario */}
+
       <View
         style={{
           flexDirection: "row",
@@ -102,6 +95,7 @@ export default function ExploreScreen() {
         </View>
       </View>
 
+      {/* Buscador con botón de filtro integrado */}
       <SearchBar
         value={query}
         onChangeText={setQuery}
@@ -109,6 +103,7 @@ export default function ExploreScreen() {
         activeFilterCount={activeFilterCount}
       />
 
+      {/* Panel de filtros, solo visible si showFilters = true */}
       {showFilters && (
         <FilterPanel
           zones={zonas}
@@ -120,6 +115,7 @@ export default function ExploreScreen() {
         />
       )}
 
+      {/* Lista de lugares */}
       <View style={{ rowGap: 16 }}>
         {filtered.map((place) => (
           <PlaceCard

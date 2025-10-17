@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
-import { Pressable, StyleSheet, TextInput, View } from "react-native";
+import { Pressable, StyleSheet, TextInput, View, Text } from "react-native";
 import { useThemeColors } from "../app/hooks/useThemeColors";
 import { ThemeColors } from "../app/theme/colors";
 import { radius, spacing, typography, shadow } from "../constants/tokens";
@@ -22,17 +22,33 @@ export default function SearchBar({
 }: SearchBarProps) {
   const { colors } = useThemeColors();
   const [focused, setFocused] = useState(false);
+  const inputRef = useRef<TextInput>(null);
   const styles = createStyles(colors, focused);
+  const handleFocusRequest = () => {
+    inputRef.current?.focus();
+  };
 
   return (
-    <View style={styles.container}>
+    <Pressable
+      style={({ pressed }) => [
+        styles.container,
+        pressed && !focused ? styles.containerPressed : null,
+      ]}
+      onPress={handleFocusRequest}
+      onPressIn={handleFocusRequest}
+      accessibilityRole="search"
+      accessibilityLabel={placeholder}
+      hitSlop={4}
+    >
       <Ionicons
         name="search"
         size={18}
         color={focused ? colors.primary : colors.muted}
         style={styles.icon}
       />
+
       <TextInput
+        ref={inputRef}
         style={styles.input}
         placeholder={placeholder}
         placeholderTextColor={colors.textSecondary}
@@ -44,26 +60,43 @@ export default function SearchBar({
         clearButtonMode="while-editing"
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
+        showSoftInputOnFocus
+        blurOnSubmit={false}
       />
-  
+
       {!!onPressFilter && (
         <Pressable
           onPress={onPressFilter}
           hitSlop={10}
-          style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
+          style={({ pressed }) => [
+            styles.filterButton,
+            { opacity: pressed ? 0.6 : 1 },
+          ]}
           accessibilityRole="button"
           accessibilityLabel="Mostrar filtros"
         >
-          <View style={styles.filterButton}>
-            <Ionicons
-              name="funnel"
-              size={18}
-              color={colors.textSecondary}
-            />
-          </View>
+          <Ionicons
+            name="funnel"
+            size={18}
+            color={colors.textSecondary}
+          />
+          {activeFilterCount > 0 && (
+            <View style={styles.badge}>
+              <Text
+                style={{
+                  fontSize: 10,
+                  fontWeight: "700",
+                  color: "#fff",
+                  textAlign: "center",
+                }}
+              >
+                {activeFilterCount}
+              </Text>
+            </View>
+          )}
         </Pressable>
       )}
-    </View>
+    </Pressable>
   );
 }
 
@@ -75,14 +108,13 @@ const createStyles = (colors: ThemeColors, focused: boolean) =>
       height: 44,
       borderRadius: radius.lg,
       paddingHorizontal: spacing.md,
-      backgroundColor: colors.card, 
+      backgroundColor: colors.card,
       borderWidth: 1,
       borderColor: focused ? colors.primary : colors.border,
       ...(focused ? { ...shadow.ios, ...shadow.android } : null),
     },
-    icon: {
-      opacity: 0.9,
-    },
+    containerPressed: { opacity: 0.92 },
+    icon: { opacity: 0.9 },
     input: {
       flex: 1,
       paddingVertical: 0,
@@ -90,9 +122,21 @@ const createStyles = (colors: ThemeColors, focused: boolean) =>
       fontSize: typography.base,
       color: colors.text,
     },
-     filterButton: {
+    filterButton: {
       marginLeft: spacing.sm,
       alignItems: "center",
       justifyContent: "center",
+    },
+    badge: {
+      position: "absolute",
+      top: -6,
+      right: -6,
+      backgroundColor: colors.primary,
+      borderRadius: 8,
+      minWidth: 16,
+      height: 16,
+      alignItems: "center",
+      justifyContent: "center",
+      paddingHorizontal: 3,
     },
   });
