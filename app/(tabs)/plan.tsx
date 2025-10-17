@@ -1,9 +1,10 @@
-import { SafeAreaView, View, Text, Pressable, StyleSheet } from "react-native";
+import { SafeAreaView, View, Text, Pressable, StyleSheet, ScrollView } from "react-native";
 import { router } from "expo-router";
 import { useThemeColors } from "../hooks/useThemeColors";
 import { ThemeColors } from "../theme/colors";
 import { Ionicons } from "@expo/vector-icons";
 import NearPlacesMap from "@/components/NearPlacesMap";
+import PlacesNearYouRow from "@/components/PlacesNearYouRow";
 
 export default function PlanScreen() {
   const { colors } = useThemeColors();
@@ -11,12 +12,17 @@ export default function PlanScreen() {
 
   return (
     <SafeAreaView style={styles.safe}>
+      <ScrollView>
       <View style={styles.container}>
-        <Text style={styles.title}>Plan</Text>
-        <Text style={styles.subtitle}>
-          Plantilla inicial del plan. Aquí agregaremos mapa, resumen y chips.
-        </Text>
+        <View style={{ flexDirection: "row"}}>
+        <Text style={styles.title}>Planifica tu Recorrido </Text>
+          <Ionicons name="trail-sign" size={28} color={colors.primary} />
+        </View>
+        <PlacesNearYouRow />
         <View style={{ height: 300, marginTop: 12 }}>
+          <Text style={styles.subtitle}>
+            Descubre atracciones cercanas y planifica tu día con nuestro mapa interactivo.
+          </Text>
           <NearPlacesMap />
         </View>
 
@@ -28,7 +34,9 @@ export default function PlanScreen() {
           <Text style={styles.chatButtonText}>Abrir chat IA</Text>
         </Pressable>
       </View>
+      </ScrollView>
     </SafeAreaView>
+
   );
 }
 
@@ -46,8 +54,9 @@ const getStyles = (colors: ThemeColors) =>
       color: colors.text 
     },
     subtitle: { 
-      fontSize: 14, 
-      color: colors.textSecondary 
+      fontSize: 16, 
+      color: colors.textSecondary,
+      marginBottom: 16
     },
     chatButton: {
       alignSelf: "flex-start",
