@@ -10,7 +10,7 @@ type SearchBarProps = {
   value: string;
   onChangeText: (text: string) => void;
   onPressFilter?: () => void;
-  activeFilterCount?: number;
+  resultCount?: number;
 };
 
 export default function SearchBar({
@@ -18,7 +18,7 @@ export default function SearchBar({
   value,
   onChangeText,
   onPressFilter,
-  activeFilterCount = 0,
+  resultCount,
 }: SearchBarProps) {
   const { colors } = useThemeColors();
   const [focused, setFocused] = useState(false);
@@ -73,14 +73,18 @@ export default function SearchBar({
             { opacity: pressed ? 0.6 : 1 },
           ]}
           accessibilityRole="button"
-          accessibilityLabel="Mostrar filtros"
+          accessibilityLabel={
+            typeof resultCount === "number"
+              ? `Mostrar filtros, ${resultCount} resultados`
+              : "Mostrar filtros"
+          }
         >
           <Ionicons
             name="funnel"
             size={18}
             color={colors.textSecondary}
           />
-          {activeFilterCount > 0 && (
+          {typeof resultCount === "number" && (
             <View style={styles.badge}>
               <Text
                 style={{
@@ -90,7 +94,7 @@ export default function SearchBar({
                   textAlign: "center",
                 }}
               >
-                {activeFilterCount}
+                {resultCount}
               </Text>
             </View>
           )}

@@ -24,8 +24,8 @@ export default function ExploreScreen() {
   const categorias = useMemo(() => [...new Set(places.map((p) => p.categoria))], []);
   const zonas = useMemo(() => [...new Set(places.map((p) => p.zona))], []);
 
-  const [filterCategories, setFilterCategories] = useState<string[]>(categorias);
-  const [filterZones, setFilterZones] = useState<string[]>(zonas);
+  const [filterCategories, setFilterCategories] = useState<string[]>([]);
+  const [filterZones, setFilterZones] = useState<string[]>([]);
 
   const toggleFilterZone = useCallback((zone: string) => {
     setFilterZones((prev) =>
@@ -42,10 +42,6 @@ export default function ExploreScreen() {
   const effectiveZones = filterZones.length ? filterZones : zonas;
   const effectiveCategories = filterCategories.length ? filterCategories : categorias;
 
-  const activeFilterCount =
-    (filterZones.length > 0 && filterZones.length < zonas.length ? filterZones.length : 0) +
-    (filterCategories.length > 0 && filterCategories.length < categorias.length ? filterCategories.length : 0);
-
   const filtered = useMemo(() => {
     return places.filter(
       (p) =>
@@ -54,6 +50,10 @@ export default function ExploreScreen() {
         effectiveCategories.includes(p.categoria)
     );
   }, [query, effectiveZones, effectiveCategories]);
+  const hasZoneFilter = filterZones.length > 0;
+  const hasCategoryFilter = filterCategories.length > 0;
+  const hasActiveFilters = hasZoneFilter || hasCategoryFilter;
+  const resultCount = hasActiveFilters ? filtered.length : undefined;
 
   return (
     <ScrollView
@@ -95,15 +95,13 @@ export default function ExploreScreen() {
         </View>
       </View>
 
-      {/* Buscador con botón de filtro integrado */}
       <SearchBar
         value={query}
         onChangeText={setQuery}
         onPressFilter={() => setShowFilters((v) => !v)}
-        activeFilterCount={activeFilterCount}
+        resultCount={resultCount}
       />
 
-      {/* Panel de filtros, solo visible si showFilters = true */}
       {showFilters && (
         <FilterPanel
           zones={zonas}
@@ -115,7 +113,6 @@ export default function ExploreScreen() {
         />
       )}
 
-      {/* Lista de lugares */}
       <View style={{ rowGap: 16 }}>
         {filtered.map((place) => (
           <PlaceCard
