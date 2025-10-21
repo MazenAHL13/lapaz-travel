@@ -90,7 +90,7 @@ export default function ExploreScreen() {
           <Text
             style={{ color: colors.text, fontSize: 22, fontWeight: "700" }}
           >
-            {user?.name ?? "Invitado"}
+            {user?.email ?? "Invitado"}
           </Text>
         </View>
       </View>

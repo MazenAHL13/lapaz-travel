@@ -1,7 +1,9 @@
 import { useThemeColors } from "@/src/hooks/useThemeColors";
+import { auth } from "@/src/services/firebase/config";
 import { useUserStore } from "@/src/store/useUserStore";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import {
   Alert,
@@ -20,11 +22,10 @@ export default function LoginScreen() {
   const { theme, colors } = useThemeColors();
   const router = useRouter();
   const styles = createStyles(colors);
+  const setUser = useUserStore((state) => state.setUser);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const login = useUserStore((s) => s.login);
 
   const handleLogin = async () => {
     const trimmedEmail = email.trim();
@@ -36,21 +37,15 @@ export default function LoginScreen() {
     }
 
     try {
-      const success = await login(trimmedEmail, trimmedPassword);
-
-      if (!success) {
-        Alert.alert(
-          "Error de inicio de sesión",
-          "Usuario o contraseña incorrectos."
-        );
-        return;
-      }
-
+      const cred = await signInWithEmailAndPassword(auth, trimmedEmail, trimmedPassword);
+      setUser(cred.user);
+      Alert.alert("Éxito", "Inicio de sesión correcto.");
       router.replace("/(tabs)");
-    } catch (error) {
+    } catch (error: any) {
+      console.error("Error al iniciar sesión:", error);
       Alert.alert(
         "Error de inicio de sesión",
-        "Ocurrió un error inesperado. Inténtalo de nuevo."
+        error.message || "Usuario o contraseña incorrectos."
       );
     }
   };

@@ -1,22 +1,25 @@
 import { useThemeColors } from "@/src/hooks/useThemeColors";
+import { auth, db } from "@/src/services/firebase/config";
 import { useUserStore } from "@/src/store/useUserStore";
 import { ThemeColors } from "@/src/theme/colors";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 import { useState } from "react";
 import { Alert, Image, Pressable, SafeAreaView, StyleSheet, Text, TextInput, View } from "react-native";
 
 export default function RegisterScreen() {
   const { colors, theme } = useThemeColors();
   const styles = createStyles(colors);
-
+  const setUser = useUserStore((state) => state.setUser);
+  
   const router = useRouter();
-  const register = useUserStore((s) => s.register);
   const [showPassword, setShowPassword] = useState(false);
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailValid, setEmailValid] = useState(true);
+  const [passwordValid, setPasswordValid] = useState(true);
 
   const validateEmail = (text: string) => {
     setEmail(text);
@@ -24,22 +27,46 @@ export default function RegisterScreen() {
     setEmailValid(emailRegex.test(text.trim()));
   };
 
+  const validatePassword = (text: string) => {
+    setPassword(text);
+    setPasswordValid(text.trim().length >= 6);
+  };
+
   const handleRegister = async () => {
-    if (!email.trim() || !password.trim()) {
+    const trimmedEmail = email.trim();
+    const trimmedPassword = password.trim();
+  
+    if (!trimmedEmail || !trimmedPassword) {
       Alert.alert("Campos requeridos", "Completa todos los campos");
       return;
     }
-
+  
     if (!emailValid) {
       Alert.alert("Correo inválido", "Por favor, introduce un correo válido.");
       return;
     }
+  
+    if (!passwordValid) {
+      Alert.alert("Contraseña demasiado corta", "La contraseña debe tener al menos 6 caracteres.");
+      return;
+    }
 
-    const success = await register(email.trim(), password.trim());
-    if (success) router.replace("/(tabs)");
-    else {
-      const err = useUserStore.getState().error;
-      Alert.alert("Error", err || "No se pudo registrar el usuario.");
+    try {
+      const cred = await createUserWithEmailAndPassword(auth, trimmedEmail, trimmedPassword);
+  
+      await setDoc(doc(db, "users", cred.user.uid), {
+        uid: cred.user.uid,
+        email: cred.user.email,
+        createdAt: new Date().toISOString(),
+      });
+  
+      setUser(cred.user);
+  
+      Alert.alert("Éxito", "Usuario registrado correctamente.");
+      router.replace("/(tabs)");
+    } catch (err: any) {
+      console.error("Firebase Error:", err);
+      Alert.alert("Error", err.message || "No se pudo registrar el usuario.");
     }
   };
 
@@ -76,12 +103,14 @@ export default function RegisterScreen() {
         />
         <View style={{ position: "relative" }}>
           <TextInput
-            style={[styles.input, { color: colors.text, borderColor: colors.border }]}
+            style={[styles.input, { 
+              color: colors.text, 
+              borderColor: passwordValid ? colors.border : "red"}]}
             placeholder="Contraseña"
             placeholderTextColor={colors.textSecondary}
             secureTextEntry={!showPassword}
             value={password}
-            onChangeText={setPassword}
+            onChangeText={validatePassword}
           />
           <Pressable
               onPress={() => setShowPassword((v) => !v)}

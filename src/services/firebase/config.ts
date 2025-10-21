@@ -1,4 +1,10 @@
-export const config = {
+import { getApp, getApps, initializeApp } from "firebase/app";
+import { initializeAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
+
+
+const firebaseConfig = {
     apiKey: "AIzaSyB4F_Rav41DyJGf23DYgrtzJ7ijkcM5LJ0",
     authDomain: "lapaztravel.firebaseapp.com",
     projectId: "lapaztravel",
@@ -8,4 +14,8 @@ export const config = {
     measurementId: "G-1KVEQN5DCQ"
 };
 
+const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 
+export const auth = initializeAuth(app);
+export const db = getFirestore(app);
+export const storage = getStorage(app);
