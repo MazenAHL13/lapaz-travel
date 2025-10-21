@@ -1,10 +1,10 @@
-import { SafeAreaView, View, Text, Pressable, StyleSheet, ScrollView } from "react-native";
-import { router } from "expo-router";
-import { useThemeColors } from "../hooks/useThemeColors";
-import { ThemeColors } from "../theme/colors";
+import NearPlacesMap from "@/src/components/NearPlacesMap";
+import PlacesNearYouRow from "@/src/components/PlacesNearYouRow";
+import { useThemeColors } from "@/src/hooks/useThemeColors";
 import { Ionicons } from "@expo/vector-icons";
-import NearPlacesMap from "@/components/NearPlacesMap";
-import PlacesNearYouRow from "@/components/PlacesNearYouRow";
+import { router } from "expo-router";
+import { Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import { ThemeColors } from "../../src/theme/colors";
 
 export default function PlanScreen() {
   const { colors } = useThemeColors();

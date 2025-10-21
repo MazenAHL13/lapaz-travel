@@ -1,9 +1,9 @@
-import { SafeAreaView, ScrollView, Text, View } from "react-native";
-import PlaceCard from "../../components/PlaceCard";
-import data from "../data/placesData.json";
-import { useThemeColors } from "../hooks/useThemeColors";
-import { useFavoritesStore } from "../store/useFavoritesStore";
+import PlaceCard from "@/src/components/PlaceCard";
+import data from "@/src/data/placesData.json";
+import { useThemeColors } from "@/src/hooks/useThemeColors";
+import { useFavoritesStore } from "@/src/store/useFavoritesStore";
 import { router } from "expo-router";
+import { SafeAreaView, ScrollView, Text, View } from "react-native";
 const places = data.places;
 
 export default function FavoritesScreen() {

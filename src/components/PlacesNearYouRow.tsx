@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import { ScrollView, View, Text, Image, Pressable, StyleSheet } from "react-native";
+import data from "@/src/data/placesData.json";
 import * as Location from "expo-location";
-import { useThemeColors } from "../app/hooks/useThemeColors";
-import { ThemeColors } from "../app/theme/colors";
 import { router } from "expo-router";
-import data from "../app/data/placesData.json";
+import { useEffect, useState } from "react";
+import { Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { useThemeColors } from "../hooks/useThemeColors";
+import { ThemeColors } from "../theme/colors";
 
 export type Place = {
   id: string;

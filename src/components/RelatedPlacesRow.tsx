@@ -1,7 +1,7 @@
-import { ScrollView, View, Text, Image, Pressable, StyleSheet } from "react-native";
-import { useThemeColors } from "../app/hooks/useThemeColors";
-import { ThemeColors } from "../app/theme/colors";
 import { router } from "expo-router";
+import { Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { useThemeColors } from "../hooks/useThemeColors";
+import { ThemeColors } from "../theme/colors";
 
 
 export type Place = {

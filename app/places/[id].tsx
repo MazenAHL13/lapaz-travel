@@ -1,21 +1,20 @@
+import BackButton from "@/src/components/Backbutton";
+import FavoriteButton from "@/src/components/FavoriteButton";
+import RelatedPlacesRow from "@/src/components/RelatedPlacesRow";
+import data from "@/src/data/placesData.json";
+import { useThemeColors } from "@/src/hooks/useThemeColors";
 import { Ionicons } from "@expo/vector-icons";
-import { router, Stack, useLocalSearchParams } from "expo-router";
+import { Stack, useLocalSearchParams } from "expo-router";
 import React from "react";
 import {
   Image,
-  Pressable,
   SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
-  View,
+  View
 } from "react-native";
-import FavoriteButton from "../../components/FavoriteButton";
-import data from "../data/placesData.json";
-import { useThemeColors } from "../hooks/useThemeColors";
-import { ThemeColors } from "../theme/colors";
-import RelatedPlacesRow from "../../components/RelatedPlacesRow";
-import BackButton from "@/components/Backbutton";
+import { ThemeColors } from "../../src/theme/colors";
 
 const places = data.places;
 

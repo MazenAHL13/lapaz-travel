@@ -1,15 +1,15 @@
-import BackButton from "@/components/Backbutton";
+import BackButton from "@/src/components/Backbutton";
+import ChatBubble, { ChatMessage } from "@/src/components/Chatbubble";
+import { ChatComposer } from "@/src/components/ChatComposer";
+import { useThemeColors } from "@/src/hooks/useThemeColors";
 import { useRef, useState } from "react";
 import {
-    FlatList,
-    KeyboardAvoidingView,
-    Platform,
-    SafeAreaView,
-    StyleSheet,
+  FlatList,
+  KeyboardAvoidingView,
+  Platform,
+  SafeAreaView,
+  StyleSheet,
 } from "react-native";
-import ChatBubble, { ChatMessage } from "../../components/Chatbubble";
-import { ChatComposer } from "../../components/ChatComposer";
-import { useThemeColors } from "../hooks/useThemeColors";
 
 export default function ChatModal() {
   const { colors } = useThemeColors();

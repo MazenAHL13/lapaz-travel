@@ -1,6 +1,6 @@
-import { View, TextInput, Pressable, StyleSheet, ActivityIndicator, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useThemeColors } from "../app/hooks/useThemeColors";
+import { ActivityIndicator, Pressable, StyleSheet, TextInput, View } from "react-native";
+import { useThemeColors } from "../hooks/useThemeColors";
 
 export function ChatComposer({
   value, onChangeText, onSend, onPickImage, isThinking, paddingBottom = 16,

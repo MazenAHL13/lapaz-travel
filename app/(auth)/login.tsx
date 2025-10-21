@@ -1,3 +1,5 @@
+import { useThemeColors } from "@/src/hooks/useThemeColors";
+import { useUserStore } from "@/src/store/useUserStore";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useState } from "react";
@@ -11,9 +13,7 @@ import {
   TextInput,
   View,
 } from "react-native";
-import { useThemeColors } from "./hooks/useThemeColors";
-import { useUserStore } from "./store/useUserStore";
-import { ThemeColors } from "./theme/colors";
+import { ThemeColors } from "../../src/theme/colors";
 
 
 export default function LoginScreen() {
@@ -51,8 +51,8 @@ const [showPassword, setShowPassword] = useState(false);
 
 const logoSource =
   theme === "dark"
-    ? require("../assets/images/logoDark.png")
-    : require("../assets/images/logo.png");
+    ? require("../../assets/images/logoDark.png")
+    : require("../../assets/images/logo.png");
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>

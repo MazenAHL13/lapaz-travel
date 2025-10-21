@@ -1,13 +1,13 @@
-import { useMemo, useState, useCallback } from "react";
-import { ScrollView, View, Image, Text } from "react-native";
-import { useRouter } from "expo-router";
+import FilterPanel from "@/src/components/FilterPanel";
+import PlaceCard from "@/src/components/PlaceCard";
+import SearchBar from "@/src/components/SearchBar";
+import data from "@/src/data/placesData.json";
+import { useThemeColors } from "@/src/hooks/useThemeColors";
+import { useUserStore } from "@/src/store/useUserStore";
 import { Ionicons } from "@expo/vector-icons";
-import SearchBar from "../../components/SearchBar";
-import FilterPanel from "../../components/FilterPanel";
-import PlaceCard from "../../components/PlaceCard";
-import data from "../data/placesData.json";
-import { useThemeColors } from "../hooks/useThemeColors";
-import { useUserStore } from "../store/useUserStore";
+import { useRouter } from "expo-router";
+import { useCallback, useMemo, useState } from "react";
+import { Image, ScrollView, Text, View } from "react-native";
 
 
 

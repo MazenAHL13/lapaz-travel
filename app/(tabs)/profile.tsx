@@ -1,10 +1,10 @@
+import { useThemeColors } from "@/src/hooks/useThemeColors";
+import { useUserStore } from "@/src/store/useUserStore";
 import { Ionicons } from "@expo/vector-icons";
-import { SafeAreaView, View, Text, Pressable, Image, Alert, StyleSheet } from "react-native";
-import { useThemeColors } from "../hooks/useThemeColors";
-import { useUserStore } from "../store/useUserStore";
-import { router } from "expo-router";
 import * as ImagePicker from "expo-image-picker";
+import { router } from "expo-router";
 import { useState } from "react";
+import { Alert, Image, Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
 
 export default function ProfileScreen() {
   const { colors } = useThemeColors();
