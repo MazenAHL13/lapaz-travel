@@ -60,7 +60,11 @@ export default function RegisterScreen() {
         createdAt: new Date().toISOString(),
       });
   
-      setUser(cred.user);
+      if (cred.user.email) {
+        setUser({ ...cred.user, email: cred.user.email });
+      } else {
+        Alert.alert("Error", "El usuario no tiene un correo electrónico válido.");
+      }
   
       Alert.alert("Éxito", "Usuario registrado correctamente.");
       router.replace("/(tabs)");

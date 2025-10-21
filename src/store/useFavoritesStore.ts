@@ -17,7 +17,7 @@ export const useFavoritesStore = create<FavState>()(
       favoritesByUser: {},
 
       toggleFavorite: (placeId) => {
-        const userId = useUserStore.getState().currentUser?.id;
+        const userId = useUserStore.getState().currentUser?.uid;
         if (!userId) return;
 
         const current = get().favoritesByUser[userId] ?? [];
@@ -31,14 +31,14 @@ export const useFavoritesStore = create<FavState>()(
       },
 
       isFavorite: (placeId) => {
-        const userId = useUserStore.getState().currentUser?.id;
+        const userId = useUserStore.getState().currentUser?.uid;
         if (!userId) return false;
         const current = get().favoritesByUser[userId] ?? [];
         return current.includes(placeId);
       },
 
       getFavorites: () => {
-        const userId = useUserStore.getState().currentUser?.id;
+        const userId = useUserStore.getState().currentUser?.uid;
         if (!userId) return [];
         return get().favoritesByUser[userId] ?? [];
       },

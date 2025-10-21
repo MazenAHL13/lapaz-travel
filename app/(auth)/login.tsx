@@ -30,23 +30,37 @@ export default function LoginScreen() {
   const handleLogin = async () => {
     const trimmedEmail = email.trim();
     const trimmedPassword = password.trim();
-
+  
     if (!trimmedEmail || !trimmedPassword) {
       Alert.alert("Campos requeridos", "Debes llenar ambos campos.");
       return;
     }
-
+  
     try {
       const cred = await signInWithEmailAndPassword(auth, trimmedEmail, trimmedPassword);
-      setUser(cred.user);
+      if (cred.user.email) {
+        setUser({ ...cred.user, email: cred.user.email });
+      } else {
+        Alert.alert("Error", "El usuario no tiene un correo electrónico válido.");
+      }
       Alert.alert("Éxito", "Inicio de sesión correcto.");
       router.replace("/(tabs)");
     } catch (error: any) {
-      console.error("Error al iniciar sesión:", error);
-      Alert.alert(
-        "Error de inicio de sesión",
-        error.message || "Usuario o contraseña incorrectos."
-      );
+    
+      if (
+        error.code === "auth/user-not-found" ||
+        error.code === "auth/wrong-password" ||
+        error.code === "auth/invalid-credential"
+      ) {
+        Alert.alert("Error de inicio de sesión", "Usuario o contraseña incorrecta.");
+      } else if (error.code === "auth/invalid-email") {
+        Alert.alert("Error de inicio de sesión", "Correo electrónico inválido.");
+      } else {
+        Alert.alert(
+          "Error de inicio de sesión",
+          error.message || "Ocurrió un error inesperado."
+        );
+      }
     }
   };
 

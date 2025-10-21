@@ -63,7 +63,6 @@ export default function ProfileScreen() {
     ]);
   };
 
-  // 🧍 Avatar dinámico
   const Avatar = () => {
     const sourceUri = isEditing ? tempAvatarUri : user?.avatar;
 

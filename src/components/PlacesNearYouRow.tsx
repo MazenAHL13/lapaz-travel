@@ -20,7 +20,7 @@ export type Place = {
 const FALLBACK = { latitude: -16.4897, longitude: -68.1193 };
 
 const isNear = (a: { latitude: number; longitude: number }, b: { latitude: number; longitude: number }) => {
-  const delta = 0.02; // ≈3 km aprox
+  const delta = 0.02;
   return (
     Math.abs(a.latitude - b.latitude) <= delta &&
     Math.abs(a.longitude - b.longitude) <= delta
@@ -54,10 +54,8 @@ export default function PlacesNearYouRow({
     })();
   }, []);
 
-// Obtiene todos los lugares del JSON
     const allPlaces: Place[] = data.places;
 
-// Filtra solo los lugares que están cerca del usuario
     const nearbyPlaces = allPlaces.filter((place) =>
     isNear(
         { latitude: place.latitude, longitude: place.longitude },
