@@ -1,9 +1,9 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 
+import { useThemeColors } from "@/src/hooks/useThemeColors";
 import { StyleSheet } from "react-native";
-import { useThemeColors } from "../hooks/useThemeColors";
-import { ThemeColors } from "../theme/colors";
+import { ThemeColors } from "../../src/theme/colors";
 
 const createStyles = (colors: ThemeColors) =>
   StyleSheet.create({

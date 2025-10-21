@@ -1,8 +1,8 @@
-import { Pressable, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useFavoritesStore } from "../app/store/useFavoritesStore";
-import { useThemeColors } from "../app/hooks/useThemeColors";
-import { radius, spacing, typography } from  "../constants/tokens";
+import { Pressable, Text } from "react-native";
+import { radius, spacing, typography } from "../constants/tokens";
+import { useThemeColors } from "../hooks/useThemeColors";
+import { useFavoritesStore } from "../store/useFavoritesStore";
 
 export default function FavoriteButton({ placeId }: { placeId: string }) {
   const { colors } = useThemeColors();

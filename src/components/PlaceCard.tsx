@@ -1,9 +1,9 @@
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useThemeColors } from "../app/hooks/useThemeColors";
-import { ThemeColors } from "../app/theme/colors";
-import { useFavoritesStore } from "../app/store/useFavoritesStore";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { radius, shadow, spacing } from "../constants/tokens";
+import { useThemeColors } from "../hooks/useThemeColors";
+import { useFavoritesStore } from "../store/useFavoritesStore";
+import { ThemeColors } from "../theme/colors";
 
 type PlaceCardProps = {
   title: string;

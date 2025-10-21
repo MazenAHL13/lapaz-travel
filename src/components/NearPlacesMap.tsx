@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import { ActivityIndicator, StyleSheet, View, Platform } from "react-native";
-import MapView, { Marker } from "react-native-maps";
+import data from "@/src/data/placesData.json";
 import * as Location from "expo-location";
-import data from "../app/data/placesData.json";
+import { useEffect, useState } from "react";
+import { ActivityIndicator, Platform, StyleSheet, View } from "react-native";
+import MapView, { Marker } from "react-native-maps";
 
 interface Region {
   latitude: number;

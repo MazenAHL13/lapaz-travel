@@ -1,9 +1,9 @@
-import { ThemeColors } from "@/app/theme/colors";
+import { ThemeColors } from "@/src/theme/colors";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { Pressable, StyleSheet, Text } from "react-native";
-import { useThemeColors } from "../app/hooks/useThemeColors";
 import { radius, spacing, typography } from "../constants/tokens";
+import { useThemeColors } from "../hooks/useThemeColors";
 
  export default function BackButton() {
     const { colors } = useThemeColors();

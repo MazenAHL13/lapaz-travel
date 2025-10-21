@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useThemeColors } from "@/src/hooks/useThemeColors";
+import { useThemeStore } from "@/src/store/useThemeStore";
 import { ScrollView, StyleSheet, Switch, Text, View } from "react-native";
-import { useThemeColors } from "../hooks/useThemeColors";
-import type { ThemeColors } from "../theme/colors";
-import { useThemeStore } from "../store/useThemeStore";
-import { radius, spacing, typography, shadow } from "../../constants/tokens";
+import { radius, shadow, spacing, typography } from "../../src/constants/tokens";
+import type { ThemeColors } from "../../src/theme/colors";
 
 export default function SettingsScreen() {
   const { theme, colors } = useThemeColors();

@@ -1,9 +1,9 @@
-import { useRef, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
-import { Pressable, StyleSheet, TextInput, View, Text } from "react-native";
-import { useThemeColors } from "../app/hooks/useThemeColors";
-import { ThemeColors } from "../app/theme/colors";
-import { radius, spacing, typography, shadow } from "../constants/tokens";
+import { useRef, useState } from "react";
+import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { radius, shadow, spacing, typography } from "../constants/tokens";
+import { useThemeColors } from "../hooks/useThemeColors";
+import { ThemeColors } from "../theme/colors";
 
 type SearchBarProps = {
   placeholder?: string;

@@ -1,9 +1,9 @@
-import React from "react";
-import { View, Text, StyleSheet, Image} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useThemeColors } from "../app/hooks/useThemeColors";
-import { ThemeColors } from "../app/theme/colors";
+import React from "react";
+import { Image, StyleSheet, Text, View } from "react-native";
 import Markdown from "react-native-markdown-display";
+import { useThemeColors } from "../hooks/useThemeColors";
+import { ThemeColors } from "../theme/colors";
 
 export type ChatMessage = {
   id: string;
