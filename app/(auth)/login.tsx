@@ -34,25 +34,37 @@ export default function LoginScreen() {
       Alert.alert("Campos requeridos", "Debes llenar ambos campos.");
       return;
     }
-    const success = await login(trimmedEmail, trimmedPassword);
 
-  if (!success) {
-    Alert.alert(
-      "Error de inicio de sesión",
-      "Usuario o contraseña incorrectos."
-    );
-    return;
-  }
+    try {
+      const success = await login(trimmedEmail, trimmedPassword);
 
-  router.replace("/(tabs)");
-};
+      if (!success) {
+        Alert.alert(
+          "Error de inicio de sesión",
+          "Usuario o contraseña incorrectos."
+        );
+        return;
+      }
 
-const [showPassword, setShowPassword] = useState(false);
+      router.replace("/(tabs)");
+    } catch (error) {
+      Alert.alert(
+        "Error de inicio de sesión",
+        "Ocurrió un error inesperado. Inténtalo de nuevo."
+      );
+    }
+  };
 
-const logoSource =
-  theme === "dark"
-    ? require("../../assets/images/logoDark.png")
-    : require("../../assets/images/logo.png");
+  const handleRegister = () => {
+    router.push("/(auth)/register");
+  };
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const logoSource =
+    theme === "dark"
+      ? require("../../assets/images/logoDark.png")
+      : require("../../assets/images/logo.png");
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
@@ -67,7 +79,7 @@ const logoSource =
       <View style={styles.card}>
         <TextInput
           style={[styles.input, { color: colors.text, borderColor: colors.border }]}
-          placeholder="Usuario o correo"
+          placeholder="Correo"
           placeholderTextColor={colors.textSecondary}
           value={email}
           onChangeText={setEmail}
@@ -110,7 +122,7 @@ const logoSource =
         </Pressable>
 
         <Pressable
-          onPress={handleLogin}
+          onPress={handleRegister}
           style={({ pressed }) => [
             styles.button,
             {
