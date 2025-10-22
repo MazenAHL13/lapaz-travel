@@ -123,7 +123,7 @@ export default function ProfileScreen() {
       )}
 
           <Text style={{ fontSize: 20, fontWeight: "700", color: colors.text }}>
-            {user?.name ?? "Usuario"}
+            {user?.name ?? "Usuario"} 
           </Text>
           <Text style={{ color: colors.textSecondary }}>{user?.email ?? "—"}</Text>
         </View>

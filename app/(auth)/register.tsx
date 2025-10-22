@@ -20,7 +20,8 @@ export default function RegisterScreen() {
   const [password, setPassword] = useState("");
   const [emailValid, setEmailValid] = useState(true);
   const [passwordValid, setPasswordValid] = useState(true);
-
+  const [username, setUsername] = useState("");
+  const [usernameValid, setUsernameValid] = useState(true);
   const validateEmail = (text: string) => {
     setEmail(text);
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -32,6 +33,11 @@ export default function RegisterScreen() {
     setPasswordValid(text.trim().length >= 6);
   };
 
+  const validateUsername = (text: string) => {
+    setUsername(text);
+    setUsernameValid(text.trim().length >= 3);
+  };
+    
   const handleRegister = async () => {
     const trimmedEmail = email.trim();
     const trimmedPassword = password.trim();
@@ -51,11 +57,17 @@ export default function RegisterScreen() {
       return;
     }
 
+    if (!usernameValid) {
+      Alert.alert("Nombre de usuario inválido", "El nombre de usuario debe tener al menos 3 caracteres.");
+      return;
+    }
+
     try {
       const cred = await createUserWithEmailAndPassword(auth, trimmedEmail, trimmedPassword);
   
       await setDoc(doc(db, "users", cred.user.uid), {
         uid: cred.user.uid,
+        name: username.trim(),
         email: cred.user.email,
         createdAt: new Date().toISOString(),
       });
@@ -90,6 +102,15 @@ export default function RegisterScreen() {
       </View>
 
       <View style={styles.card}>
+      <TextInput
+            style={[styles.input, { 
+              color: colors.text, 
+              borderColor: usernameValid ? colors.border : "red"}]}
+            placeholder="Username"
+            placeholderTextColor={colors.textSecondary}
+            value={username}
+            onChangeText={validateUsername}
+          />
         <TextInput
           style={[
             styles.input,
@@ -98,7 +119,7 @@ export default function RegisterScreen() {
               borderColor: emailValid ? colors.border : "red" 
             },
           ]}
-          placeholder="Correo electrónico"
+          placeholder="Email"
           placeholderTextColor={colors.textSecondary}
           value={email}
           onChangeText={validateEmail}
@@ -106,11 +127,11 @@ export default function RegisterScreen() {
           keyboardType="email-address"
         />
         <View style={{ position: "relative" }}>
-          <TextInput
+        <TextInput
             style={[styles.input, { 
               color: colors.text, 
               borderColor: passwordValid ? colors.border : "red"}]}
-            placeholder="Contraseña"
+            placeholder="Password"
             placeholderTextColor={colors.textSecondary}
             secureTextEntry={!showPassword}
             value={password}

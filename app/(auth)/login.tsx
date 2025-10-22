@@ -88,7 +88,7 @@ export default function LoginScreen() {
       <View style={styles.card}>
         <TextInput
           style={[styles.input, { color: colors.text, borderColor: colors.border }]}
-          placeholder="Correo"
+          placeholder="Email"
           placeholderTextColor={colors.textSecondary}
           value={email}
           onChangeText={setEmail}
@@ -96,13 +96,13 @@ export default function LoginScreen() {
         />
         <View style={{ position: "relative" }}>
           <TextInput
-            style={[styles.input, { color: colors.text, borderColor: colors.border }]}
-            placeholder="Contraseña"
-            placeholderTextColor={colors.textSecondary}
-            secureTextEntry={!showPassword}
-            value={password}
-            onChangeText={setPassword}
-          />
+              style={[styles.input, { color: colors.text, borderColor: colors.border }]}
+              placeholder="Password"
+              placeholderTextColor={colors.textSecondary}
+              secureTextEntry={!showPassword}
+              value={password}
+              onChangeText={setPassword}
+            />
           <Pressable
               onPress={() => setShowPassword((v) => !v)}
               style={{
