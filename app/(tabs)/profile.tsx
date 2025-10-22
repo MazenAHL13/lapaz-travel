@@ -64,6 +64,7 @@ export default function ProfileScreen() {
   };
 
   const Avatar = () => {
+    console.log(user?.name);
     const sourceUri = isEditing ? tempAvatarUri : user?.avatar;
 
     if (sourceUri) {
