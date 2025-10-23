@@ -2,19 +2,19 @@ import BackButton from "@/src/components/Backbutton";
 import FavoriteButton from "@/src/components/FavoriteButton";
 
 import RelatedPlacesRow, { Place as RelatedPlace } from "@/src/components/RelatedPlacesRow";
-import { useThemeColors } from "@/src/hooks/useThemeColors";
 import { usePlaces } from "@/src/hooks/usePlaces";
+import { useThemeColors } from "@/src/hooks/useThemeColors";
 import { Ionicons } from "@expo/vector-icons";
 import { Stack, useLocalSearchParams } from "expo-router";
 import React from "react";
 import {
+  ActivityIndicator,
   Image,
   SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
   View,
-  ActivityIndicator,
 } from "react-native";
 import { ThemeColors } from "../../src/theme/colors";
 
@@ -23,9 +23,9 @@ export default function PlaceDetail() {
   const { colors } = useThemeColors();
   const styles = getStyles(colors);
 
-  const { data: places, loading } = usePlaces();
+  const { data: places, loadingPlaces } = usePlaces();
 
-  if (loading) {
+  if (loadingPlaces) {
     return (
       <View style={styles.centered}>
         <ActivityIndicator size="large" color={colors.primary} />
@@ -71,16 +71,16 @@ export default function PlaceDetail() {
 
           <Text style={styles.subtitle}>{place.subtitle}</Text>
 
-          {(place.zona || place.categoria) && (
+          {(place.zone || place.categoria) && (
             <View style={styles.tagsContainer}>
-              {place.zona && (
+              {place.zone && (
                 <View style={styles.tag}>
                   <Ionicons
                     name="location-outline"
                     size={14}
                     color={colors.primary}
                   />
-                  <Text style={styles.tagText}>{place.zona}</Text>
+                  <Text style={styles.tagText}>{place.zone}</Text>
                 </View>
               )}
               {place.categoria && (

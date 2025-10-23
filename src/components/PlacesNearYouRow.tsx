@@ -1,8 +1,8 @@
-import data from "@/src/data/placesData.json";
 import * as Location from "expo-location";
 import { router } from "expo-router";
 import { useEffect, useState } from "react";
 import { Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { usePlaces } from "../hooks/usePlaces";
 import { useThemeColors } from "../hooks/useThemeColors";
 import { ThemeColors } from "../theme/colors";
 
@@ -34,6 +34,7 @@ export default function PlacesNearYouRow({
   limit?: number;
   title?: string;
 }) {
+  const { data: places, loadingPlaces } = usePlaces();
   const { colors } = useThemeColors();
   const [here, setHere] = useState<{ latitude: number; longitude: number }>(FALLBACK);
 
@@ -54,7 +55,7 @@ export default function PlacesNearYouRow({
     })();
   }, []);
 
-    const allPlaces: Place[] = data.places;
+    const allPlaces: Place[] = places;
 
     const nearbyPlaces = allPlaces.filter((place) =>
     isNear(

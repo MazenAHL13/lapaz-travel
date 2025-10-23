@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
-import { db } from "@/src/services/firebase/config";
+import { useEffect, useState } from "react";
+import { db } from "../services/firebase/config";
 
 export type Place = {
   id: string;
@@ -8,18 +8,18 @@ export type Place = {
   subtitle?: string;
   description?: string;
   schedule?: string;
-  zona?: string;
-  categoria?: string;
+  zone: string;
+  categoria: string;
   latitude?: number;
   longitude?: number;
   tips?: string[];
-  imageUri?: string; // del JSON original
-  coverUri?: string; // Cloudinary (cuando se agregue)
+  imageUri?: string;
+  coverUri?: string;
 };
 
 export function usePlaces() {
   const [data, setData] = useState<Place[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loadingPlaces, setLoadingPlaces] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "places"), (snapshot) => {
@@ -28,11 +28,11 @@ export function usePlaces() {
         ...(doc.data() as any),
       }));
       setData(places);
-      setLoading(false);
+      setLoadingPlaces(false);
     });
 
     return () => unsubscribe();
   }, []);
 
-  return { data, loading };
+  return { data, loadingPlaces };
 }

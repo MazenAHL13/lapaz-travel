@@ -1,12 +1,13 @@
 import PlaceCard from "@/src/components/PlaceCard";
-import data from "@/src/data/placesData.json";
+import { usePlaces } from "@/src/hooks/usePlaces";
 import { useThemeColors } from "@/src/hooks/useThemeColors";
 import { useFavoritesStore } from "@/src/store/useFavoritesStore";
 import { router } from "expo-router";
 import { SafeAreaView, ScrollView, Text, View } from "react-native";
-const places = data.places;
+
 
 export default function FavoritesScreen() {
+  const { data: places, loadingPlaces } = usePlaces();
   const { colors } = useThemeColors();
   const { getFavorites } = useFavoritesStore();
   const favoriteIds = getFavorites();
@@ -37,11 +38,12 @@ export default function FavoritesScreen() {
               key={place.id}
               title={place.title}
               subtitle={place.subtitle}
-              imageUri={place.imageUri}
+              imageUri={place.imageUri?? ""}
               onPress={() => router.push({
                 pathname: "/places/[id]",
                 params: { id: place.id },
-              })} placeId={""}            />
+              })} 
+              placeId={""}            />
           ))
         )}
       </ScrollView>
