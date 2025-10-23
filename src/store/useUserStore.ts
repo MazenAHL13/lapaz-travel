@@ -8,6 +8,7 @@ export type AppUser = {
   name?: string;
   email: string;
   avatar?: string;
+  darkMode?: boolean;
 };
 
 type UserState = {
@@ -15,6 +16,7 @@ type UserState = {
   setUser: (user: AppUser | null) => void;
   setAvatar: (avatarUrl: string) => void;
   clearAvatar: () => void;
+  setDarkMode: (darkMode: boolean) => void;
   logout: () => Promise<void>;
 };
 
@@ -45,6 +47,19 @@ export const useUserStore = create<UserState>((set) => ({
         set((state) => ({
           currentUser: state.currentUser
             ? { ...state.currentUser, avatar: undefined }
+            : null,
+        }));
+    },
+
+    setDarkMode: async (darkMode: boolean) => {
+        const currentUser = useUserStore.getState().currentUser;
+        if (!currentUser) return;
+      
+        await setDoc(doc(db, "users", currentUser.uid), { darkMode }, { merge: true });
+      
+        set((state) => ({
+          currentUser: state.currentUser
+            ? { ...state.currentUser, darkMode }
             : null,
         }));
     },
