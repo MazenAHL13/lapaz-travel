@@ -1,16 +1,22 @@
 import { auth, db } from "@/src/services/firebase/config";
 import { User as FirebaseUser, onAuthStateChanged } from "firebase/auth";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc,
+  deleteField,
+  serverTimestamp,
+} from "firebase/firestore";
 import { Appearance } from "react-native";
 import { create } from "zustand";
 import { useThemeStore } from "./useThemeStore";
-
 
 export type AppUser = {
   uid: string;
   name?: string;
   email: string;
-  avatar?: string;
+  avatar?: string | null;
   darkMode?: boolean;
   role: "user";
 };
@@ -18,91 +24,107 @@ export type AppUser = {
 type UserState = {
   currentUser: AppUser | null;
   setUser: (user: AppUser | null) => void;
-  setName: (name: string) => void;
-  setAvatar: (avatarUrl: string) => void;
-  clearAvatar: () => void;
+
+  setName: (name: string) => Promise<void>;
+  setAvatar: (avatarUrl: string) => Promise<void>;
+  clearAvatar: () => Promise<void>;
   setDarkMode: (darkMode: boolean) => Promise<void>;
+
   logout: () => Promise<void>;
 };
 
-const getDeviceTheme = () => 
-  Appearance.getColorScheme() === "dark" ? "dark" : "light";
+const getDeviceTheme = () =>
+  (Appearance.getColorScheme() === "dark" ? "dark" : "light") as
+    | "dark"
+    | "light";
 
 export const useUserStore = create<UserState>((set) => ({
-    currentUser: null,
+  currentUser: null,
 
-    setUser: (user) => set({ currentUser: user }),
-    
-    setName: (name: string) => {
-        const currentUser = useUserStore.getState().currentUser;
-        if (!currentUser) return;
-      
-        setDoc(doc(db, "users", currentUser.uid), { name }, { merge: true });
-      
-        set((state) => ({
-          currentUser: state.currentUser
-            ? { ...state.currentUser, name }
-            : null,
-        }));
-    },
-    setAvatar: async (avatarUrl: string) => {
-        const currentUser = useUserStore.getState().currentUser;
-        if (!currentUser) return;
-      
-        await setDoc(doc(db, "users", currentUser.uid), { avatar: avatarUrl }, { merge: true });
-      
-        set((state) => ({
-          currentUser: state.currentUser
-            ? { ...state.currentUser, avatar: avatarUrl }
-            : null,
-        }));
-    },
-      
-    clearAvatar: async () => {
-        const currentUser = useUserStore.getState().currentUser;
-        if (!currentUser) return;
-    
-        await setDoc(doc(db, "users", currentUser.uid), { avatar: undefined }, { merge: true });
-      
-        set((state) => ({
-          currentUser: state.currentUser
-            ? { ...state.currentUser, avatar: undefined }
-            : null,
-        }));
-    },
+  setUser: (user) => set({ currentUser: user }),
 
-    setDarkMode: async (darkMode: boolean) => {
-        const currentUser = useUserStore.getState().currentUser;
-        if (!currentUser) return;
-      
-        await setDoc(doc(db, "users", currentUser.uid), { darkMode }, { merge: true });
-      
-        set((state) => ({
-          currentUser: state.currentUser
-            ? { ...state.currentUser, darkMode }
-            : null,
-        }));
-    },
+  setName: async (name: string) => {
+    const current = useUserStore.getState().currentUser;
+    if (!current) return;
 
-    logout: async () => {
-        await auth.signOut();
-        set({ currentUser: null });
-        useThemeStore.getState().setTheme(getDeviceTheme());  
-    },
+    await updateDoc(doc(db, "users", current.uid), { name: name.trim() });
+
+    set((state) => ({
+      currentUser: state.currentUser ? { ...state.currentUser, name } : null,
+    }));
+  },
+
+  setAvatar: async (avatarUrl: string) => {
+    const current = useUserStore.getState().currentUser;
+    if (!current) return;
+
+    await updateDoc(doc(db, "users", current.uid), { avatar: avatarUrl });
+
+    set((state) => ({
+      currentUser: state.currentUser
+        ? { ...state.currentUser, avatar: avatarUrl }
+        : null,
+    }));
+  },
+
+  clearAvatar: async () => {
+    const current = useUserStore.getState().currentUser;
+    if (!current) return;
+
+    // ⚠️ importante: borrar el campo con deleteField()
+    await updateDoc(doc(db, "users", current.uid), { avatar: deleteField() });
+
+    set((state) => ({
+      currentUser: state.currentUser
+        ? { ...state.currentUser, avatar: undefined }
+        : null,
+    }));
+  },
+
+  setDarkMode: async (darkMode: boolean) => {
+    const current = useUserStore.getState().currentUser;
+    if (!current) return;
+
+    await updateDoc(doc(db, "users", current.uid), { darkMode });
+
+    set((state) => ({
+      currentUser: state.currentUser
+        ? { ...state.currentUser, darkMode }
+        : null,
+    }));
+
+    useThemeStore.getState().setTheme(darkMode ? "dark" : "light");
+  },
+
+  logout: async () => {
+    await auth.signOut();
+    set({ currentUser: null });
+    useThemeStore.getState().setTheme(getDeviceTheme());
+  },
 }));
 
 onAuthStateChanged(auth, async (firebaseUser: FirebaseUser | null) => {
   if (firebaseUser) {
-    const docRef = doc(db, "users", firebaseUser.uid);
-    const docSnap = await getDoc(docRef);
+    const ref = doc(db, "users", firebaseUser.uid);
+    let snap = await getDoc(ref);
+
+    if (!snap.exists()) {
+      await setDoc(ref, {
+        email: firebaseUser.email || "",
+        createdAt: serverTimestamp(),
+      });
+      snap = await getDoc(ref);
+    }
+
+    const data = snap.data() || {};
 
     const appUser: AppUser = {
       uid: firebaseUser.uid,
       email: firebaseUser.email || "",
-      name: docSnap.exists() ? docSnap.data()?.name : undefined,
-      avatar: docSnap.exists() ? docSnap.data()?.avatar : undefined,
-      darkMode: docSnap.exists() ? docSnap.data()?.darkMode : undefined,
-      role: docSnap.exists() ? docSnap.data()?.role || "user" : "user",
+      name: data.name,
+      avatar: data.avatar ?? undefined,
+      darkMode: data.darkMode,
+      role: (data.role as "user") ?? "user",
     };
 
     useUserStore.getState().setUser(appUser);

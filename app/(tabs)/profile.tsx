@@ -1,10 +1,21 @@
 import { useThemeColors } from "@/src/hooks/useThemeColors";
+import { uploadToCloudinary } from "@/src/services/cloudinary/cloudinary";
 import { useUserStore } from "@/src/store/useUserStore";
 import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import { router } from "expo-router";
 import { useState } from "react";
-import { Alert, Image, Pressable, SafeAreaView, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  ActivityIndicator,
+  Alert,
+  Image,
+  Pressable,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 
 export default function ProfileScreen() {
   const { colors } = useThemeColors();
@@ -12,21 +23,24 @@ export default function ProfileScreen() {
   const logout = useUserStore((s) => s.logout);
   const setAvatar = useUserStore((s) => s.setAvatar);
   const clearAvatar = useUserStore((s) => s.clearAvatar);
-  const [isEditing, setIsEditing] = useState(false);
-  const [tempAvatarUri, setTempAvatarUri] = useState<string | null | undefined>(undefined);
   const setName = useUserStore((s) => s.setName);
+
+  const [isEditing, setIsEditing] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [tempAvatarUri, setTempAvatarUri] = useState<string | null | undefined>(undefined);
   const [tempName, setTempName] = useState(user?.name ?? "");
+
   const styles = createStyles(colors);
 
+  const isHttpUrl = (u?: string | null) => !!u && /^https?:\/\//i.test(u);
 
   const handleLogout = async () => {
     logout();
     router.replace("/login");
   };
 
-
   const pickImage = async () => {
-    if (!isEditing) return; 
+    if (!isEditing || saving) return;
 
     Alert.alert(
       "Cambiar foto de perfil",
@@ -50,7 +64,7 @@ export default function ProfileScreen() {
             });
 
             if (!res.canceled && res.assets.length > 0) {
-              setTempAvatarUri(res.assets[0].uri);
+              setTempAvatarUri(res.assets[0].uri); // file:// local mientras edita
             }
           },
         },
@@ -59,6 +73,7 @@ export default function ProfileScreen() {
   };
 
   const handleRemovePhoto = () => {
+    if (!isEditing || saving) return;
     Alert.alert("Quitar foto", "¿Estás seguro de eliminar tu foto de perfil?", [
       { text: "Cancelar", style: "cancel" },
       { text: "Eliminar", style: "destructive", onPress: () => setTempAvatarUri(null) },
@@ -66,9 +81,7 @@ export default function ProfileScreen() {
   };
 
   const Avatar = () => {
-    console.log(user?.name);
     const sourceUri = isEditing ? tempAvatarUri : user?.avatar;
-
     if (sourceUri) {
       return (
         <Image
@@ -91,39 +104,39 @@ export default function ProfileScreen() {
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
       <View style={{ padding: 16, gap: 16 }}>
         <View style={{ alignItems: "center", gap: 8 }}>
-          <Pressable onPress={pickImage} disabled={!isEditing}>
+          <Pressable onPress={pickImage} disabled={!isEditing || saving}>
             <Avatar />
           </Pressable>
 
           {isEditing && (
-  <>
-          <Text style={{ fontSize: 16, color: colors.textSecondary, marginTop: 4 }}>
-            Toca la imagen para cambiar tu foto
-          </Text>
+            <>
+              <Text style={{ fontSize: 16, color: colors.textSecondary, marginTop: 4 }}>
+                Toca la imagen para cambiar tu foto
+              </Text>
 
-          {tempAvatarUri && (
-            <Pressable
-              onPress={handleRemovePhoto}
-              style={({ pressed }) => [
-                styles.removePhotoButton,
-                {
-                  backgroundColor: pressed
-                    ? colors.error
-                    : colors.background,
-                  borderColor: colors.error,
-                },
-              ]}
-            >
-              <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}>
-                <Ionicons name="trash-outline" size={18} color={colors.error} />
-                <Text style={{ fontSize: 14, fontWeight: "600", color: colors.error }}>
-                  Quitar foto
-                </Text>
-              </View>
-            </Pressable>
+              {tempAvatarUri && (
+                <Pressable
+                  disabled={saving}
+                  onPress={handleRemovePhoto}
+                  style={({ pressed }) => [
+                    styles.removePhotoButton,
+                    {
+                      backgroundColor: pressed ? colors.error : colors.background,
+                      borderColor: colors.error,
+                      opacity: saving ? 0.6 : 1,
+                    },
+                  ]}
+                >
+                  <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}>
+                    <Ionicons name="trash-outline" size={18} color={colors.error} />
+                    <Text style={{ fontSize: 14, fontWeight: "600", color: colors.error }}>
+                      Quitar foto
+                    </Text>
+                  </View>
+                </Pressable>
+              )}
+            </>
           )}
-        </>
-      )}
 
           {isEditing ? (
             <TextInput
@@ -141,6 +154,7 @@ export default function ProfileScreen() {
               placeholderTextColor={colors.textSecondary}
               autoFocus
               returnKeyType="done"
+              editable={!saving}
             />
           ) : (
             <Text style={{ fontSize: 20, fontWeight: "700", color: colors.text }}>
@@ -150,7 +164,6 @@ export default function ProfileScreen() {
           <Text style={{ color: colors.textSecondary }}>{user?.email ?? "—"}</Text>
         </View>
 
-   
         <View
           style={{
             borderWidth: 1,
@@ -164,9 +177,7 @@ export default function ProfileScreen() {
           <Text style={{ color: colors.textSecondary }}>✈ Viajes guardados: próximamente</Text>
         </View>
 
-     
         <View style={{ gap: 12 }}>
-      
           <Pressable
             style={{
               backgroundColor: isEditing ? colors.surface : colors.primary,
@@ -175,37 +186,61 @@ export default function ProfileScreen() {
               paddingVertical: 12,
               borderRadius: 12,
               alignItems: "center",
+              opacity: saving ? 0.7 : 1,
             }}
-            onPress={() => {
+            onPress={async () => {
               if (isEditing) {
-                if (tempAvatarUri) {
-                  setAvatar(tempAvatarUri);
-                } else if (tempAvatarUri === null) {
-                  clearAvatar();
+                try {
+                  setSaving(true);
+                  // 1) Avatar
+                  if (tempAvatarUri === null) {
+                    // quitar foto
+                    clearAvatar();
+                  } else if (isHttpUrl(tempAvatarUri)) {
+                    // ya es URL pública (no subir)
+                    setAvatar(tempAvatarUri as string);
+                  } else if (tempAvatarUri) {
+                    // file:// -> subir a Cloudinary
+                    const up = await uploadToCloudinary(tempAvatarUri, {
+                      fileName: "profile-photo.jpg",
+                      mimeType: "image/jpeg",
+                    });
+                    if (!up?.secure_url) throw new Error("No se recibió secure_url de Cloudinary");
+                    setAvatar(up.secure_url);
+                  }
+                  // 2) Nombre
+                  if ((tempName ?? "") !== (user?.name ?? "")) {
+                    setName((tempName || "").trim() || "Usuario");
+                  }
+                  setIsEditing(false);
+                  Alert.alert("Cambios guardados", "Tu perfil ha sido actualizado.");
+                } catch (e: any) {
+                  Alert.alert("Error", e?.message || "No se pudo actualizar tu perfil.");
+                } finally {
+                  setSaving(false);
                 }
-                if ((tempName ?? "") !== (user?.name ?? "")) {
-                  setName(tempName.trim() || "Usuario");
-                }
-                setIsEditing(false);
-                Alert.alert("Cambios guardados", "Tu perfil ha sido actualizado.");
               } else {
                 setTempAvatarUri(user?.avatar);
                 setTempName(user?.name ?? "");
                 setIsEditing(true);
               }
             }}
+            disabled={saving}
           >
-            <Text
-              style={{
-                fontWeight: "700",
-                color: isEditing ? colors.primary : colors.surface,
-              }}
-            >
-              {isEditing ? "Guardar cambios" : "Editar perfil"}
-            </Text>
+            {saving ? (
+              <ActivityIndicator />
+            ) : (
+              <Text
+                style={{
+                  fontWeight: "700",
+                  color: isEditing ? colors.primary : colors.surface,
+                }}
+              >
+                {isEditing ? "Guardar cambios" : "Editar perfil"}
+              </Text>
+            )}
           </Pressable>
 
-       
           <Pressable
             style={{
               borderWidth: 1,
@@ -213,8 +248,10 @@ export default function ProfileScreen() {
               paddingVertical: 12,
               borderRadius: 12,
               alignItems: "center",
+              opacity: saving ? 0.7 : 1,
             }}
             onPress={handleLogout}
+            disabled={saving}
           >
             <Text style={{ color: colors.text, fontWeight: "700" }}>
               Cerrar sesión
@@ -225,6 +262,7 @@ export default function ProfileScreen() {
     </SafeAreaView>
   );
 }
+
 const createStyles = (colors: any) =>
   StyleSheet.create({
     removePhotoButton: {
