@@ -1,5 +1,6 @@
 import { useThemeColors } from "@/src/hooks/useThemeColors";
 import { auth } from "@/src/services/firebase/config";
+import { useGoogleAuth } from "@/src/services/firebase/googleAuth";
 import { useUserStore } from "@/src/store/useUserStore";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
@@ -26,6 +27,8 @@ export default function LoginScreen() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const { promptAsync, request: googleRequest } = useGoogleAuth();
 
   const handleLogin = async () => {
     const trimmedEmail = email.trim();
@@ -143,6 +146,33 @@ export default function LoginScreen() {
           ]}
         >
           <Text style={[styles.buttonText, { color: colors.primary }]}>Sign up</Text>
+        </Pressable>
+        <Pressable
+          onPress={() => {
+            if (googleRequest) {
+              promptAsync();
+            } else {
+              Alert.alert("Error", "No se pudo inicializar Google Auth.");
+            }
+          }}
+          style={({ pressed }) => [
+            styles.button,
+            {
+              backgroundColor: "#fff",
+              borderWidth: 1,
+              borderColor: "#ccc",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 8,
+              opacity: pressed ? 0.9 : 1,
+            },
+          ]}
+        >
+          <Ionicons name="logo-google" size={22} color="#DB4437" />
+          <Text style={[styles.buttonText, { color: "#333" }]}>
+            Iniciar con Google
+          </Text>
         </Pressable>
       </View>
     </SafeAreaView>

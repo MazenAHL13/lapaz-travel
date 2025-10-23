@@ -1,6 +1,5 @@
 {
   "expo": {
-
     "name": "lapaz-travel",
     "slug": "lapaz-travel",
     "version": "1.0.0",
@@ -15,7 +14,11 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.lapaztravel",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -26,8 +29,11 @@
       "predictiveBackGestureEnabled": false,
       "permissions": [
         "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
         "ACCESS_FINE_LOCATION"
-      ]
+      ],
+      "package": "com.anonymous.lapaztravel"
     },
     "web": {
       "bundler": "metro",
@@ -40,6 +46,12 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "b84b4506-0893-4a9b-869a-1137bcd87717"
+      }
     }
   }
 }
