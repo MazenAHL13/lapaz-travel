@@ -5,9 +5,6 @@ import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-
-
-
 import {
   Alert,
   Image,
@@ -16,15 +13,15 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  View,
+  View
 } from "react-native";
-import { ThemeColors } from "../../src/theme/colors";
 
 export default function LoginScreen() {
   const { theme, colors } = useThemeColors();
   const router = useRouter();
   const styles = createStyles(colors);
   const setUser = useUserStore((state) => state.setUser);
+  const [rememberMe, setRememberMe] = useState(false);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -70,6 +67,10 @@ export default function LoginScreen() {
   const handleRegister = () => {
     router.push("/(auth)/register");
   };
+
+  const handleForgotPassword = async () => {
+    router.push("/(auth)/forgotPassword")
+};
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -147,12 +148,17 @@ export default function LoginScreen() {
         >
           <Text style={[styles.buttonText, { color: colors.primary }]}>Sign up</Text>
         </Pressable>
+        <View style={styles.rememberRow}>
+          <Pressable onPress={handleForgotPassword}>
+              <Text style={[styles.linkMuted, { color: colors.primary, fontWeight: "600" }]}>Forgot Password?</Text>
+          </Pressable>
       </View>
+</View>
     </SafeAreaView>
   );
 }
 
-const createStyles = (colors: ThemeColors) =>
+const createStyles = (colors: any) =>
   StyleSheet.create({
     container: {
       flex: 1,
@@ -192,5 +198,14 @@ const createStyles = (colors: ThemeColors) =>
     logoContainer: {
       alignItems: "center",
       marginBottom: 40,
+    },
+    linkMuted: {
+        fontSize: 14
+    },
+    rememberRow: {
+      flexDirection: "row",
+      justifyContent: "flex-end",
+      alignItems: "center",
+      marginTop: 8,
     },
   });

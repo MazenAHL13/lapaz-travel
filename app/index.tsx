@@ -4,17 +4,17 @@ import { useEffect } from "react";
 import { ActivityIndicator, View } from "react-native";
 
 export default function SplashScreen() {
-  const { user } = useUserStore();
+  const { currentUser } = useUserStore();
   const router = useRouter();
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      if (user) router.replace("/(tabs)");
+      if (currentUser) router.replace("/(tabs)");
       else router.replace("/(auth)/login");
     }, 1200);
 
     return () => clearTimeout(timeout);
-  }, [user]);
+  }, [currentUser]);
 
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>

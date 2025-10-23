@@ -16,7 +16,6 @@ export default function ExploreScreen() {
   const { colors } = useThemeColors();
   const router = useRouter();
   const user = useUserStore((s) => s.currentUser);
-  console.log(places);
   const styles = getStyles(colors);
 
   const [query, setQuery] = useState("");
@@ -86,12 +85,12 @@ export default function ExploreScreen() {
         )}
         <View style={{ flex: 1 }}>
           <Text style={{ color: colors.textSecondary, fontSize: 14 }}>
-            Bienvenido
+            Welcome
           </Text>
           <Text
             style={{ color: colors.text, fontSize: 22, fontWeight: "700" }}
           >
-            {user?.email ?? "Invitado"}
+            {user?.name ?? "Invitado"}
           </Text>
         </View>
       </View>
