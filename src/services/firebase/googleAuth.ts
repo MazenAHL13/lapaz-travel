@@ -1,3 +1,4 @@
+import * as AuthSession from "expo-auth-session";
 import * as Google from "expo-auth-session/providers/google";
 import * as WebBrowser from "expo-web-browser";
 import { GoogleAuthProvider, signInWithCredential } from "firebase/auth";
@@ -8,7 +9,8 @@ WebBrowser.maybeCompleteAuthSession();
 
 
 export function useGoogleAuth() {
-  const redirectUri = "https://lapaztravel.firebaseapp.com/__/auth/handler";
+
+  const redirectUri = AuthSession.makeRedirectUri();
   const [request, response, promptAsync] = Google.useAuthRequest({
     webClientId: "824761370595-2u2hl39rv8r00f7ri92tgmernm98lfv3.apps.googleusercontent.com",
     androidClientId: "824761370595-8rutetq4nagjr746ou176nftfdk02spr.apps.googleusercontent.com",
