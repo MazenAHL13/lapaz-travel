@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import { router } from "expo-router";
 import { useState } from "react";
-import { Alert, Image, Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { Alert, Image, Pressable, SafeAreaView, StyleSheet, Text, TextInput, View } from "react-native";
 
 export default function ProfileScreen() {
   const { colors } = useThemeColors();
@@ -14,6 +14,8 @@ export default function ProfileScreen() {
   const clearAvatar = useUserStore((s) => s.clearAvatar);
   const [isEditing, setIsEditing] = useState(false);
   const [tempAvatarUri, setTempAvatarUri] = useState<string | null | undefined>(undefined);
+  const setName = useUserStore((s) => s.setName);
+  const [tempName, setTempName] = useState(user?.name ?? "");
   const styles = createStyles(colors);
 
 
@@ -123,9 +125,28 @@ export default function ProfileScreen() {
         </>
       )}
 
-          <Text style={{ fontSize: 20, fontWeight: "700", color: colors.text }}>
-            {user?.name ?? "Usuario"} 
-          </Text>
+          {isEditing ? (
+            <TextInput
+              value={tempName}
+              onChangeText={setTempName}
+              style={[
+                styles.nameInput,
+                {
+                  color: colors.text,
+                  borderColor: colors.border,
+                  backgroundColor: colors.surface,
+                },
+              ]}
+              placeholder="Nombre"
+              placeholderTextColor={colors.textSecondary}
+              autoFocus
+              returnKeyType="done"
+            />
+          ) : (
+            <Text style={{ fontSize: 20, fontWeight: "700", color: colors.text }}>
+              {user?.name ?? "Usuario"}
+            </Text>
+          )}
           <Text style={{ color: colors.textSecondary }}>{user?.email ?? "—"}</Text>
         </View>
 
@@ -162,10 +183,14 @@ export default function ProfileScreen() {
                 } else if (tempAvatarUri === null) {
                   clearAvatar();
                 }
+                if ((tempName ?? "") !== (user?.name ?? "")) {
+                  setName(tempName.trim() || "Usuario");
+                }
                 setIsEditing(false);
                 Alert.alert("Cambios guardados", "Tu perfil ha sido actualizado.");
               } else {
                 setTempAvatarUri(user?.avatar);
+                setTempName(user?.name ?? "");
                 setIsEditing(true);
               }
             }}
@@ -210,5 +235,17 @@ const createStyles = (colors: any) =>
       alignItems: "center",
       justifyContent: "center",
       marginTop: 6,
+    },
+    nameInput: {
+      fontSize: 20,
+      fontWeight: "700",
+      borderWidth: 1.5,
+      borderRadius: 8,
+      paddingVertical: 8,
+      paddingHorizontal: 12,
+      marginTop: 0,
+      textAlign: "center",
+      minWidth: 180,
+      marginBottom: 0,
     },
   });

@@ -17,6 +17,7 @@ export type AppUser = {
 type UserState = {
   currentUser: AppUser | null;
   setUser: (user: AppUser | null) => void;
+  setName: (name: string) => void;
   setAvatar: (avatarUrl: string) => void;
   clearAvatar: () => void;
   setDarkMode: (darkMode: boolean) => Promise<void>;
@@ -31,6 +32,18 @@ export const useUserStore = create<UserState>((set) => ({
 
     setUser: (user) => set({ currentUser: user }),
     
+    setName: (name: string) => {
+        const currentUser = useUserStore.getState().currentUser;
+        if (!currentUser) return;
+      
+        setDoc(doc(db, "users", currentUser.uid), { name }, { merge: true });
+      
+        set((state) => ({
+          currentUser: state.currentUser
+            ? { ...state.currentUser, name }
+            : null,
+        }));
+    },
     setAvatar: async (avatarUrl: string) => {
         const currentUser = useUserStore.getState().currentUser;
         if (!currentUser) return;
