@@ -8,8 +8,7 @@ import { ThemeColors } from "@/src/theme/colors";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useCallback, useMemo, useState } from "react";
-import { ActivityIndicator, Image, ScrollView, StyleSheet, Text, View } from "react-native";
-
+import { ActivityIndicator, Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 
 export default function ExploreScreen() {
   const { data: places, loadingPlaces } = usePlaces();
@@ -17,9 +16,13 @@ export default function ExploreScreen() {
   const router = useRouter();
   const user = useUserStore((s) => s.currentUser);
   const styles = getStyles(colors);
-
+  console.log(user?.role);
   const [query, setQuery] = useState("");
   const [showFilters, setShowFilters] = useState(false);
+
+  if (user === undefined) {
+    return null;
+  }
 
   const categorias = useMemo(() => [...new Set(places.map((p) => p.categoria))].filter((c): c is string => c !== undefined), []);
   const zonas = useMemo(() => [...new Set(places.map((p) => p.zone))].filter((z): z is string => z !== undefined), []);
@@ -56,87 +59,98 @@ export default function ExploreScreen() {
   const resultCount = hasActiveFilters ? filtered.length : undefined;
 
   return (
-    <ScrollView
-      style={{ flex: 1, backgroundColor: colors.background }}
-      contentContainerStyle={{ padding: 16, rowGap: 16, paddingBottom: 24 }}
-      keyboardShouldPersistTaps="handled"
-      keyboardDismissMode="on-drag"
-    >
-
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          gap: 12,
-          marginBottom: 8,
-        }}
+    <>
+      <ScrollView
+        style={{ flex: 1, backgroundColor: colors.background }}
+        contentContainerStyle={{ padding: 16, rowGap: 16, paddingBottom: 24 }}
+        keyboardShouldPersistTaps="handled"
+        keyboardDismissMode="on-drag"
       >
-        {user?.avatar ? (
-          <Image
-            source={{ uri: user.avatar }}
-            style={{
-              width: 56,
-              height: 56,
-              borderRadius: 28,
-            }}
-          />
-        ) : (
-          <Ionicons name="person-circle" size={56} color={colors.text} />
-        )}
-        <View style={{ flex: 1 }}>
-          <Text style={{ color: colors.textSecondary, fontSize: 14 }}>
-            Welcome
-          </Text>
-          <Text
-            style={{ color: colors.text, fontSize: 22, fontWeight: "700" }}
-          >
-            {user?.name ?? "Invitado"}
-          </Text>
+
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            gap: 12,
+            marginBottom: 8,
+          }}
+        >
+          {user?.avatar ? (
+            <Image
+              source={{ uri: user.avatar }}
+              style={{
+                width: 56,
+                height: 56,
+                borderRadius: 28,
+              }}
+            />
+          ) : (
+            <Ionicons name="person-circle" size={56} color={colors.text} />
+          )}
+          <View style={{ flex: 1 }}>
+            <Text style={{ color: colors.textSecondary, fontSize: 14 }}>
+              Welcome
+            </Text>
+            <Text
+              style={{ color: colors.text, fontSize: 22, fontWeight: "700" }}
+            >
+              {user?.name ?? "Invitado"}
+            </Text>
+          </View>
         </View>
-      </View>
 
-      <SearchBar
-        value={query}
-        onChangeText={setQuery}
-        onPressFilter={() => setShowFilters((v) => !v)}
-        resultCount={resultCount}
-      />
-
-      {showFilters && (
-        <FilterPanel
-          zones={zonas}
-          categories={categorias}
-          activeZones={filterZones}
-          activeCategories={filterCategories}
-          onToggleZone={toggleFilterZone}
-          onToggleCategory={toggleFilterCategory}
+        <SearchBar
+          value={query}
+          onChangeText={setQuery}
+          onPressFilter={() => setShowFilters((v) => !v)}
+          resultCount={resultCount}
         />
-      )}
 
-      <View style={{ rowGap: 16 }}>
-      {loadingPlaces ? (
-        <ActivityIndicator size="large" color={colors.primary} />
-      ) : places.length === 0 ? (
-        <Text style={{ color: colors.textSecondary }}>No hay lugares disponibles.</Text>
-      ) : (
-        places.map((place) => (
-          <PlaceCard
-            key={place.id}
-            title={place.title}
-            subtitle={place.zone ?? ""}
-            imageUri={place.imageUri ?? ""}
-            onPress={() =>
-              router.push({
-                pathname: "/places/[id]",
-                params: { id: place.id },
-              })
-            }
-            placeId={place.id}
+        {showFilters && (
+          <FilterPanel
+            zones={zonas}
+            categories={categorias}
+            activeZones={filterZones}
+            activeCategories={filterCategories}
+            onToggleZone={toggleFilterZone}
+            onToggleCategory={toggleFilterCategory}
           />
-        ))
+        )}
+
+        <View style={{ rowGap: 16 }}>
+        {loadingPlaces ? (
+          <ActivityIndicator size="large" color={colors.primary} />
+        ) : places.length === 0 ? (
+          <Text style={{ color: colors.textSecondary }}>No hay lugares disponibles.</Text>
+        ) : (
+          places.map((place) => (
+            <PlaceCard
+              key={place.id}
+              title={place.title}
+              subtitle={place.zone ?? ""}
+              imageUri={place.imageUri ?? ""}
+              onPress={() =>
+                router.push({
+                  pathname: "/places/[id]",
+                  params: { id: place.id },
+                })
+              }
+              placeId={place.id}
+            />
+          ))
+        )}
+        </View>
+        
+      </ScrollView>
+      {user && user.role === "admin" && (
+        <Pressable
+          style={[styles.floatingButton, { bottom: 90, right: 20, left: undefined }]}
+          onPress={() => router.push("/placeForm")}
+        >
+          <Ionicons name="add" size={32} color="#fff" />
+        </Pressable>
       )}
-      </View>
-    </ScrollView>
+    </>
   );
 }
 
@@ -251,5 +265,21 @@ const getStyles = (colors: ThemeColors) =>
       color: colors.textSecondary,
       marginRight: 8,
       lineHeight: 22,
+    },
+    floatingButton: {
+      position: "absolute",
+      width: 56,
+      height: 56,
+      borderRadius: 28,
+      backgroundColor: colors.primary,
+      alignItems: "center",
+      justifyContent: "center",
+      elevation: 5,
+      shadowColor: "#000",
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.3,
+      shadowRadius: 4,
+      bottom: -90,
+      left: 10,
     },
   });

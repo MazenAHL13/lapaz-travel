@@ -12,6 +12,7 @@ export type AppUser = {
   email: string;
   avatar?: string;
   darkMode?: boolean;
+  role: "user";
 };
 
 type UserState = {
@@ -101,6 +102,7 @@ onAuthStateChanged(auth, async (firebaseUser: FirebaseUser | null) => {
       name: docSnap.exists() ? docSnap.data()?.name : undefined,
       avatar: docSnap.exists() ? docSnap.data()?.avatar : undefined,
       darkMode: docSnap.exists() ? docSnap.data()?.darkMode : undefined,
+      role: docSnap.exists() ? docSnap.data()?.role || "user" : "user",
     };
 
     useUserStore.getState().setUser(appUser);
