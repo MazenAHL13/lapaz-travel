@@ -18,7 +18,7 @@ export type AppUser = {
   email: string;
   avatar?: string | null;
   darkMode?: boolean;
-  role: "user";
+  role?: "user" | "admin";
 };
 
 type UserState = {
@@ -71,7 +71,6 @@ export const useUserStore = create<UserState>((set) => ({
     const current = useUserStore.getState().currentUser;
     if (!current) return;
 
-    // ⚠️ importante: borrar el campo con deleteField()
     await updateDoc(doc(db, "users", current.uid), { avatar: deleteField() });
 
     set((state) => ({
@@ -117,15 +116,15 @@ onAuthStateChanged(auth, async (firebaseUser: FirebaseUser | null) => {
     }
 
     const data = snap.data() || {};
-
     const appUser: AppUser = {
       uid: firebaseUser.uid,
       email: firebaseUser.email || "",
       name: data.name,
       avatar: data.avatar ?? undefined,
       darkMode: data.darkMode,
-      role: (data.role as "user") ?? "user",
+      role: (data.role as "user" | "admin") ?? "user",
     };
+    useUserStore.getState().setUser(appUser);
 
     useUserStore.getState().setUser(appUser);
 
