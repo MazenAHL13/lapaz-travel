@@ -1,7 +1,10 @@
 import { auth, db } from "@/src/services/firebase/config";
 import { User as FirebaseUser, onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
+import { Appearance } from "react-native";
 import { create } from "zustand";
+import { useThemeStore } from "./useThemeStore";
+
 
 export type AppUser = {
   uid: string;
@@ -16,9 +19,12 @@ type UserState = {
   setUser: (user: AppUser | null) => void;
   setAvatar: (avatarUrl: string) => void;
   clearAvatar: () => void;
-  setDarkMode: (darkMode: boolean) => void;
+  setDarkMode: (darkMode: boolean) => Promise<void>;
   logout: () => Promise<void>;
 };
+
+const getDeviceTheme = () => 
+  Appearance.getColorScheme() === "dark" ? "dark" : "light";
 
 export const useUserStore = create<UserState>((set) => ({
     currentUser: null,
@@ -67,7 +73,8 @@ export const useUserStore = create<UserState>((set) => ({
     logout: async () => {
         await auth.signOut();
         set({ currentUser: null });
-  },
+        useThemeStore.getState().setTheme(getDeviceTheme());  
+    },
 }));
 
 onAuthStateChanged(auth, async (firebaseUser: FirebaseUser | null) => {
@@ -80,10 +87,18 @@ onAuthStateChanged(auth, async (firebaseUser: FirebaseUser | null) => {
       email: firebaseUser.email || "",
       name: docSnap.exists() ? docSnap.data()?.name : undefined,
       avatar: docSnap.exists() ? docSnap.data()?.avatar : undefined,
+      darkMode: docSnap.exists() ? docSnap.data()?.darkMode : undefined,
     };
 
     useUserStore.getState().setUser(appUser);
+
+    if (appUser.darkMode !== undefined) {
+      useThemeStore.getState().setTheme(appUser.darkMode ? "dark" : "light");
+    } else {
+      useThemeStore.getState().setTheme(getDeviceTheme());
+    }
   } else {
     useUserStore.getState().setUser(null);
+    useThemeStore.getState().setTheme(getDeviceTheme());
   }
 });
