@@ -5,6 +5,9 @@ import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
+
+
+
 import {
   Alert,
   Image,
@@ -16,7 +19,6 @@ import {
   View,
 } from "react-native";
 import { ThemeColors } from "../../src/theme/colors";
-
 
 export default function LoginScreen() {
   const { theme, colors } = useThemeColors();
@@ -44,6 +46,7 @@ export default function LoginScreen() {
         Alert.alert("Error", "El usuario no tiene un correo electrónico válido.");
       }
       Alert.alert("Éxito", "Inicio de sesión correcto.");
+
       router.replace("/(tabs)");
     } catch (error: any) {
     

@@ -1,8 +1,9 @@
 import BackButton from "@/src/components/Backbutton";
 import FavoriteButton from "@/src/components/FavoriteButton";
-import RelatedPlacesRow from "@/src/components/RelatedPlacesRow";
-import data from "@/src/data/placesData.json";
+
+import RelatedPlacesRow, { Place as RelatedPlace } from "@/src/components/RelatedPlacesRow";
 import { useThemeColors } from "@/src/hooks/useThemeColors";
+import { usePlaces } from "@/src/hooks/usePlaces";
 import { Ionicons } from "@expo/vector-icons";
 import { Stack, useLocalSearchParams } from "expo-router";
 import React from "react";
@@ -12,17 +13,26 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  View
+  View,
+  ActivityIndicator,
 } from "react-native";
 import { ThemeColors } from "../../src/theme/colors";
-
-const places = data.places;
 
 export default function PlaceDetail() {
   const { id } = useLocalSearchParams();
   const { colors } = useThemeColors();
-
   const styles = getStyles(colors);
+
+  const { data: places, loading } = usePlaces();
+
+  if (loading) {
+    return (
+      <View style={styles.centered}>
+        <ActivityIndicator size="large" color={colors.primary} />
+        <Text style={{ color: colors.textSecondary }}>Cargando lugar...</Text>
+      </View>
+    );
+  }
 
   const placeId = Array.isArray(id) ? id[0] : id;
   const place = places.find((p) => p.id === placeId);
@@ -48,7 +58,10 @@ export default function PlaceDetail() {
           <BackButton />
 
           <View style={styles.imageContainer}>
-            <Image source={{ uri: place.imageUri }} style={styles.image} />
+            <Image
+              source={{ uri: place.coverUri || place.imageUri }}
+              style={styles.image}
+            />
           </View>
 
           <View style={styles.headerContainer}>
@@ -62,13 +75,21 @@ export default function PlaceDetail() {
             <View style={styles.tagsContainer}>
               {place.zona && (
                 <View style={styles.tag}>
-                  <Ionicons name="location-outline" size={14} color={colors.primary} />
+                  <Ionicons
+                    name="location-outline"
+                    size={14}
+                    color={colors.primary}
+                  />
                   <Text style={styles.tagText}>{place.zona}</Text>
                 </View>
               )}
               {place.categoria && (
                 <View style={styles.tag}>
-                  <Ionicons name="pricetag-outline" size={14} color={colors.primary} />
+                  <Ionicons
+                    name="pricetag-outline"
+                    size={14}
+                    color={colors.primary}
+                  />
                   <Text style={styles.tagText}>{place.categoria}</Text>
                 </View>
               )}
@@ -90,15 +111,15 @@ export default function PlaceDetail() {
               <Ionicons name="bulb-outline" size={22} color={colors.text} />
               <Text style={styles.cardTitle}>Tips</Text>
             </View>
-            {place.tips.map((tip, i) => (
+            {place.tips?.map((tip, i) => (
               <View key={i} style={styles.tipItem}>
                 <Text style={styles.bulletPoint}>•</Text>
                 <Text style={styles.cardContent}>{tip}</Text>
               </View>
             ))}
           </View>
-          <RelatedPlacesRow current={place} all={places} /> 
 
+          <RelatedPlacesRow current={place as RelatedPlace} all={places as RelatedPlace[]} />
         </ScrollView>
       </SafeAreaView>
     </>
@@ -124,22 +145,6 @@ const getStyles = (colors: ThemeColors) =>
       justifyContent: "center",
       alignItems: "center",
       backgroundColor: colors.background,
-    },
-    backButton: {
-      flexDirection: "row",
-      alignItems: "center",
-      alignSelf: "flex-start",
-      paddingHorizontal: 12,
-      paddingVertical: 6,
-      borderRadius: 20,
-      backgroundColor: colors.surface,
-      marginBottom: 16,
-    },
-    backButtonText: {
-      fontSize: 16,
-      color: colors.primary,
-      marginLeft: 6,
-      fontWeight: "500",
     },
     imageContainer: {
       shadowColor: "#000",
