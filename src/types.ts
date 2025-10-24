@@ -5,7 +5,6 @@ export type Place = {
   subtitle?: string;
   description?: string;
   schedule?: string;
-  zone: string;
   categoria: string;
   latitude?: number;
   longitude?: number;

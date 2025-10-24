@@ -154,8 +154,8 @@ export default function PlaceForm({ existingPlace }: Props) {
 
         <TextInput placeholder="Description (optional)" style={[styles.textArea, { color: colors.text }]} value={description} onChangeText={setDescription} multiline />
 
-        <TextInput placeholder="Latitude" keyboardType="numeric" style={[styles.input, { color: colors.text }]} value={latitude} onChangeText={setLatitude} />
-        <TextInput placeholder="Longitude" keyboardType="numeric" style={[styles.input, { color: colors.text }]} value={longitude} onChangeText={setLongitude} />
+        <TextInput placeholder="Latitude"  style={[styles.input, { color: colors.text }]} value={latitude} onChangeText={setLatitude} />
+        <TextInput placeholder="Longitude" style={[styles.input, { color: colors.text }]} value={longitude} onChangeText={setLongitude} />
 
         <TextInput placeholder="Tips (separated by commas)" style={[styles.textArea, { color: colors.text }]} value={tips} onChangeText={setTips} multiline />
 
@@ -174,11 +174,13 @@ export default function PlaceForm({ existingPlace }: Props) {
             {loading ? "Saving..." : existingPlace ? "Update" : "Save"}
           </Text>
         </Pressable>
-        <Pressable onPress={handleDelete} style={[styles.buttonDelete, { backgroundColor: colors.primary }]}>
-          <Text style={[styles.buttonText, { color: colors.background }]}>
-            {loading ? "Deleting..." : existingPlace ? "Delete" : "Delete"}
-          </Text>
-        </Pressable>
+        {existingPlace && (
+          <Pressable onPress={handleDelete} style={styles.buttonDelete}>
+            <Text style={[styles.buttonText, { color: "#fff" }]}>
+              {loading ? "Deleting..." : "Delete"}
+            </Text>
+          </Pressable>
+        )}
       </ScrollView>
     </SafeAreaView>
   );
@@ -213,7 +215,7 @@ const createStyles = (colors: ThemeColors) =>
       height: 52,
       borderRadius: 14,
       alignItems: "center",
-      justifyContent: "center",
+      justifyContent: "center", 
       backgroundColor: colors.error, 
       shadowColor: "#000",
       shadowOpacity: 0.12,
