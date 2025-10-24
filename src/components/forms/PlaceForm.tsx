@@ -32,7 +32,7 @@ export default function PlaceForm({ existingPlace }: Props) {
 
   const [title, setTitle] = useState(existingPlace?.title ?? "");
   const [subtitle, setSubtitle] = useState(existingPlace?.subtitle ?? "");
-  const [zone, setZone] = useState(existingPlace?.zone ?? "");
+  const [zona, setZona] = useState(existingPlace?.zona ?? "");
   const [categoria, setCategoria] = useState(existingPlace?.categoria ?? "");
   const [description, setDescription] = useState(existingPlace?.description ?? "");
   const [schedule, setSchedule] = useState(existingPlace?.schedule ?? "");
@@ -63,7 +63,7 @@ export default function PlaceForm({ existingPlace }: Props) {
   };
 
   const handleSave = async () => {
-    if (!title.trim() || !zone.trim() || !categoria.trim()) {
+    if (!title.trim() || !zona.trim() || !categoria.trim()) {
       Alert.alert("Required fields", "Please complete title, zone, and category.");
       return;
     }
@@ -73,7 +73,7 @@ export default function PlaceForm({ existingPlace }: Props) {
       const payload = {
         title: title.trim(),
         subtitle: subtitle.trim(),
-        zone: zone.trim(),
+        zona: zona.trim(),
         categoria: categoria.trim(),
         description: description.trim(),
         schedule: schedule.trim(),
@@ -147,7 +147,7 @@ export default function PlaceForm({ existingPlace }: Props) {
 
         <TextInput placeholder="Title" style={[styles.input, { color: colors.text }]} value={title} onChangeText={setTitle} />
         <TextInput placeholder="Subtitle (optional)" style={[styles.input, { color: colors.text }]} value={subtitle} onChangeText={setSubtitle} />
-        <TextInput placeholder="Zone" style={[styles.input, { color: colors.text }]} value={zone} onChangeText={setZone} />
+        <TextInput placeholder="Zone" style={[styles.input, { color: colors.text }]} value={zona} onChangeText={setZona} />
         <TextInput placeholder="Category" style={[styles.input, { color: colors.text }]} value={categoria} onChangeText={setCategoria} />
 
         <TextInput placeholder="Schedule (optional)" style={[styles.input, { color: colors.text }]} value={schedule} onChangeText={setSchedule} />
