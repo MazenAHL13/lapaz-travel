@@ -1,7 +1,7 @@
 import BackButton from "@/src/components/Backbutton";
 import EditButton from "@/src/components/editButton";
 import FavoriteButton from "@/src/components/FavoriteButton";
-import RelatedPlacesRow, { Place as RelatedPlace } from "@/src/components/RelatedPlacesRow";
+import RelatedPlacesRow from "@/src/components/RelatedPlacesRow";
 import { usePlaces } from "@/src/hooks/usePlaces";
 import { useThemeColors } from "@/src/hooks/useThemeColors";
 import { getRoute } from "@/src/services/getRoute";
@@ -101,7 +101,7 @@ const handleHowToGetThere = async () => {
         >
           <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
             <BackButton />
-            {user?.role === "admin" && <EditButton placeId={place.id} />}
+            {user?.role === "admin" && place.id && <EditButton placeId={place.id} />}
           </View>
 
           <View style={styles.imageContainer}>
@@ -113,7 +113,7 @@ const handleHowToGetThere = async () => {
 
           <View style={styles.headerContainer}>
             <Text style={styles.title}>{place.title}</Text>
-            <FavoriteButton placeId={place.id} />
+            {place.id && <FavoriteButton placeId={place.id} />}
           </View>
 
           <Text style={styles.subtitle}>{place.subtitle}</Text>
@@ -220,7 +220,7 @@ const handleHowToGetThere = async () => {
 
        
 
-          <RelatedPlacesRow current={place as RelatedPlace} all={places as RelatedPlace[]} />
+          <RelatedPlacesRow current={place} all={places} />
         </ScrollView>
       </SafeAreaView>
     </>
