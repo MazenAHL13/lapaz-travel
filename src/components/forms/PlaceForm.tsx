@@ -194,12 +194,12 @@ export default function PlaceForm({ existingPlace }: Props) {
 
         <TextInput placeholder="Tips (separated by commas)" style={[styles.textArea, { color: colors.text }]} value={tips} onChangeText={setTips} multiline />
 
-        <Pressable onPress={() => pickImage("cover")} style={styles.imageButton}>
+        <Pressable onPress={() => pickImage("image")} style={styles.imageButton}>
           <Text style={{ color: colors.primary }}>{imageUri ? "Change Cover" : "Select Cover"}</Text>
         </Pressable>
         {imageUri && <Image source={{ uri: imageUri }} style={styles.previewImage} />}
 
-        <Pressable onPress={() => pickImage("image")} style={styles.imageButton}>
+        <Pressable onPress={() => pickImage("cover")} style={styles.imageButton}>
           <Text style={{ color: colors.primary }}>{coverUri ? "Change Secondary Image" : "Select Secondary Image"}</Text>
         </Pressable>
         {coverUri && <Image source={{ uri: coverUri }} style={styles.previewImage} />}
