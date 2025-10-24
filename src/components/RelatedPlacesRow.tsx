@@ -2,16 +2,7 @@ import { router } from "expo-router";
 import { Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { useThemeColors } from "../hooks/useThemeColors";
 import { ThemeColors } from "../theme/colors";
-
-
-export type Place = {
-  id: string;
-  title: string;
-  subtitle?: string;
-  imageUri: string;
-  zona?: string;
-  categoria?: string;
-};
+import { Place } from "../types";
 
 type Props = {
   current: Place;
@@ -21,7 +12,7 @@ type Props = {
 };
 export default function RelatedPlacesRow({ current, all, limit = 10, title = "Explora lugares relacionados" }: Props) {
   const { colors } = useThemeColors();
-  const related = all.filter((place) => place.id !== current.id && (place.zona === current.zona || place.categoria === current.categoria));
+  const related = all.filter((place) => place.id !== current.id && (place.zone === current.zone || place.categoria === current.categoria));
 
   if (related.length === 0) {
     return null;
@@ -38,7 +29,7 @@ export default function RelatedPlacesRow({ current, all, limit = 10, title = "Ex
                             <Text style={styles(colors).cardTitle} numberOfLines={1}>{place.title}</Text>
                             {place.subtitle ? <Text style={styles(colors).cardSubtitle} numberOfLines={1}>{place.subtitle}</Text> : null}
                             <View style={styles(colors).pills}>
-                                {place.zona ? <Text style={styles(colors).pill}>{place.zona}</Text> : null}
+                                {place.zone ? <Text style={styles(colors).pill}>{place.zone}</Text> : null}
                                 {place.categoria ? <Text style={styles(colors).pill}>{place.categoria}</Text> : null}
                             </View>
                         </View>

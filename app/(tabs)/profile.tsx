@@ -64,7 +64,7 @@ export default function ProfileScreen() {
             });
 
             if (!res.canceled && res.assets.length > 0) {
-              setTempAvatarUri(res.assets[0].uri); // file:// local mientras edita
+              setTempAvatarUri(res.assets[0].uri);
             }
           },
         },
@@ -192,15 +192,15 @@ export default function ProfileScreen() {
               if (isEditing) {
                 try {
                   setSaving(true);
-                  // 1) Avatar
+                  
                   if (tempAvatarUri === null) {
-                    // quitar foto
+                    
                     clearAvatar();
                   } else if (isHttpUrl(tempAvatarUri)) {
-                    // ya es URL pública (no subir)
+                    
                     setAvatar(tempAvatarUri as string);
                   } else if (tempAvatarUri) {
-                    // file:// -> subir a Cloudinary
+                    
                     const up = await uploadToCloudinary(tempAvatarUri, {
                       fileName: "profile-photo.jpg",
                       mimeType: "image/jpeg",
@@ -208,7 +208,7 @@ export default function ProfileScreen() {
                     if (!up?.secure_url) throw new Error("No se recibió secure_url de Cloudinary");
                     setAvatar(up.secure_url);
                   }
-                  // 2) Nombre
+                  
                   if ((tempName ?? "") !== (user?.name ?? "")) {
                     setName((tempName || "").trim() || "Usuario");
                   }

@@ -8,7 +8,7 @@ import { ThemeColors } from "@/src/theme/colors";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useCallback, useMemo, useState } from "react";
-import { ActivityIndicator, Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 
 export default function ExploreScreen() {
   const { data: places, loadingPlaces } = usePlaces();
@@ -53,16 +53,17 @@ export default function ExploreScreen() {
         effectiveCategories.includes(p.categoria)
     );
   }, [query, effectiveZones, effectiveCategories]);
+  
   const hasZoneFilter = filterZones.length > 0;
   const hasCategoryFilter = filterCategories.length > 0;
   const hasActiveFilters = hasZoneFilter || hasCategoryFilter;
   const resultCount = hasActiveFilters ? filtered.length : undefined;
 
   return (
-    <>
+    <SafeAreaView style={styles.safeArea}>
       <ScrollView
         style={{ flex: 1, backgroundColor: colors.background }}
-        contentContainerStyle={{ padding: 16, rowGap: 16, paddingBottom: 24 }}
+        contentContainerStyle={{ padding: 16, rowGap: 16, paddingBottom: 80 }}
         keyboardShouldPersistTaps="handled"
         keyboardDismissMode="on-drag"
       >
@@ -144,13 +145,13 @@ export default function ExploreScreen() {
       </ScrollView>
       {user && user.role === "admin" && (
         <Pressable
-          style={[styles.floatingButton, { bottom: 90, right: 20, left: undefined }]}
+          style={[styles.floatingButton, { bottom: 30, right: 20, left: undefined }]}
           onPress={() => router.push("/placeForm")}
         >
           <Ionicons name="add" size={32} color="#fff" />
         </Pressable>
       )}
-    </>
+    </SafeAreaView>
   );
 }
 
@@ -279,7 +280,5 @@ const getStyles = (colors: ThemeColors) =>
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.3,
       shadowRadius: 4,
-      bottom: -90,
-      left: 10,
     },
-  });
+});

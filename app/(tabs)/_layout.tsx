@@ -11,6 +11,7 @@ const createStyles = (colors: ThemeColors) =>
     tabBarStyle: {
       backgroundColor: colors.surface,
       borderTopColor: colors.border,
+      borderTopWidth: 0,
     },
   });
 

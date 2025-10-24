@@ -21,7 +21,6 @@ export default function LoginScreen() {
   const router = useRouter();
   const styles = createStyles(colors);
   const setUser = useUserStore((state) => state.setUser);
-  const [rememberMe, setRememberMe] = useState(false);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -81,6 +80,7 @@ export default function LoginScreen() {
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
+      
       <View style={styles.logoContainer}>
         <Image
           source={logoSource}
@@ -154,6 +154,7 @@ export default function LoginScreen() {
           </Pressable>
       </View>
 </View>
+      
     </SafeAreaView>
   );
 }

@@ -1,30 +1,35 @@
 import BackButton from "@/src/components/Backbutton";
+import EditButton from "@/src/components/editButton";
 import FavoriteButton from "@/src/components/FavoriteButton";
 import RelatedPlacesRow, { Place as RelatedPlace } from "@/src/components/RelatedPlacesRow";
-import { useThemeColors } from "@/src/hooks/useThemeColors";
 import { usePlaces } from "@/src/hooks/usePlaces";
+import { useThemeColors } from "@/src/hooks/useThemeColors";
+import { getRoute } from "@/src/services/getRoute";
+import { useUserStore } from "@/src/store/useUserStore";
 import { Ionicons } from "@expo/vector-icons";
-import { Stack, useLocalSearchParams } from "expo-router";
+import * as Location from "expo-location";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
+  ActivityIndicator,
   Image,
+  Pressable,
   SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
-  View,
-  ActivityIndicator,
-  Pressable
+  View
 } from "react-native";
+import MapView, { Marker, Polyline } from "react-native-maps";
 import { ThemeColors } from "../../src/theme/colors";
-import MapView, { Marker, Polyline } from "react-native-maps"; 
-import * as Location from "expo-location";                     
-import { getRoute } from "@/src/services/getRoute";    
 
 export default function PlaceDetail() {
   const { id } = useLocalSearchParams();
   const { colors } = useThemeColors();
   const styles = getStyles(colors);
+
+  const user = useUserStore((s) => s.currentUser);
+  const router = useRouter();
 
   const { data: places, loadingPlaces } = usePlaces();
   const [showMap, setShowMap] = useState(false);
@@ -87,15 +92,17 @@ const handleHowToGetThere = async () => {
 
   return (
     <>
-      <Stack.Screen options={{ title: place.title, headerTitleAlign: "center" }} />
-
       <SafeAreaView style={styles.safeArea}>
+        
         <ScrollView
           style={styles.scrollView}
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
         >
-          <BackButton />
+          <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+            <BackButton />
+            {user?.role === "admin" && <EditButton placeId={place.id} />}
+          </View>
 
           <View style={styles.imageContainer}>
             <Image
@@ -137,7 +144,6 @@ const handleHowToGetThere = async () => {
           )}
 
           <Text style={styles.description}>{place.description}</Text>
-          {/* --- Botón Cómo llegar --- */}
           <Pressable
             onPress={handleHowToGetThere}
             disabled={!hasCoords || loadingRoute}
@@ -160,7 +166,6 @@ const handleHowToGetThere = async () => {
               {loadingRoute ? "Calculando ruta..." : hasCoords ? "Cómo llegar" : "Coordenadas no disponibles"}
             </Text>
           </Pressable>
-   {/* --- Mapa con ruta (bonus in-app) --- */}
           {showMap && hasCoords && (
             <View
               style={{
@@ -333,4 +338,18 @@ const getStyles = (colors: ThemeColors) =>
       marginRight: 8,
       lineHeight: 22,
     },
+    editButton: {
+      position: "absolute",
+      top: 16,
+      right: 16,
+      zIndex: 10,
+      backgroundColor: colors.background,
+      padding: 8,
+      borderRadius: 30,
+      shadowColor: "#000",
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.2,
+      shadowRadius: 4,
+      elevation: 5,
+    }
   });

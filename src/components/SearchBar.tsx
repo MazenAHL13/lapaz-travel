@@ -143,4 +143,4 @@ const createStyles = (colors: ThemeColors, focused: boolean) =>
       justifyContent: "center",
       paddingHorizontal: 3,
     },
-  });
+});

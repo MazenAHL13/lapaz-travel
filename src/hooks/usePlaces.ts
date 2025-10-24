@@ -1,21 +1,7 @@
 import { collection, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../services/firebase/config";
-
-export type Place = {
-  id: string;
-  title: string;
-  subtitle?: string;
-  description?: string;
-  schedule?: string;
-  zone: string;
-  categoria: string;
-  latitude?: number;
-  longitude?: number;
-  tips?: string[];
-  imageUri?: string;
-  coverUri?: string;
-};
+import { Place } from "../types";
 
 export function usePlaces() {
   const [data, setData] = useState<Place[]>([]);

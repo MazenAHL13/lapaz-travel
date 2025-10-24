@@ -5,17 +5,8 @@ import { Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-nati
 import { usePlaces } from "../hooks/usePlaces";
 import { useThemeColors } from "../hooks/useThemeColors";
 import { ThemeColors } from "../theme/colors";
+import { Place } from "../types";
 
-export type Place = {
-  id: string;
-  title: string;
-  subtitle?: string;
-  imageUri: string;
-  zona?: string;
-  categoria?: string;
-  latitude: number;
-  longitude: number;
-};
 
 const FALLBACK = { latitude: -16.4897, longitude: -68.1193 };
 
@@ -59,7 +50,7 @@ export default function PlacesNearYouRow({
 
     const nearbyPlaces = allPlaces.filter((place) =>
     isNear(
-        { latitude: place.latitude, longitude: place.longitude },
+        { latitude: place.latitude ?? 0, longitude: place.longitude ?? 0 },
     here
   )
 );
@@ -91,7 +82,7 @@ export default function PlacesNearYouRow({
               )}
 
               <View style={styles(colors).pills}>
-                {place.zona && <Text style={styles(colors).pill}>{place.zona}</Text>}
+                {place.zone && <Text style={styles(colors).pill}>{place.zone}</Text>}
                 {place.categoria && <Text style={styles(colors).pill}>{place.categoria}</Text>}
               </View>
             </View>
