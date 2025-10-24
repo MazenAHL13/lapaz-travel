@@ -12,6 +12,7 @@ import { ActivityIndicator, Image, Pressable, SafeAreaView, ScrollView, StyleShe
 
 export default function ExploreScreen() {
   const { data: places, loadingPlaces } = usePlaces();
+  console.log(places);
   const { colors } = useThemeColors();
   const router = useRouter();
   const user = useUserStore((s) => s.currentUser);
@@ -46,13 +47,11 @@ export default function ExploreScreen() {
   const effectiveCategories = filterCategories.length ? filterCategories : categorias;
 
   const filtered = useMemo(() => {
-    return places.filter(
-      (p) =>
-        p.title.toLowerCase().includes(query.trim().toLowerCase()) &&
-        effectiveZones.includes(p.zone) &&
-        effectiveCategories.includes(p.categoria)
-    );
-  }, [query, effectiveZones, effectiveCategories]);
+    if (!places) return [];
+    const q = query.trim().toLowerCase();
+    return places.filter((p) => p.title.toLowerCase().includes(q));
+  }, [places, query]);
+
   
   const hasZoneFilter = filterZones.length > 0;
   const hasCategoryFilter = filterCategories.length > 0;
@@ -119,27 +118,27 @@ export default function ExploreScreen() {
         )}
 
         <View style={{ rowGap: 16 }}>
-        {loadingPlaces ? (
-          <ActivityIndicator size="large" color={colors.primary} />
-        ) : places.length === 0 ? (
-          <Text style={{ color: colors.textSecondary }}>No hay lugares disponibles.</Text>
-        ) : (
-          places.map((place) => (
-            <PlaceCard
-              key={place.id}
-              title={place.title}
-              subtitle={place.zone ?? ""}
-              imageUri={place.imageUri ?? ""}
-              onPress={() =>
-                router.push({
-                  pathname: "/places/[id]",
-                  params: { id: place.id },
-                })
-              }
-              placeId={place.id}
-            />
-          ))
-        )}
+          {loadingPlaces ? (
+            <ActivityIndicator size="large" color={colors.primary} />
+          ) : filtered.length === 0 ? (
+            <Text style={{ color: colors.textSecondary }}>No hay lugares disponibles.</Text>
+          ) : (
+            filtered.map((place) => (
+              <PlaceCard
+                key={place.id}
+                title={place.title}
+                subtitle={place.zone ?? ""}
+                imageUri={place.imageUri ?? ""}
+                onPress={() =>
+                  router.push({
+                    pathname: "/places/[id]",
+                    params: { id: place.id },
+                  })
+                }
+                placeId={place.id}
+              />
+            ))
+          )}
         </View>
         
       </ScrollView>
