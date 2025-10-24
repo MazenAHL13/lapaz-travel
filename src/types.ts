@@ -1,4 +1,5 @@
 export type Place = {
+  zona: string | undefined;
   id?: string;
   title: string;
   subtitle?: string;

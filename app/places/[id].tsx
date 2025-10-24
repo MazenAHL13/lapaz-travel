@@ -118,16 +118,16 @@ const handleHowToGetThere = async () => {
 
           <Text style={styles.subtitle}>{place.subtitle}</Text>
 
-          {(place.zone || place.categoria) && (
+          {(place.zona || place.categoria) && (
             <View style={styles.tagsContainer}>
-              {place.zone && (
+              {place.zona && (
                 <View style={styles.tag}>
                   <Ionicons
                     name="location-outline"
                     size={14}
                     color={colors.primary}
                   />
-                  <Text style={styles.tagText}>{place.zone}</Text>
+                  <Text style={styles.tagText}>{place.zona}</Text>
                 </View>
               )}
               {place.categoria && (

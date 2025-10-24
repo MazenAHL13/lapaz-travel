@@ -82,7 +82,7 @@ export default function PlacesNearYouRow({
               )}
 
               <View style={styles(colors).pills}>
-                {place.zone && <Text style={styles(colors).pill}>{place.zone}</Text>}
+                {place.zona && <Text style={styles(colors).pill}>{place.zona}</Text>}
                 {place.categoria && <Text style={styles(colors).pill}>{place.categoria}</Text>}
               </View>
             </View>

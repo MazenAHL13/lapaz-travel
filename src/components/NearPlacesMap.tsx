@@ -72,7 +72,7 @@ export default function NearPlacesMap() {
                   key={p.id}
                   coordinate={{ latitude: p.latitude?? 0, longitude: p.longitude?? 0}}
                   title={p.title}
-                  description={p.zone || p.categoria}
+                  description={p.zona || p.categoria}
           />
         ))
       )}
