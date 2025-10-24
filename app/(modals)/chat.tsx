@@ -50,8 +50,7 @@ export default function ChatModal() {
       const reply: ChatMessage = {
         id: (Date.now() + 1).toString(),
         role: "assistant",
-        content:
-          "Respuesta mock",
+        content: "Respuesta mock",
         time: "Ahora",
       };
       setMessages((prev) => [...prev, reply]);
@@ -64,8 +63,7 @@ export default function ChatModal() {
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.select({ ios: "padding", android: undefined })}
-        keyboardVerticalOffset={Platform.select({ ios: 0, android: 0 }) ?? 0}
-      >
+        keyboardVerticalOffset={Platform.select({ ios: 0, android: 0 }) ?? 0}>
         <FlatList
           ref={listRef}
           data={messages}
@@ -74,7 +72,7 @@ export default function ChatModal() {
             <View style={{ alignItems: "flex-start", padding: 8 }}>
               <BackButton />
             </View>
-  )}
+          )}
           renderItem={({ item }) => <ChatBubble message={item} />}
           contentContainerStyle={{
             paddingVertical: 10,

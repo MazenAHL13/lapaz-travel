@@ -1,6 +1,7 @@
-import PlaceForm, { Place } from "@/src/components/forms/PlaceForm";
+import PlaceForm from "@/src/components/forms/PlaceForm";
 import { useThemeColors } from "@/src/hooks/useThemeColors";
 import { db } from "@/src/services/firebase/config";
+import { Place } from "@/src/types";
 import { useLocalSearchParams } from "expo-router";
 import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
@@ -31,16 +32,30 @@ export default function EditPlaceScreen() {
 
   if (loading) {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: colors.background }}>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: colors.background,
+        }}>
         <ActivityIndicator size="large" color={colors.primary} />
-        <Text style={{ color: colors.textSecondary, marginTop: 10 }}>Cargando lugar...</Text>
+        <Text style={{ color: colors.textSecondary, marginTop: 10 }}>
+          Cargando lugar...
+        </Text>
       </View>
     );
   }
 
   if (!place) {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: colors.background }}>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: colors.background,
+        }}>
         <Text style={{ color: colors.text }}>Lugar no encontrado.</Text>
       </View>
     );
