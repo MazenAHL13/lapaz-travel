@@ -1,6 +1,5 @@
 {
   "expo": {
-
     "name": "lapaz-travel",
     "slug": "lapaz-travel",
     "version": "1.0.0",
@@ -36,7 +35,8 @@
     },
     "plugins": [
       "expo-router",
-      "expo-font"
+      "expo-font",
+      "expo-maps"
     ],
     "experiments": {
       "typedRoutes": true
