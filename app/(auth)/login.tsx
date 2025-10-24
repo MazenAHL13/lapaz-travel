@@ -8,11 +8,13 @@ import { useState } from "react";
 import {
   Alert,
   Image,
+  Keyboard,
   Pressable,
   SafeAreaView,
   StyleSheet,
   Text,
   TextInput,
+  TouchableWithoutFeedback,
   View
 } from "react-native";
 
@@ -80,81 +82,83 @@ export default function LoginScreen() {
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
-      
-      <View style={styles.logoContainer}>
-        <Image
-          source={logoSource}
-          style={styles.logo}
-          resizeMode="contain"
-        />
-      </View>
-
-      <View style={styles.card}>
-        <TextInput
-          style={[styles.input, { color: colors.text, borderColor: colors.border }]}
-          placeholder="Email"
-          placeholderTextColor={colors.textSecondary}
-          value={email}
-          onChangeText={setEmail}
-          autoCapitalize="none"
-        />
-        <View style={{ position: "relative" }}>
-          <TextInput
-              style={[styles.input, { color: colors.text, borderColor: colors.border }]}
-              placeholder="Password"
-              placeholderTextColor={colors.textSecondary}
-              secureTextEntry={!showPassword}
-              value={password}
-              onChangeText={setPassword}
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <View style={styles.globalContainer}>
+          <View style={styles.logoContainer}>
+            <Image
+              source={logoSource}
+              style={styles.logo}
+              resizeMode="contain"
             />
-          <Pressable
-              onPress={() => setShowPassword((v) => !v)}
-              style={{
-                position: "absolute",
-                right: 14,
-                top: 14,
-              }}
-            >
-              <Ionicons
-                name={showPassword ? "eye-off" : "eye"}
-                size={22}
-                color={colors.textSecondary}
-              />
-            </Pressable>
           </View>
-        <Pressable
-          onPress={handleLogin}
-          style={({ pressed }) => [
-            styles.button,
-            { backgroundColor: colors.primary, opacity: pressed ? 0.9 : 1 },
-          ]}
-        >
-          <Text style={[styles.buttonText]}>
-            Log in
-          </Text>
-        </Pressable>
 
-        <Pressable
-          onPress={handleRegister}
-          style={({ pressed }) => [
-            styles.button,
-            {
-              backgroundColor: colors.background,
-              borderWidth: 2,
-              borderColor: colors.primary,
-              opacity: pressed ? 0.9 : 1,
-            },
-          ]}
-        >
-          <Text style={[styles.buttonText, { color: colors.primary }]}>Sign up</Text>
-        </Pressable>
-        <View style={styles.rememberRow}>
-          <Pressable onPress={handleForgotPassword}>
-              <Text style={[styles.linkMuted, { color: colors.primary, fontWeight: "600" }]}>Forgot Password?</Text>
-          </Pressable>
-      </View>
-</View>
-      
+          <View style={styles.card}>
+            <TextInput
+              style={[styles.input, { color: colors.text, borderColor: colors.border }]}
+              placeholder="Email"
+              placeholderTextColor={colors.textSecondary}
+              value={email}
+              onChangeText={setEmail}
+              autoCapitalize="none"
+            />
+            <View style={{ position: "relative" }}>
+              <TextInput
+                  style={[styles.input, { color: colors.text, borderColor: colors.border }]}
+                  placeholder="Password"
+                  placeholderTextColor={colors.textSecondary}
+                  secureTextEntry={!showPassword}
+                  value={password}
+                  onChangeText={setPassword}
+                />
+              <Pressable
+                  onPress={() => setShowPassword((v) => !v)}
+                  style={{
+                    position: "absolute",
+                    right: 14,
+                    top: 14,
+                  }}
+                >
+                  <Ionicons
+                    name={showPassword ? "eye-off" : "eye"}
+                    size={22}
+                    color={colors.textSecondary}
+                  />
+                </Pressable>
+              </View>
+            <Pressable
+              onPress={handleLogin}
+              style={({ pressed }) => [
+                styles.button,
+                { backgroundColor: colors.primary, opacity: pressed ? 0.9 : 1 },
+              ]}
+            >
+              <Text style={[styles.buttonText]}>
+                Log in
+              </Text>
+            </Pressable>
+
+            <Pressable
+              onPress={handleRegister}
+              style={({ pressed }) => [
+                styles.button,
+                {
+                  backgroundColor: colors.background,
+                  borderWidth: 2,
+                  borderColor: colors.primary,
+                  opacity: pressed ? 0.9 : 1,
+                },
+              ]}
+            >
+              <Text style={[styles.buttonText, { color: colors.primary }]}>Sign up</Text>
+            </Pressable>
+            <View style={styles.rememberRow}>
+              <Pressable onPress={handleForgotPassword}>
+                  <Text style={[styles.linkMuted, { color: colors.primary, fontWeight: "600" }]}>Forgot Password?</Text>
+              </Pressable>
+            </View>
+          </View>
+        </View>
+      </TouchableWithoutFeedback>
     </SafeAreaView>
   );
 }
@@ -208,5 +212,9 @@ const createStyles = (colors: any) =>
       justifyContent: "flex-end",
       alignItems: "center",
       marginTop: 8,
+    },
+    globalContainer: {
+      width: "100%",
+      alignItems: "center",
     },
   });
