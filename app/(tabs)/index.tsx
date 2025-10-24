@@ -57,7 +57,6 @@ export default function ExploreScreen() {
     if (!places) return [];
     const q = lower(clean(query));
 
-    // para comparar por clave en minúsculas, sin alterar cómo se ven los chips
     const zoneKeys = new Set(filterZones.map(z => lower(clean(z))));
     const catKeys  = new Set(filterCategories.map(c => lower(clean(c))));
 
@@ -75,7 +74,6 @@ export default function ExploreScreen() {
   }, [places, query, filterZones, filterCategories]);
 
   const hasActiveFilters = filterZones.length > 0 || filterCategories.length > 0;
-  // Muestra conteo si hay texto en búsqueda o filtros activos
   const resultCount = (query.length > 0 || hasActiveFilters) ? filtered.length : undefined;
 
   return (
@@ -109,9 +107,9 @@ export default function ExploreScreen() {
 
         {showFilters && (
           <FilterPanel
-            zones={zonas}                    // todas las zonas (chips visibles)
-            categories={categorias}          // todas las categorías
-            activeZones={filterZones}        // selección actual (puede estar vacía)
+            zones={zonas}                    
+            categories={categorias}          
+            activeZones={filterZones}        
             activeCategories={filterCategories}
             onToggleZone={toggleFilterZone}
             onToggleCategory={toggleFilterCategory}

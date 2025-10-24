@@ -1,4 +1,5 @@
 import { useThemeColors } from "@/src/hooks/useThemeColors";
+import { uploadToCloudinary } from "@/src/services/cloudinary/cloudinary";
 import { db } from "@/src/services/firebase/config";
 import { useUserStore } from "@/src/store/useUserStore";
 import { ThemeColors } from "@/src/theme/colors";
@@ -8,7 +9,6 @@ import * as ImagePicker from "expo-image-picker";
 import { useRouter } from "expo-router";
 import { addDoc, collection, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { useState } from "react";
-import { uploadToCloudinary } from "@/src/services/cloudinary/cloudinary";
 import {
   Alert,
   Image,
@@ -195,14 +195,14 @@ export default function PlaceForm({ existingPlace }: Props) {
         <TextInput placeholder="Tips (separated by commas)" style={[styles.textArea, { color: colors.text }]} value={tips} onChangeText={setTips} multiline />
 
         <Pressable onPress={() => pickImage("cover")} style={styles.imageButton}>
-          <Text style={{ color: colors.primary }}>{coverUri ? "Change Cover" : "Select Cover"}</Text>
-        </Pressable>
-        {coverUri && <Image source={{ uri: coverUri }} style={styles.previewImage} />}
-
-        <Pressable onPress={() => pickImage("image")} style={styles.imageButton}>
-          <Text style={{ color: colors.primary }}>{imageUri ? "Change Secondary Image" : "Select Secondary Image"}</Text>
+          <Text style={{ color: colors.primary }}>{imageUri ? "Change Cover" : "Select Cover"}</Text>
         </Pressable>
         {imageUri && <Image source={{ uri: imageUri }} style={styles.previewImage} />}
+
+        <Pressable onPress={() => pickImage("image")} style={styles.imageButton}>
+          <Text style={{ color: colors.primary }}>{coverUri ? "Change Secondary Image" : "Select Secondary Image"}</Text>
+        </Pressable>
+        {coverUri && <Image source={{ uri: coverUri }} style={styles.previewImage} />}
 
         <Pressable onPress={handleSave} style={[styles.button, { backgroundColor: colors.primary }]}>
           <Text style={[styles.buttonText, { color: colors.background }]}>
