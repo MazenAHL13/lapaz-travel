@@ -9,6 +9,7 @@ import {
   Platform,
   SafeAreaView,
   StyleSheet,
+  View,
 } from "react-native";
 
 export default function ChatModal() {
@@ -69,7 +70,11 @@ export default function ChatModal() {
           ref={listRef}
           data={messages}
           keyExtractor={(m) => m.id}
-          ListHeaderComponent={<BackButton />}
+          ListHeaderComponent={() => (
+            <View style={{ alignItems: "flex-start", padding: 8 }}>
+              <BackButton />
+            </View>
+  )}
           renderItem={({ item }) => <ChatBubble message={item} />}
           contentContainerStyle={{
             paddingVertical: 10,
