@@ -8,6 +8,7 @@ import * as ImagePicker from "expo-image-picker";
 import { useRouter } from "expo-router";
 import { addDoc, collection, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { useState } from "react";
+import { uploadToCloudinary } from "@/src/services/cloudinary/cloudinary";
 import {
   Alert,
   Image,
@@ -39,6 +40,8 @@ export default function PlaceForm({ existingPlace }: Props) {
   const [latitude, setLatitude] = useState(existingPlace?.latitude?.toString() ?? "");
   const [longitude, setLongitude] = useState(existingPlace?.longitude?.toString() ?? "");
   const [tips, setTips] = useState(existingPlace?.tips?.join(", ") ?? "");
+  const isHttpUrl = (u?: string | null) => !!u && /^https?:\/\//i.test(u);
+
   const [imageUri, setImageUri] = useState<string | null>(existingPlace?.imageUri ?? null);
   const [coverUri, setCoverUri] = useState<string | null>(existingPlace?.coverUri ?? null);
   const [loading, setLoading] = useState(false);
@@ -70,6 +73,38 @@ export default function PlaceForm({ existingPlace }: Props) {
 
     try {
       setLoading(true);
+      let finalCoverUrl = coverUri ?? "";   
+      let finalImageUrl = imageUri ?? "";
+
+
+      if (coverUri === null) {
+        finalCoverUrl = "";
+      } else if (isHttpUrl(coverUri)) {
+        finalCoverUrl = coverUri!;
+      } else if (coverUri) {
+        const up = await uploadToCloudinary(coverUri, {
+          fileName: `place-cover-${existingPlace?.id ?? Date.now()}.jpg`,
+          mimeType: "image/jpeg",
+        });
+        if (!up?.secure_url && !up?.url) throw new Error("No secure_url from Cloudinary (cover).");
+        finalCoverUrl = up.secure_url ?? up.url ?? "";
+      }
+
+    
+      if (imageUri === null) {
+        finalImageUrl = "";
+      } else if (isHttpUrl(imageUri)) {
+        finalImageUrl = imageUri!;
+      } else if (imageUri) {
+        const up = await uploadToCloudinary(imageUri, {
+          fileName: `place-image-${existingPlace?.id ?? Date.now()}.jpg`,
+          mimeType: "image/jpeg",
+        });
+        if (!up?.secure_url && !up?.url) throw new Error("No secure_url from Cloudinary (image).");
+        finalImageUrl = up.secure_url ?? up.url ?? "";
+      }
+
+
       const payload = {
         title: title.trim(),
         subtitle: subtitle.trim(),
@@ -80,8 +115,8 @@ export default function PlaceForm({ existingPlace }: Props) {
         latitude: latitude ? parseFloat(latitude) : null,
         longitude: longitude ? parseFloat(longitude) : null,
         tips: tips ? tips.split(",").map((t) => t.trim()) : [],
-        imageUri: imageUri ?? "",
-        coverUri: coverUri ?? "",
+        imageUri: finalImageUrl?? "",
+        coverUri: finalCoverUrl?? "",
         createdBy: user.uid,
         updatedAt: new Date().toISOString(),
       };
