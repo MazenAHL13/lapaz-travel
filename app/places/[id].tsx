@@ -10,6 +10,7 @@ import { Ionicons } from "@expo/vector-icons";
 import * as Location from "expo-location";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useState } from "react";
+import OpenInMapsButton from "@/src/components/OpenInMapsButton";
 import {
   ActivityIndicator,
   Image,
@@ -166,6 +167,11 @@ const handleHowToGetThere = async () => {
               {loadingRoute ? "Calculando ruta..." : hasCoords ? "Cómo llegar" : "Coordenadas no disponibles"}
             </Text>
           </Pressable>
+          <OpenInMapsButton
+            latitude={place.latitude as number}
+            longitude={place.longitude as number}
+            title={place.title}
+          />
           {showMap && hasCoords && (
             <View
               style={{
