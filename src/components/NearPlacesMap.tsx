@@ -1,10 +1,11 @@
 import * as Location from "expo-location";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, Platform, StyleSheet, Text, View } from "react-native";
-import MapView, { Marker } from "react-native-maps";
+import MapView, { Marker, Callout } from "react-native-maps";
 import { usePlaces } from "../hooks/usePlaces";
 import { useThemeColors } from "../hooks/useThemeColors";
 import { ThemeColors } from "../theme/colors";
+import { useRouter } from "expo-router";
 
 interface Region {
   latitude: number;
@@ -18,6 +19,8 @@ export default function NearPlacesMap() {
   const [loading, setLoading] = useState(true);
   const { colors } = useThemeColors();
   const styles = getStyles(colors);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     (async () => {
@@ -67,13 +70,30 @@ export default function NearPlacesMap() {
               ) : places.length === 0 ? (
                 <Text style={{ color: colors.textSecondary }}>No hay lugares disponibles.</Text>
               ) : (
-              places.map((p) => (
-                <Marker
-                  key={p.id}
-                  coordinate={{ latitude: p.latitude?? 0, longitude: p.longitude?? 0}}
-                  title={p.title}
-                  description={p.zona || p.categoria}
-          />
+              places.filter((p) => typeof p.latitude === "number" && typeof p.longitude === "number").map((p) => (
+              <Marker
+                key={p.id}
+                coordinate={{ latitude: p.latitude as number, longitude: p.longitude as number }}
+                title={p.title}
+                description={p.zona || p.categoria}
+                pinColor={selectedId === p.id ? colors.primary : undefined}
+                zIndex={selectedId === p.id ? 999 : 1}
+                onPress={() => setSelectedId(p.id!)}
+              >
+                <Callout tooltip onPress={() => router.push(`/places/${p.id}`)}>
+                  <View style={styles.calloutContainer}>
+                    <Text style={styles.calloutTitle}>{p.title}</Text>
+
+                    {(p.zona || p.categoria) && (
+                      <Text style={styles.calloutSubtitle}>
+                        {p.zona || p.categoria}
+                      </Text>
+                    )}
+
+                    <Text style={styles.calloutLink}>Ver detalle →</Text>
+                  </View>
+                </Callout>
+              </Marker>
         ))
       )}
       </MapView>
@@ -201,5 +221,27 @@ const getStyles = (colors: ThemeColors) =>
     },
     container: {
       flex: 1,
-    }
+    },
+      calloutContainer: {
+      backgroundColor: colors.card,
+      borderRadius: 10,
+      padding: 10,
+      borderColor: colors.border,
+      borderWidth: 1,
+      maxWidth: 240,
+    },
+    calloutTitle: {
+      color: colors.text,
+      fontWeight: "700",
+    },
+    calloutSubtitle: {
+      color: colors.textSecondary,
+      marginTop: 2,
+    },
+    calloutLink: {
+      color: colors.primary,
+      marginTop: 8,
+      fontWeight: "600",
+      textAlign: "right",
+    },
 });
