@@ -64,43 +64,57 @@ export default function NearPlacesMap() {
         initialRegion={region}
         showsUserLocation
         showsMyLocationButton={Platform.OS === "android"}
+        onPress={() => setSelectedId(null)} // deseleccionar tocando el mapa
       >
         {loadingPlaces ? (
-                <ActivityIndicator size="large" color={colors.primary} />
-              ) : places.length === 0 ? (
-                <Text style={{ color: colors.textSecondary }}>No hay lugares disponibles.</Text>
-              ) : (
-              places.filter((p) => typeof p.latitude === "number" && typeof p.longitude === "number").map((p) => (
-              <Marker
-                key={p.id}
-                coordinate={{ latitude: p.latitude as number, longitude: p.longitude as number }}
-                title={p.title}
-                description={p.zona || p.categoria}
-                pinColor={selectedId === p.id ? colors.primary : undefined}
-                zIndex={selectedId === p.id ? 999 : 1}
-                onPress={() => setSelectedId(p.id!)}
-              >
-                <Callout tooltip onPress={() => router.push(`/places/${p.id}`)}>
-                  <View style={styles.calloutContainer}>
-                    <Text style={styles.calloutTitle}>{p.title}</Text>
-
-                    {(p.zona || p.categoria) && (
-                      <Text style={styles.calloutSubtitle}>
-                        {p.zona || p.categoria}
-                      </Text>
-                    )}
-
-                    <Text style={styles.calloutLink}>Ver detalle →</Text>
-                  </View>
-                </Callout>
-              </Marker>
-        ))
-      )}
+          <ActivityIndicator size="large" color={colors.primary} />
+        ) : places.length === 0 ? (
+          <Text style={{ color: colors.textSecondary }}>No hay lugares disponibles.</Text>
+        ) : (
+          places
+            .filter(
+              (p) =>
+                !!p.id &&
+                typeof p.latitude === "number" &&
+                typeof p.longitude === "number"
+            )
+            .map((p) => {
+              const key = p.id as string; 
+              return (
+                <Marker
+                  key={key}
+                  coordinate={{
+                    latitude: p.latitude as number,
+                    longitude: p.longitude as number,
+                  }}
+                  title={p.title}
+                  description={p.zona || p.categoria}
+                  pinColor={selectedId === key ? colors.primary : undefined}
+                  zIndex={selectedId === key ? 999 : 1}
+                  onPress={() => setSelectedId(key)}
+                >
+                  <Callout
+                    tooltip
+                    onPress={() => router.push(`/places/${key}`)}
+                  >
+                    <View style={styles.calloutContainer}>
+                      <Text style={styles.calloutTitle}>{p.title}</Text>
+                      {(p.zona || p.categoria) && (
+                        <Text style={styles.calloutSubtitle}>
+                          {p.zona || p.categoria}
+                        </Text>
+                      )}
+                      <Text style={styles.calloutLink}>Ver detalle →</Text>
+                    </View>
+                  </Callout>
+                </Marker>
+              );
+            })
+        )}
       </MapView>
     </View>
   );
 }
-
 
 const getStyles = (colors: ThemeColors) =>
   StyleSheet.create({
