@@ -18,6 +18,7 @@ export default function NearPlacesMap() {
   const [loading, setLoading] = useState(true);
   const { colors } = useThemeColors();
   const styles = getStyles(colors);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -67,12 +68,17 @@ export default function NearPlacesMap() {
               ) : places.length === 0 ? (
                 <Text style={{ color: colors.textSecondary }}>No hay lugares disponibles.</Text>
               ) : (
-              places.map((p) => (
+              places.filter((p) => typeof p.latitude === "number" && typeof p.longitude === "number").map((p) => (
                 <Marker
                   key={p.id}
                   coordinate={{ latitude: p.latitude?? 0, longitude: p.longitude?? 0}}
                   title={p.title}
                   description={p.zona || p.categoria}
+                  pinColor={selectedId === p.id ? colors.primary : colors.muted}
+                  zIndex={selectedId === p.id ? 999 : 1}
+                  onPress={() => {
+                    setSelectedId(p.id!);}
+                  }
           />
         ))
       )}
