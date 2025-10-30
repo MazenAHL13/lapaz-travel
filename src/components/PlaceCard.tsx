@@ -1,9 +1,11 @@
 import { Ionicons } from "@expo/vector-icons";
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { Image, Pressable, StyleSheet, Text, View, Animated } from "react-native";
 import { radius, shadow, spacing } from "../constants/tokens";
 import { useThemeColors } from "../hooks/useThemeColors";
 import { useFavoritesStore } from "../store/useFavoritesStore";
 import { ThemeColors } from "../theme/colors";
+import { useBounceAnimation } from "@/src/hooks/useBounceAnimation";
 
 type PlaceCardProps = {
   title: string;
@@ -24,6 +26,7 @@ export default function PlaceCard({
   const { isFavorite, toggleFavorite } = useFavoritesStore();
   const isFav = placeId ? isFavorite(placeId) : false;
 
+  const { scale, bounce } = useBounceAnimation({ toValue: 1.2 });
 
   const styles = createStyles(colors);
 
@@ -37,28 +40,37 @@ export default function PlaceCard({
         shadow.android,
       ]}
     >
-      <View style={styles.imageWrapper}>
+      <View style={styles.imageWrapper} pointerEvents="box-none">
         <Image source={{ uri: imageUri }} style={styles.image} />
+
         {placeId && (
-          <Pressable
-            onPress={() => toggleFavorite(placeId)}
-            hitSlop={10}
-            style={({ pressed }) => [
-              styles.favoriteIcon,
+          <Animated.View
+            style={[
+              styles.favoriteIcon, 
               {
-                backgroundColor: isFav
-                  ? `${colors.primary}20`
-                  : `${colors.card}CC`,
-                transform: [{ scale: pressed ? 0.9 : 1 }],
+                transform: [{ scale }],
+                backgroundColor: isFav ? `${colors.primary}20` : `${colors.card}CC`,
               },
             ]}
+            pointerEvents="box-none"
           >
-            <Ionicons
-              name={isFav ? "heart" : "heart-outline"}
-              size={20}
-              color={isFav ? colors.primary : colors.textSecondary}
-            />
-          </Pressable>
+            <Pressable
+              onPress={() => {
+                bounce();
+                toggleFavorite(placeId);
+              }}
+              hitSlop={10}
+              accessibilityRole="button"
+              accessibilityLabel={isFav ? "Quitar de favoritos" : "Añadir a favoritos"}
+              style={({ pressed }) => [{ opacity: pressed ? 0.8 : 1 }]}
+            >
+              <Ionicons
+                name={isFav ? "heart" : "heart-outline"}
+                size={20}
+                color={isFav ? colors.primary : colors.textSecondary}
+              />
+            </Pressable>
+          </Animated.View>
         )}
       </View>
 
