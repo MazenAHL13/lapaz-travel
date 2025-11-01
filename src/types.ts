@@ -12,3 +12,17 @@ export type Place = {
   imageUri?: string;
   coverUri?: string;
 };
+
+
+export type EtaResult = {
+  distanceMeters: number;
+  drivingSeconds: number;
+  walkingSeconds: number;
+};
+
+export type MapRegion = {
+  latitude: number;
+  longitude: number;
+  latitudeDelta: number;
+  longitudeDelta: number;
+};
