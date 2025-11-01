@@ -11,6 +11,8 @@ type Props = {
   activeCategories: string[];
   onToggleZone: (z: string) => void;
   onToggleCategory: (c: string) => void;
+  sortBy: "none" | "distance"| "alpha";
+  onChangeSortBy: (v: "none" | "distance" | "alpha") => void;
 };
 
 export default function FilterPanel({
@@ -20,12 +22,38 @@ export default function FilterPanel({
   activeCategories,
   onToggleZone,
   onToggleCategory,
+  sortBy,
+  onChangeSortBy,
+
 }: Props) {
   const { colors } = useThemeColors();
   const s = styles(colors);
 
   return (
     <View style={s.wrapper}>
+      <View style={s.divider} />
+
+      <Text style={s.sectionTitle}>Ordenar</Text>
+      <View style={s.row}>
+        <Chip
+          label="Sin orden"
+          active={sortBy === "none"}
+          onPress={() => onChangeSortBy("none")}
+          colors={colors}
+        />
+        <Chip
+          label="Cercanos Primero"
+          active={sortBy === "distance"}
+          onPress={() => onChangeSortBy("distance")}
+          colors={colors}
+        />
+        <Chip
+          label="Alfabético"
+          active={sortBy === "alpha"}
+          onPress={() => onChangeSortBy("alpha")}
+          colors={colors}
+        />
+      </View>
       <Text style={s.sectionTitle}>Zonas</Text>
       <View style={s.row}>
         {zones.map((z) => (
