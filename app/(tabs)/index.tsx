@@ -7,8 +7,11 @@ import { useUserStore } from "@/src/store/useUserStore";
 import { ThemeColors } from "@/src/theme/colors";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState, useEffect } from "react";
 import { ActivityIndicator, Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import { haversineMeters } from "@/src/utils/distance";
+import * as Location from "expo-location";
+import { Alert } from "react-native";
 
 export default function ExploreScreen() {
   const { data: places, loadingPlaces } = usePlaces();
@@ -20,14 +23,54 @@ export default function ExploreScreen() {
   const [query, setQuery] = useState("");
   const [showFilters, setShowFilters] = useState(false);
 
+  type SortOption = "none" | "distance" | "alpha";
+  const [sortBy, setSortBy] = useState<SortOption>("distance");
+  const [userPos, setUserPos] = useState<{ lat: number; lng: number } | null>(null);
+  const [locError, setLocError] = useState<string | null>(null);
+
+    useEffect(() => {
+      let cancelled = false;
+
+      async function ensureLocation() {
+        if (sortBy !== "distance" || userPos) return;
+
+        setLocError(null);
+        try {
+          const { status } = await Location.requestForegroundPermissionsAsync();
+          if (status !== "granted") {
+            setLocError("Permiso de ubicación denegado");
+            setSortBy("none");
+            Alert.alert("Ubicación requerida", "Activa permisos para ordenar por cercanía.");
+            return;
+          }
+
+          const loc = await Location.getCurrentPositionAsync({
+            accuracy: Location.Accuracy.Balanced,
+          });
+
+          if (!cancelled) {
+            setUserPos({ lat: loc.coords.latitude, lng: loc.coords.longitude });
+          }
+        } catch {
+          if (!cancelled) {
+            setLocError("No se pudo obtener la ubicación");
+            setSortBy("none");
+          }
+        }
+      }
+
+      ensureLocation();
+      return () => {
+        cancelled = true;
+      };
+    }, [sortBy, userPos]);
+
   if (user === undefined) return null;
 
-  // Helpers simples (sin cambiar cómo se ve en UI)
   const clean = (s?: string) => (s ?? "").trim().replace(/\s+/g, " ");
   const lower = (s: string) => s.toLowerCase();
   const uniq = (arr: string[]) => Array.from(new Set(arr));
 
-  // Listas visibles (tal cual los datos, solo trim y dedup)
   const categorias = useMemo(() => {
     const all = (places ?? []).map(p => clean(p.categoria)).filter(Boolean) as string[];
     return uniq(all).sort((a, b) => a.localeCompare(b));
@@ -53,25 +96,39 @@ export default function ExploreScreen() {
     );
   }, []);
 
-  const filtered = useMemo(() => {
-    if (!places) return [];
-    const q = lower(clean(query));
+const filtered = useMemo(() => {
+  if (!places) return [];
+  const q = lower(clean(query));
 
-    const zoneKeys = new Set(filterZones.map(z => lower(clean(z))));
-    const catKeys  = new Set(filterCategories.map(c => lower(clean(c))));
+  const zoneKeys = new Set(filterZones.map(z => lower(clean(z))));
+  const catKeys  = new Set(filterCategories.map(c => lower(clean(c))));
 
-    return places.filter((p) => {
-      const title = lower(p.title ?? "");
-      const z = lower(clean(p.zona));
-      const c = lower(clean(p.categoria));
+  // 1) Filtrado tal cual
+  let out = places.filter((p) => {
+    const title = lower(p.title ?? "");
+    const z = lower(clean(p.zona));
+    const c = lower(clean(p.categoria));
 
-      const matchesQ = title.includes(q);
-      const matchesZone = zoneKeys.size ? zoneKeys.has(z) : true;
-      const matchesCat  = catKeys.size ? catKeys.has(c) : true;
+    const matchesQ = title.includes(q);
+    const matchesZone = zoneKeys.size ? zoneKeys.has(z) : true;
+    const matchesCat  = catKeys.size ? catKeys.has(c) : true;
 
-      return matchesQ && matchesZone && matchesCat;
-    });
-  }, [places, query, filterZones, filterCategories]);
+    return matchesQ && matchesZone && matchesCat;
+  });
+
+  if (sortBy === "distance" && userPos) {
+    out = out
+      .map((p) => {
+        const d = haversineMeters(userPos, { lat: p.latitude, lng: p.longitude });
+        return { ...p, __distanceMeters: d as number };
+      })
+      .sort((a: any, b: any) => a.__distanceMeters - b.__distanceMeters);
+  } else if (sortBy === "alpha") {
+    out = [...out].sort((a, b) => (a.title ?? "").localeCompare(b.title ?? "", undefined, { sensitivity: "base" }));
+  }
+
+  return out;
+}, [places, query, filterZones, filterCategories, sortBy, userPos]);
 
   const hasActiveFilters = filterZones.length > 0 || filterCategories.length > 0;
   const resultCount = (query.length > 0 || hasActiveFilters) ? filtered.length : undefined;
@@ -113,8 +170,11 @@ export default function ExploreScreen() {
             activeCategories={filterCategories}
             onToggleZone={toggleFilterZone}
             onToggleCategory={toggleFilterCategory}
+            sortBy={sortBy}
+            onChangeSortBy={setSortBy}
           />
         )}
+
 
         <View style={{ rowGap: 16 }}>
           {loadingPlaces ? (
