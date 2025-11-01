@@ -2,7 +2,7 @@ export function haversineMeters(
   a: { lat: number; lng: number },
   b: { lat: number; lng: number }
 ): number {
-  const R = 6371000; // Radio medio de la Tierra en metros
+  const R = 6371000;
   const toRad = (deg: number) => (deg * Math.PI) / 180;
 
   const dLat = toRad(b.lat - a.lat);

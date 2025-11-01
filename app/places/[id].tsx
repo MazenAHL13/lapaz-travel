@@ -11,6 +11,9 @@ import * as Location from "expo-location";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useState } from "react";
 import OpenInMapsButton from "@/src/components/OpenInMapsButton";
+import { useDistanceEta } from "@/src/hooks/useDistanceEta";
+import { formatDistance } from "@/src/utils/distance";
+
 import {
   ActivityIndicator,
   Image,
@@ -21,6 +24,7 @@ import {
   Text,
   View
 } from "react-native";
+
 import MapView, { Marker, Polyline } from "react-native-maps";
 import { ThemeColors } from "../../src/theme/colors";
 
@@ -38,6 +42,28 @@ export default function PlaceDetail() {
   const [routeCoords, setRouteCoords] = useState<{ latitude: number; longitude: number }[]>([]);
   const [userLoc, setUserLoc] = useState<{ latitude: number; longitude: number } | null>(null);
 
+  const placeId = Array.isArray(id) ? id[0] : id;
+  const place = places.find((p) => p.id === placeId);
+
+  const hasCoords =
+    typeof place?.latitude === "number" && typeof place?.longitude === "number";
+
+  const distanceTarget = hasCoords
+    ? {
+        latitude: place?.latitude as number,
+        longitude: place?.longitude as number,
+        zona: place?.zona ?? undefined,
+      }
+    : null;
+
+  const { loading: etaLoading, error: etaError, distanceMeters, eta } = useDistanceEta(distanceTarget);
+  const drivingMinutes = eta ? Math.max(1, Math.round(eta.drivingSeconds / 60)) : null;
+  const walkingMinutes = eta ? Math.max(1, Math.round(eta.walkingSeconds / 60)) : null;
+  const formatMinutesLabel = (minutes: number | null) => {
+    if (minutes == null) return "-";
+    return `${minutes} min`;
+  };
+
   if (loadingPlaces) {
     return (
       <View style={styles.centered}>
@@ -47,24 +73,19 @@ export default function PlaceDetail() {
     );
   }
 
-  const placeId = Array.isArray(id) ? id[0] : id;
-  const place = places.find((p) => p.id === placeId);
-  const hasCoords =
-  typeof place?.latitude === "number" && typeof place?.longitude === "number";
-
-const handleHowToGetThere = async () => {
-  if (!hasCoords) {
-    alert("Este lugar aún no tiene coordenadas cargadas.");
-    return;
-  }
-
-  try {
-    setLoadingRoute(true);
-    const { status } = await Location.requestForegroundPermissionsAsync();
-    if (status !== "granted") {
-      alert("Permiso de ubicación denegado");
+  const handleHowToGetThere = async () => {
+    if (!hasCoords) {
+      alert("Este lugar aún no tiene coordenadas cargadas.");
       return;
     }
+
+    try {
+      setLoadingRoute(true);
+      const { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        alert("Permiso de ubicación denegado");
+        return;
+      }
 
     const loc = await Location.getCurrentPositionAsync({});
     const origin = { latitude: loc.coords.latitude, longitude: loc.coords.longitude };
@@ -145,6 +166,37 @@ const handleHowToGetThere = async () => {
           )}
 
           <Text style={styles.description}>{place.description}</Text>
+          {hasCoords && (
+            <View style={styles.cardHeader}>
+              <Ionicons name="location-outline" size={22} color={colors.text} />
+              <Text style={styles.cardTitle}>Distancia estimada</Text>
+            </View>
+          )}
+          {etaLoading ? (
+            
+            <Text style={{ color: colors.textSecondary, marginTop: 6, marginBottom: 12 }}>
+              Calculando distancia…
+            </Text>
+          ) : etaError ? (
+            <Text style={{ color: colors.textSecondary, marginTop: 6, marginBottom: 12 }}>
+              {etaError}
+            </Text>
+          ) : eta && distanceMeters != null ? (
+            
+            
+            <Text style={{ color: colors.textSecondary, marginTop: 6, marginBottom: 12 }}>
+              {formatDistance(distanceMeters)} • {formatMinutesLabel(drivingMinutes)}{" "}
+              <Ionicons name="car-outline" size={14} color={colors.textSecondary} /> |{" "}
+              {formatMinutesLabel(walkingMinutes)}{" "}
+              <Ionicons name="walk-outline" size={14} color={colors.textSecondary} />
+            </Text>
+          ) : (
+            hasCoords && (
+              <Text style={{ color: colors.textSecondary, marginTop: 6, marginBottom: 12 }}>
+                Activa ubicación para ver distancia y tiempo
+              </Text>
+            )
+          )}
           <Pressable
             onPress={handleHowToGetThere}
             disabled={!hasCoords || loadingRoute}
