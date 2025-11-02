@@ -1,10 +1,30 @@
 import PlaceCard from "@/src/components/PlaceCard";
 import { usePlaces } from "@/src/hooks/usePlaces";
+import { useSlideAndFade } from "@/src/hooks/useSlideAndFade";
 import { useThemeColors } from "@/src/hooks/useThemeColors";
 import { useFavoritesStore } from "@/src/store/useFavoritesStore";
 import { router } from "expo-router";
-import { SafeAreaView, ScrollView, Text, View } from "react-native";
+import { Animated, SafeAreaView, ScrollView, Text, View } from "react-native";
 
+const AnimatedPlaceCard = ({ place, index, onPress }) => {
+  const animStyle = useSlideAndFade({
+    initialTranslateY: 12,
+    duration: 280,
+    delay: index * 60,
+  });
+
+  return (
+    <Animated.View style={animStyle}>
+      <PlaceCard
+        title={place.title}
+        subtitle={place.subtitle}
+        imageUri={place.imageUri ?? ""}
+        onPress={onPress}
+        placeId={place.id}
+      />
+    </Animated.View>
+  );
+};
 
 export default function FavoritesScreen() {
   const { data: places, loadingPlaces } = usePlaces();
@@ -33,17 +53,15 @@ export default function FavoritesScreen() {
             </Text>
           </View>
         ) : (
-          favoritePlaces.map((place) => (
-            <PlaceCard
+          favoritePlaces.map((place, index) => (
+            <AnimatedPlaceCard
               key={place.id}
-              title={place.title}
-              subtitle={place.subtitle}
-              imageUri={place.imageUri?? ""}
+              place={place}
+              index={index}
               onPress={() => router.push({
                 pathname: "/places/[id]",
                 params: { id: place.id },
-              })} 
-              placeId={""}            />
+              })} />
           ))
         )}
       </ScrollView>

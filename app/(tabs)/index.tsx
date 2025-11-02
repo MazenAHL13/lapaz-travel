@@ -2,16 +2,36 @@ import FilterPanel from "@/src/components/FilterPanel";
 import PlaceCard from "@/src/components/PlaceCard";
 import SearchBar from "@/src/components/SearchBar";
 import { usePlaces } from "@/src/hooks/usePlaces";
+import { useSlideAndFade } from "@/src/hooks/useSlideAndFade";
 import { useThemeColors } from "@/src/hooks/useThemeColors";
 import { useUserStore } from "@/src/store/useUserStore";
 import { ThemeColors } from "@/src/theme/colors";
-import { Ionicons } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
-import { useCallback, useMemo, useState, useEffect } from "react";
-import { ActivityIndicator, Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import { haversineMeters } from "@/src/utils/distance";
+import { Ionicons } from "@expo/vector-icons";
 import * as Location from "expo-location";
-import { Alert } from "react-native";
+import { useRouter } from "expo-router";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { ActivityIndicator, Alert, Animated, Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+
+const AnimatedPlaceCard = ({ place, index, onPress, placeId }) => {
+  const animStyle = useSlideAndFade({
+    initialTranslateY: 12,
+    duration: 280,
+    delay: index * 60,
+  });
+
+  return (
+    <Animated.View style={animStyle}>
+      <PlaceCard
+        title={place.title}
+        subtitle={place.zona ?? ""}
+        imageUri={place.imageUri ?? ""}
+        onPress={onPress}
+        placeId={placeId}
+      />
+    </Animated.View>
+  );
+};
 
 export default function ExploreScreen() {
   const { data: places, loadingPlaces } = usePlaces();
@@ -103,7 +123,6 @@ const filtered = useMemo(() => {
   const zoneKeys = new Set(filterZones.map(z => lower(clean(z))));
   const catKeys  = new Set(filterCategories.map(c => lower(clean(c))));
 
-  // 1) Filtrado tal cual
   let out = places.filter((p) => {
     const title = lower(p.title ?? "");
     const z = lower(clean(p.zona));
@@ -182,12 +201,11 @@ const filtered = useMemo(() => {
           ) : filtered.length === 0 ? (
             <Text style={{ color: colors.textSecondary }}>No hay lugares disponibles.</Text>
           ) : (
-            filtered.map((place) => (
-              <PlaceCard
+            filtered.map((place, index) => (
+              <AnimatedPlaceCard
                 key={place.id}
-                title={place.title}
-                subtitle={place.zona ?? ""}       
-                imageUri={place.imageUri ?? ""}
+                place={place}
+                index={index}
                 onPress={() =>
                   router.push({ pathname: "/places/[id]", params: { id: place.id } })
                 }
