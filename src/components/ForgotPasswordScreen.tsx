@@ -5,14 +5,16 @@ import { useRouter } from "expo-router";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { useState } from "react";
 import {
-    Alert,
-    Image,
-    Pressable,
-    SafeAreaView,
-    StyleSheet,
-    Text,
-    TextInput,
-    View,
+  Alert,
+  Image,
+  Keyboard,
+  Pressable,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableWithoutFeedback,
+  View,
 } from "react-native";
 
 export default function ForgotPasswordScreen() {
@@ -66,68 +68,72 @@ export default function ForgotPasswordScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.logoContainer}>
-        <Image source={logoSource} style={styles.logo} resizeMode="contain" />
-      </View>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <View style={styles.globalContainer}>
+          <View style={styles.logoContainer}>
+            <Image source={logoSource} style={styles.logo} resizeMode="contain" />
+          </View>
 
-      <View style={styles.card}>
-        <Text style={[styles.title, { color: colors.text }]}>
-          Reset Password
-        </Text>
+          <View style={styles.card}>
+            <Text style={[styles.title, { color: colors.text }]}>
+              Reset Password
+            </Text>
 
-        <Text style={[styles.subtitle, { color: colors.textSecondary }]}>
-            Enter your email address and we'll send you a link to reset your password.
-        </Text>
+            <Text style={[styles.subtitle, { color: colors.textSecondary }]}>
+                Enter your email address and we'll send you a link to reset your password.
+            </Text>
 
-        <TextInput
-          style={[
-            styles.input,
-            {
-              color: colors.text,
-              borderColor: emailValid ? colors.border : "red",
-            },
-          ]}
-          placeholder="Email"
-          placeholderTextColor={colors.textSecondary}
-          value={email}
-          onChangeText={validateEmail}
-          autoCapitalize="none"
-          keyboardType="email-address"
-        />
+            <TextInput
+              style={[
+                styles.input,
+                {
+                  color: colors.text,
+                  borderColor: emailValid ? colors.border : "red",
+                },
+              ]}
+              placeholder="Email"
+              placeholderTextColor={colors.textSecondary}
+              value={email}
+              onChangeText={validateEmail}
+              autoCapitalize="none"
+              keyboardType="email-address"
+            />
 
-        <Pressable
-          onPress={handleForgotPassword}
-          disabled={loading}
-          style={({ pressed }) => [
-            styles.button,
-            {
-              backgroundColor: colors.primary,
-              opacity: pressed || loading ? 0.9 : 1,
-            },
-          ]}
-        >
-          <Text style={[styles.buttonText, { color: colors.background }]}>
-            {loading ? "Enviando..." : "Enviar enlace"}
-          </Text>
-        </Pressable>
+            <Pressable
+              onPress={handleForgotPassword}
+              disabled={loading}
+              style={({ pressed }) => [
+                styles.button,
+                {
+                  backgroundColor: colors.primary,
+                  opacity: pressed || loading ? 0.9 : 1,
+                },
+              ]}
+            >
+              <Text style={[styles.buttonText, { color: colors.background }]}>
+                {loading ? "Sending..." : "Send link"}
+              </Text>
+            </Pressable>
 
-        <Pressable
-          onPress={() => router.push("/(auth)/login")}
-          style={({ pressed }) => [
-            styles.button,
-            {
-              backgroundColor: colors.background,
-              borderWidth: 2,
-              borderColor: colors.primary,
-              opacity: pressed ? 0.9 : 1,
-            },
-          ]}
-        >
-          <Text style={[styles.buttonText, { color: colors.primary }]}>
-            Volver al login
-          </Text>
-        </Pressable>
-      </View>
+            <Pressable
+              onPress={() => router.push("/(auth)/login")}
+              style={({ pressed }) => [
+                styles.button,
+                {
+                  backgroundColor: colors.background,
+                  borderWidth: 2,
+                  borderColor: colors.primary,
+                  opacity: pressed ? 0.9 : 1,
+                },
+              ]}
+            >
+              <Text style={[styles.buttonText, { color: colors.primary }]}>
+                Back to login
+              </Text>
+            </Pressable>
+          </View>
+        </View>
+      </TouchableWithoutFeedback>
     </SafeAreaView>
   );
 }
@@ -186,5 +192,9 @@ const createStyles = (colors: ThemeColors) =>
       fontSize: 14,
       textAlign: "center",
       marginBottom: 10,
+    },
+    globalContainer: {
+      width: "100%",
+      alignItems: "center",
     },
   });

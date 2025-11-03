@@ -70,6 +70,8 @@ export default function RegisterScreen() {
         name: username.trim(),
         email: cred.user.email,
         createdAt: new Date().toISOString(),
+        avatar: "",
+        role: "user"
       });
   
       if (cred.user.email) {

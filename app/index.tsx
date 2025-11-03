@@ -1,24 +1,43 @@
 import { useUserStore } from "@/src/store/useUserStore";
 import { useRouter } from "expo-router";
-import { useEffect } from "react";
-import { ActivityIndicator, View } from "react-native";
+import { useEffect, useState } from "react";
+import { ActivityIndicator, Image, View } from "react-native";
 
 export default function SplashScreen() {
   const { currentUser } = useUserStore();
   const router = useRouter();
+  const [isRouterReady, setIsRouterReady] = useState(false);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      if (currentUser) router.replace("/(tabs)");
-      else router.replace("/(auth)/login");
-    }, 1200);
-
+    const timeout = setTimeout(() => setIsRouterReady(true), 100);
     return () => clearTimeout(timeout);
-  }, [currentUser]);
+  }, []);
+
+  useEffect(() => {
+    if (!isRouterReady) return;
+
+    if (currentUser === null) {
+      router.replace("/(auth)/login");
+    } else if (currentUser) {
+      router.replace("/(tabs)");
+    }
+  }, [currentUser, isRouterReady]);
 
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <ActivityIndicator size="large" />
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#fff",
+      }}
+    >
+      <Image
+        source={require("@/assets/images/logo.png")}
+        style={{ width: 140, height: 140, marginBottom: 30 }}
+        resizeMode="contain"
+      />
+      <ActivityIndicator size="large" color="#007AFF" />
     </View>
   );
 }
