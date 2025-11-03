@@ -11,6 +11,7 @@ export type Place = {
   tips?: string[];
   imageUri?: string;
   coverUri?: string;
+  createdBy?: string;
 };
 
 

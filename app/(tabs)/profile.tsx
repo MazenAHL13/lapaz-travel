@@ -107,7 +107,11 @@ export default function ProfileScreen() {
           <Pressable onPress={pickImage} disabled={!isEditing || saving}>
             <Avatar />
           </Pressable>
-
+          {user?.role === "admin" && (
+            <Text style={{ color: colors.primary, fontWeight: "700" }}>
+              Admin
+            </Text>
+          )}
           {isEditing && (
             <>
               <Text style={{ fontSize: 16, color: colors.textSecondary, marginTop: 4 }}>
@@ -173,7 +177,6 @@ export default function ProfileScreen() {
             gap: 6,
           }}
         >
-          <Text style={{ color: colors.textSecondary }}>⚑ Favoritos: próximamente</Text>
           <Text style={{ color: colors.textSecondary }}>✈ Viajes guardados: próximamente</Text>
         </View>
 

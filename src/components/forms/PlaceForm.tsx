@@ -46,7 +46,9 @@ export default function PlaceForm({ existingPlace }: Props) {
   const [coverUri, setCoverUri] = useState<string | null>(existingPlace?.coverUri ?? null);
   const [loading, setLoading] = useState(false);
 
-  if (user?.role !== "admin") {
+  const isAdmin = user?.role === "admin";
+
+  if (!isAdmin) {
     return (
       <View style={styles.centered}>
         <Text style={{ color: colors.text }}>You don't have permission to be here.</Text>
@@ -117,7 +119,8 @@ export default function PlaceForm({ existingPlace }: Props) {
         tips: tips ? tips.split(",").map((t) => t.trim()) : [],
         imageUri: finalImageUrl?? "",
         coverUri: finalCoverUrl?? "",
-        createdBy: user.uid,
+        createdBy: existingPlace?.createdBy ?? user.uid,
+        updatedBy: user.uid,
         updatedAt: new Date().toISOString(),
       };
 
