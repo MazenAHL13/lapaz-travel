@@ -44,6 +44,98 @@ La aplicación sigue una arquitectura modular con las siguientes capas:
 └─────────────────────────────────────┘
 ```
 
+## 📦 Instalación y Setup
+
+### Prerrequisitos
+
+- Node.js >= 18.x
+- npm o yarn
+- Expo CLI: `npm install -g expo-cli`
+- Cuenta de Firebase
+- Cuenta de Cloudinary
+- Google Maps API Key
+
+### Pasos de instalación
+
+1. **Clonar el repositorio**
+```bash
+git clone https://github.com/tu-usuario/lapaz-travel-app.git
+cd lapaz-travel-app
+```
+
+2. **Instalar dependencias**
+```bash
+npm install
+```
+
+3. **Configurar variables de entorno**
+
+Crea un archivo `.env` en la raíz del proyecto:
+```env
+# Firebase
+EXPO_PUBLIC_FIREBASE_API_KEY=tu_firebase_api_key
+EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN=tu_proyecto.firebaseapp.com
+EXPO_PUBLIC_FIREBASE_PROJECT_ID=tu_proyecto_id
+EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET=tu_proyecto.appspot.com
+EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=tu_sender_id
+EXPO_PUBLIC_FIREBASE_APP_ID=tu_app_id
+
+# Cloudinary
+EXPO_PUBLIC_CLOUDINARY_CLOUD_NAME=tu_cloud_name
+EXPO_PUBLIC_CLOUDINARY_UPLOAD_PRESET=tu_upload_preset
+
+# Google Maps
+EXPO_PUBLIC_GOOGLE_MAPS_API_KEY=tu_google_maps_key
+```
+
+4. **Configurar Firebase**
+
+- Crea un proyecto en [Firebase Console](https://console.firebase.google.com)
+- Habilita Authentication (Email/Password)
+- Crea una base de datos Firestore
+- Configura las reglas de seguridad:
+```javascript
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /places/{placeId} {
+      allow read: if true;
+      allow write: if request.auth != null && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+    
+    match /users/{userId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}
+```
+
+5. **Configurar Cloudinary**
+
+- Crea una cuenta en [Cloudinary](https://cloudinary.com)
+- Crea un upload preset unsigned
+- Anota tu cloud name y upload preset
+
+6. **Habilitar Google Directions API**
+
+- Ve a [Google Cloud Console](https://console.cloud.google.com)
+- Habilita Directions API
+- Crea una API Key
+- (Opcional) Restringe el uso de la API
+
+7. **Iniciar el proyecto**
+```bash
+# Desarrollo
+npx expo start
+
+# iOS
+npx expo start --ios
+
+# Android
+npx expo start --android
+```
+
 ## 🛠 Tecnologías y Librerías
 
 ### Core
@@ -185,3 +277,15 @@ La aplicación sigue una arquitectura modular con las siguientes capas:
   updatedAt: string;
 }
 ```
+## 👥 Equipo de Desarrollo
+Mazen Abu Hamdan 
+Fidel Aguilera 
+Diego Alba
+
+## 🧠 Aprendizajes y Retos Técnicos
+
+- Implementar **autenticación y Firestore** en Expo
+- Manejo de **geolocalización y cálculos de distancia** en tiempo real.
+- Subida y gestión de imágenes con **Cloudinary** desde móviles.
+- Coordinación de estados globales con **Zustand y persistencia**.
+- Diseño adaptable para modo oscuro y pantallas pequeñas.
