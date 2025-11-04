@@ -10,9 +10,7 @@ Una aplicación móvil React Native/Expo para descubrir y explorar lugares turí
 - [Tecnologías y Librerías](#-tecnologías-y-librerías)
 - [Instalación y Setup](#-instalación-y-setup)
 - [Estructura del Proyecto](#-estructura-del-proyecto)
-- [Variables de Entorno](#-variables-de-entorno)
 - [Funcionalidades Principales](#-funcionalidades-principales)
-- [Desarrollo](#-desarrollo)
 
 ## ✨ Características
 
